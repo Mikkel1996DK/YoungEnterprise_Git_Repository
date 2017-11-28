@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YoungEnterprise_API.Models;
+using Service;
 using Microsoft.AspNetCore.Cors;
 
 namespace YoungEnterprise_API.Controllers
@@ -15,16 +15,16 @@ namespace YoungEnterprise_API.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class TblVoteAnswersController : Controller
     {
-        private readonly DB_YoungEnterpriseContext _context;
+        private readonly Models.DB_YoungEnterpriseContext _context;
 
-        public TblVoteAnswersController(DB_YoungEnterpriseContext context)
+        public TblVoteAnswersController(Models.DB_YoungEnterpriseContext context)
         {
             _context = context;
         }
 
         // GET: api/TblVoteAnswers
         [HttpGet]
-        public IEnumerable<TblVoteAnswer> GetTblVoteAnswer()
+        public IEnumerable<Models.TblVoteAnswer> GetTblVoteAnswer()
         {
             return _context.TblVoteAnswer;
         }
@@ -50,7 +50,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblVoteAnswers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblVoteAnswer([FromRoute] int id, [FromBody] TblVoteAnswer tblVoteAnswer)
+        public async Task<IActionResult> PutTblVoteAnswer([FromRoute] int id, [FromBody] Models.TblVoteAnswer tblVoteAnswer)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblVoteAnswers
         [HttpPost]
-        public async Task<IActionResult> PostTblVoteAnswer([FromBody] TblVoteAnswer tblVoteAnswer)
+        public async Task<IActionResult> PostTblVoteAnswer([FromBody] Models.TblVoteAnswer tblVoteAnswer)
         {
             if (!ModelState.IsValid)
             {

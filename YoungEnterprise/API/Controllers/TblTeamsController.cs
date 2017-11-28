@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YoungEnterprise_API.Models;
 using Microsoft.AspNetCore.Cors;
 using Service;
 
@@ -16,10 +15,10 @@ namespace YoungEnterprise_API.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class TblTeamsController : Controller
     {
-        private readonly DB_YoungEnterpriseContext _context;
+        private readonly Models.DB_YoungEnterpriseContext _context;
         private readonly VoteService voteService;
 
-        public TblTeamsController(DB_YoungEnterpriseContext context)
+        public TblTeamsController(Models.DB_YoungEnterpriseContext context)
         {
             _context = context; // todo remove when using services
             voteService = new VoteService(_context);
@@ -34,7 +33,7 @@ namespace YoungEnterprise_API.Controllers
         */
         // GET: api/TblTeams?NoVotesFromPair=42
         [HttpGet]
-        public IEnumerable<TblTeam> GetTblTeam(int NoVotesFromPair = -1)
+        public IEnumerable<Models.TblTeam> GetTblTeam(int NoVotesFromPair = -1)
         {
             if (NoVotesFromPair == -1)
             {
@@ -68,7 +67,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblTeams/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblTeam([FromRoute] string id, [FromBody] TblTeam tblTeam)
+        public async Task<IActionResult> PutTblTeam([FromRoute] string id, [FromBody] Models.TblTeam tblTeam)
         {
             if (!ModelState.IsValid)
             {
@@ -103,7 +102,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblTeams
         [HttpPost]
-        public async Task<IActionResult> PostTblTeam([FromBody] TblTeam tblTeam)
+        public async Task<IActionResult> PostTblTeam([FromBody] Models.TblTeam tblTeam)
         {
             if (!ModelState.IsValid)
             {

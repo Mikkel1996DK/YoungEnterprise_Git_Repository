@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YoungEnterprise_API.Models;
+using Service;
 using Microsoft.AspNetCore.Cors;
 
 namespace YoungEnterprise_API.Controllers
@@ -15,16 +15,16 @@ namespace YoungEnterprise_API.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class TblQuestionsController : Controller
     {
-        private readonly DB_YoungEnterpriseContext _context;
+        private readonly Models.DB_YoungEnterpriseContext _context;
 
-        public TblQuestionsController(DB_YoungEnterpriseContext context)
+        public TblQuestionsController(Models.DB_YoungEnterpriseContext context)
         {
             _context = context;
         }
 
         // GET: api/TblQuestions
         [HttpGet]
-        public IEnumerable<TblQuestion> GetTblQuestion()
+        public IEnumerable<Models.TblQuestion> GetTblQuestion()
         {
             return _context.TblQuestion;
         }
@@ -50,7 +50,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblQuestions/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblQuestion([FromRoute] int id, [FromBody] TblQuestion tblQuestion)
+        public async Task<IActionResult> PutTblQuestion([FromRoute] int id, [FromBody] Models.TblQuestion tblQuestion)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblQuestions
         [HttpPost]
-        public async Task<IActionResult> PostTblQuestion([FromBody] TblQuestion tblQuestion)
+        public async Task<IActionResult> PostTblQuestion([FromBody] Models.TblQuestion tblQuestion)
         {
             if (!ModelState.IsValid)
             {
