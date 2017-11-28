@@ -22,9 +22,7 @@ namespace Admin
     public partial class MainWindow : Window
     {
         #region IMPORTANT COMMENT IN THIS REGION
-        //TODO: Have a look at this in order to check how to generate unique passwords for users!
-        // https://stackoverflow.com/questions/54991/generating-random-passwords
-        // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
         // All of the xaml "main"-grids RowDefinitions should:
         // - All should add up to 9
         // - Top two rows should be of the auto-size of 1.5* except if the usercontrol contains a DataGrid
@@ -55,6 +53,7 @@ namespace Admin
         // 1*
         #endregion
 
+            // Test. If you see this it is working!!
 
         private CreateScheduleView createScheduleControl = new CreateScheduleView();
         private InviteUserView inviteUserControl = new InviteUserView();
