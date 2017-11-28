@@ -53,8 +53,6 @@ namespace Admin
         // 1*
         #endregion
 
-            // Test. If you see this it is working!!
-
         private CreateScheduleView createScheduleControl = new CreateScheduleView();
         private InviteUserView inviteUserControl = new InviteUserView();
         private ResultView viewResultsControl = new ResultView();
