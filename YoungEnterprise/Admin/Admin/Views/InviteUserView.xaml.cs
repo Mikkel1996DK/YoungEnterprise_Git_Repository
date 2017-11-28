@@ -26,6 +26,11 @@ namespace Admin.Views
         {
             InitializeComponent();
             DataContext = this;
+
+            for (int i = 0; i < Service.UserService.ApiTest().Count(); i++)
+            {
+                Console.WriteLine(Service.UserService.ApiTest()[i]);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
