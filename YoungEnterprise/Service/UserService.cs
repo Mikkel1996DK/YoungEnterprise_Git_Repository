@@ -25,36 +25,8 @@ namespace Service
             return hashString;
         }
 
-        public static List<string> ApiTest ()
-        {
-            List<string> judges = new List<string>();
-            WebClient client = new WebClient();
+        
 
-            // http://localhost:53112/api/TblJudgePairs
-            Stream stream = client.OpenRead("http://localhost:53112/api/TblJudgePairs");
-
-            using (stream)
-            {
-                StreamReader reader = new StreamReader(stream);
-
-                using (reader)
-                {
-                    var json = reader.ReadToEnd();
-                    dynamic text = JsonConvert.DeserializeObject<dynamic>(json);
-
-                    var features = text.features;
-                    foreach (var judge in features)
-                    {
-                        var id = judge.properties.fldJudgePairId; // check this
-                        judges.Add(id + "");
-                    }
-                }
-
-            }
-
-
-            return judges;
-        }
 
     }
 }
