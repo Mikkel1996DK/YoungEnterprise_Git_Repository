@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
+using System.Net;
 
 namespace Service
 {
@@ -20,6 +21,17 @@ namespace Service
                 hashString += string.Format("{0:x2}", x);
             }
             return hashString;
+        }
+
+        public string ApiTest ()
+        {
+            WebClient client = new WebClient();
+
+            //client.DownloadData("");
+
+
+
+            return null;
         }
 
     }

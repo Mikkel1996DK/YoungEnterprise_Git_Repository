@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YoungEnterprise_API.Models;
+using Service;
 using Microsoft.AspNetCore.Cors;
 
 namespace YoungEnterprise_API.Controllers
@@ -15,16 +15,16 @@ namespace YoungEnterprise_API.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class TblJudgesController : Controller
     {
-        private readonly DB_YoungEnterpriseContext _context;
+        private readonly Models.DB_YoungEnterpriseContext _context;
 
-        public TblJudgesController(DB_YoungEnterpriseContext context)
+        public TblJudgesController(Models.DB_YoungEnterpriseContext context)
         {
             _context = context;
         }
 
         // GET: api/TblJudges
         [HttpGet]
-        public IEnumerable<TblJudge> GetTblJudge()
+        public IEnumerable<Models.TblJudge> GetTblJudge()
         {
             return _context.TblJudge;
         }
@@ -50,7 +50,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblJudges/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblJudge([FromRoute] int id, [FromBody] TblJudge tblJudge)
+        public async Task<IActionResult> PutTblJudge([FromRoute] int id, [FromBody] Models.TblJudge tblJudge)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblJudges
         [HttpPost]
-        public async Task<IActionResult> PostTblJudge([FromBody] TblJudge tblJudge)
+        public async Task<IActionResult> PostTblJudge([FromBody] Models.TblJudge tblJudge)
         {
             if (!ModelState.IsValid)
             {

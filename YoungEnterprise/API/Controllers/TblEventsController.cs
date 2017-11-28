@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YoungEnterprise_API.Models;
+using Service;
 using Microsoft.AspNetCore.Cors;
 
 namespace YoungEnterprise_API.Controllers
@@ -14,16 +14,16 @@ namespace YoungEnterprise_API.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class TblEventsController : Controller
     {
-        private readonly DB_YoungEnterpriseContext _context;
+        private readonly Models.DB_YoungEnterpriseContext _context;
 
-        public TblEventsController(DB_YoungEnterpriseContext context)
+        public TblEventsController(Models.DB_YoungEnterpriseContext context)
         {
             _context = context;
         }
 
         // GET: api/TblEvents
         [HttpGet]
-        public IEnumerable<TblEvent> GetTblEvent()
+        public IEnumerable<Models.TblEvent> GetTblEvent()
         {
             return _context.TblEvent;
         }
@@ -49,7 +49,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblEvents/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblEvent([FromRoute] int id, [FromBody] TblEvent tblEvent)
+        public async Task<IActionResult> PutTblEvent([FromRoute] int id, [FromBody] Models.TblEvent tblEvent)
         {
             if (!ModelState.IsValid)
             {
@@ -84,7 +84,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblEvents
         [HttpPost]
-        public async Task<IActionResult> PostTblEvent([FromBody] TblEvent tblEvent)
+        public async Task<IActionResult> PostTblEvent([FromBody] Models.TblEvent tblEvent)
         {
             if (!ModelState.IsValid)
             {

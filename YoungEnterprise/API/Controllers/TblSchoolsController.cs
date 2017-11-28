@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using YoungEnterprise_API.Models;
+using Service;
 using Microsoft.AspNetCore.Cors;
 
 namespace YoungEnterprise_API.Controllers
@@ -13,16 +13,16 @@ namespace YoungEnterprise_API.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class TblSchoolsController : Controller
     {
-        private readonly DB_YoungEnterpriseContext _context;
+        private readonly Models.DB_YoungEnterpriseContext _context;
 
-        public TblSchoolsController(DB_YoungEnterpriseContext context)
+        public TblSchoolsController(Models.DB_YoungEnterpriseContext context)
         {
             _context = context;
         }
 
         // GET: api/TblSchools
         [HttpGet]
-        public IEnumerable<TblSchool> GetTblSchool()
+        public IEnumerable<Models.TblSchool> GetTblSchool()
         {
             return _context.TblSchool;
         }
@@ -48,7 +48,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblSchools/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblSchool([FromRoute] int id, [FromBody] TblSchool tblSchool)
+        public async Task<IActionResult> PutTblSchool([FromRoute] int id, [FromBody] Models.TblSchool tblSchool)
         {
             if (!ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblSchools
         [HttpPost]
-        public async Task<IActionResult> PostTblSchool([FromBody] TblSchool tblSchool)
+        public async Task<IActionResult> PostTblSchool([FromBody] Models.TblSchool tblSchool)
         {
             if (!ModelState.IsValid)
             {
