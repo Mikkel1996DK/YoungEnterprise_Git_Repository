@@ -27,6 +27,10 @@ namespace YoungEnterprise_API.Models
         // Replaced OnConfiguring as stated by the tutorial.
         public DB_YoungEnterpriseContext (DbContextOptions<DB_YoungEnterpriseContext> options) : base(options) { }
 
+        public DB_YoungEnterpriseContext()
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TblEvent>(entity =>

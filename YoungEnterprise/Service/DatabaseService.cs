@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Data.SQLite;
 using YoungEnterprise_API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +13,6 @@ namespace Service
             databaseContext = GetConnection();
         }
     
-
         public DB_YoungEnterpriseContext GetConnection()
         {
             var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
@@ -27,11 +24,11 @@ namespace Service
 
         public void CreateJudge(int eventID, string judgeUsername, string judgePassword, string judgeName)
         {
+            databaseContext = GetConnection();
             using (databaseContext)
             {
-                try
-                {
-                    // Hard-code data for a new record, for testing.
+                try { 
+                
                     TblJudge judge = new TblJudge()
                     {
                         FldEventId = eventID,
@@ -48,10 +45,12 @@ namespace Service
                 }
 
             }
+
         }
 
         public List<TblJudge> GetAllJudges()
         {
+            databaseContext = GetConnection();
             using (databaseContext)
             {
                 try
