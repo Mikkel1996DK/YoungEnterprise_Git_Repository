@@ -1,0 +1,40 @@
+﻿<Window x:Class="Admin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Admin"
+        xmlns:controls="clr-namespace:Admin.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <!-- Replaced the default grid with a dockpanel to allow for the menu to resize as intended -->
+    <!-- The grid containing the content is inside the dockpanel below the menu -->
+    <DockPanel>
+        <!-- The menu below can be changed later on! -->
+        <Menu DockPanel.Dock="Top" Background="#969696" FontFamily="Arial" FontSize="20">
+            <MenuItem Header="Brugere">
+                <MenuItem x:Name="viewAllUsers" Header="Vis Alle Brugere" FontSize="12" Click="viewAllUsers_Click"/>
+                <MenuItem x:Name="inviteUser" Header="Inviter Bruger" FontSize="12" Click="inviteUser_Click"/>
+
+                <!-- I was't certain whether or not this was nessecary, or how it should be done (as in auto-make judge pairs, or pair judges together) -->
+                <MenuItem x:Name="createJudgePairs" Header="Lav Dommerpar" FontSize="12"/>
+            </MenuItem>
+
+            <MenuItem Header="Resultater">
+                <MenuItem x:Name="viewResults" Header="Vis Resultater" FontSize="12" Click="viewResults_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Program">
+                <MenuItem x:Name="createSchedule" Header="Lav Program" FontSize="12" Click="createSchedule_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="Status">
+                <MenuItem x:Name="viewStatus" Header="Se Status" FontSize="12"/>
+            </MenuItem>
+        </Menu>
+
+        <Grid x:Name="userControlGrid" DockPanel.Dock="Bottom">
+
+        </Grid>
+    </DockPanel>
+</Window>

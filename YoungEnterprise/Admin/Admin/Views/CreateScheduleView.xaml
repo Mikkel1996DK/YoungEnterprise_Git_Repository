@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Admin.Views.CreateScheduleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Admin.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <Grid Background="White">
+        <!-- Column/RowDefinitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="5.5*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header label -->
+        <Label Content="Lav Program" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource headerLabel}"/>
+
+        <!-- Buttons for the update schedule/generate schedule -->
+        <!-- For some odd reason it is not possible to add the custom margin determining the top,left,right,bottom values specifically -->
+        <!-- The "generateSchedule" Buttons Content, "Auto-Lav Program", might be subject to change later on. I was unsure how you spelled "generateSchedule" in danish -->
+        <!-- The "generateSchedule" Button makes sense so that the administrator can edit the cells in the datagrid and update it in the database and thereby in the web api -->
+        <Button x:Name="updateSchedule" Content="Opdatér Program" Grid.Column="1" Grid.Row="2"  Style="{StaticResource scheduleButton}" Margin="12, 12, 12, 5"/>
+        <Button x:Name="generateSchedule" Content="Auto-Lav Program" Grid.Column="2" Grid.Row="2"  Style="{StaticResource scheduleButton}" Margin="12, 12, 12, 5"/>
+
+        <!-- DataGrid to view the generated chedule schedule -->
+        <DataGrid x:Name="viewScheduleDataGrid" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Margin="12, 0, 12, 12" AutoGenerateColumns="False" FontFamily="Arial" FontSize="20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Dommerpar" Width="0.5*" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Tid" Width="1*" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Hold" Width="1.5*" IsReadOnly="True">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</UserControl>

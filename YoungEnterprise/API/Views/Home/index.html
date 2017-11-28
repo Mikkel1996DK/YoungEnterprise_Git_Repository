@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+$(document).ready(function(){
+    $("button").click(function(){
+        $.get("http://localhost:53112/api/TblEvents", function (data, status) {
+            var jsonStr = JSON.stringify(data);
+            document.getElementById("p1").innerHTML = jsonStr;
+        });
+    });
+});
+    </script>
+</head>
+<body>
+    <button>Send an HTTP GET request to the page and get the result back</button>
+    <br />
+
+    <p id="p1">
+
+    </p>
+
+</body>
+</html>
