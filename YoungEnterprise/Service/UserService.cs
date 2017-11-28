@@ -4,7 +4,6 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Net;
 using System.IO;
-using Newtonsoft.Json;
 
 namespace Service
 {
