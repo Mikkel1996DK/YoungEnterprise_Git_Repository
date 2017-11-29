@@ -34,40 +34,7 @@ namespace Admin.Views
         // It is not worth to make a test to check if an email has been send, as it would require us to send the
         // email async just to run the test (which is not what we want to do)
 
-        #region expand/collapse name/email/isJudge variables used for databinding
-        private string nameText;
-        public string NameText
-        {
-            get { return nameText; }
-            set
-            {
-                nameText = value;
-                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("NameText"));
-            }
-        }
-
-        private string email;
-        public string Email
-        {
-            get { return email; }
-            set
-            {
-                email = value;
-                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("Email"));
-            }
-        }
-
-        private bool isSchool = true;
-        public bool IsSchool
-        {
-            get { return isSchool; }
-            set
-            {
-                isSchool = value;
-                if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("IsSchool"));
-            }
-        }
-        #endregion
+        
 
         private EmailService mailSender = null;
         private UserService userService = null;

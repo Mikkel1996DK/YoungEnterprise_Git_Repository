@@ -9,7 +9,6 @@ namespace Service
 {
     public class UserService
     {
-
         public string HashPassword(string userName, string password)
         {
             string text = password + userName + "YoungEnterprise";
@@ -23,8 +22,6 @@ namespace Service
             }
             return hashString;
         }
-
-        
 
 
     }

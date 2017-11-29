@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\InviteUserViewModel.cs" />
     <Compile Include="Views\CreateScheduleView.xaml.cs">
       <DependentUpon>CreateScheduleView.xaml</DependentUpon>
     </Compile>
@@ -124,9 +125,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\Service\Service.csproj">
       <Project>{abf2fc2b-879b-4aea-a008-4e73d5915129}</Project>
