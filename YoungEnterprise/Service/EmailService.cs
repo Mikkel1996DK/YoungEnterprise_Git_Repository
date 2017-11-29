@@ -14,11 +14,19 @@ namespace Service
         private MailMessage mailMessage = null;
         public string senderAddress = "";
 
+        #region in this region: smtp server, port, ssl, user/pass etc.
+        // DO NOT DELETE COMMENTS BELOW THIS COMMENT:
+        // gmail smtp server: smtp.gmail.com
+        // port: 587
+        // ssl: enable SSL
+        // user: youngenterprise.mail1379@gmail.com
+        // pass: yprise987
+        #endregion
 
-        public EmailService(string mailHost, int mailPort, bool enableSSL, string senderEmail, string senderPassword)
+        public EmailService()
         {
             // Initialization of the smtpclient
-            SetMailAddress(mailHost, mailPort, enableSSL, senderEmail, senderPassword);
+            SetMailAddress("smtp.gmail.com", 587, true, "youngenterprise.mail1379@gmail.com", "yprise987");
         }
 
         // Created a method to change the email in case the administrator wants to change the email address being used
@@ -35,41 +43,18 @@ namespace Service
         }
 
         // The reciever being the recievers email address, the title being the title of the mail and the content being the mail itself.
-        public void SendInviteMail(string reciever, string title, string name, string username)
+        public void SendInviteMail(string reciever, string title, string name, string username, string password)
         {
             //Sends the email
             string text = "Hej " + name + "." + Environment.NewLine + Environment.NewLine + "Du er hermed inviteret til YoungEnterprise event!" + Environment.NewLine +
                           "Brugernavn: " + username + Environment.NewLine +
-                          "Kodeord   : " + GetRandomPassword(8);
-            mailMessage = new MailMessage(senderAddress, reciever, title, text);
+                          "Kodeord   : " + password;
+            mailMessage = new MailMessage(senderAddress, reciever, title, "hello");
 
             client.Send(mailMessage);
 
             // Sets the mailmessage to null which is the mailMessage's initial state
             mailMessage = null;
         }
-
-        public string GetRandomPassword(int length)
-        {
-            //Discuss whether or not to include both upper and lowercase letters!
-            string alphanumericCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-            var characters = alphanumericCharacters.Distinct().ToArray();
-
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] buffer = new byte[length * 8];
-            rng.GetBytes(buffer);
-            char[] pass = new char[length]; 
-
-            for (int i = 0; i < length; i++)
-            {
-                ulong val = BitConverter.ToUInt64(buffer, i * 8);
-                pass[i] = characters[val % (uint)characters.Length];
-            }
-
-            return new string(pass);
-        }
-
-
     }
 }
