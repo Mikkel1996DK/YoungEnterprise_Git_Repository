@@ -45,9 +45,7 @@ namespace Service
                 {
                     Console.WriteLine(ex.InnerException.Message);
                 }
-
             }
-
         }
 
         public List<TblJudge> GetAllJudges()
