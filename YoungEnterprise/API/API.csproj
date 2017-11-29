@@ -26,6 +26,8 @@
 
   <ItemGroup>
     <None Include="Views\Home\HomePage.cshtml" />
+    <None Include="wwwroot\js\JudgeStartScript.js" />
+    <None Include="wwwroot\js\LoginScript.js" />
   </ItemGroup>
 
   <ItemGroup>

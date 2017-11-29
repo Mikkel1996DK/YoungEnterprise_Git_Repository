@@ -25,19 +25,19 @@ namespace ServiceTest
         {
             // Tests if the user can log in with wrong username and password
             // Should return false
-            Assert.IsFalse(LoginUser("WrongUsername1", service.HashPassword("WrongUsername1", "WrongPassword1"));
+            Assert.IsFalse(LoginUser("WrongUsername", service.HashPassword("WrongUsername", "WrongPassword")));
 
             // Tests if the user can log in with wrong username and right password
             // Should return false
-            Assert.IsFalse(LoginUser("WrongUsername2", service.HashPassword("WrongUsername2", "ActualPassword2")));
+            Assert.IsFalse(LoginUser("WrongUsername", service.HashPassword("WrongUsername", "ActualPassword")));
 
             // Tests if the user can login with the right username and the wrong password
             // Should return false
-            Assert.IsFalse(LoginUser("ActualUsername3", service.HashPassword("ActualUsername3", "WrongPassword3")));
+            Assert.IsFalse(LoginUser("ActualUsername", service.HashPassword("ActualUsername", "WrongPassword")));
 
             // Tests if the user can login with the right usernae and the right password
             // Should return true.
-            Assert.IsTrue(LoginUser("ActualUsername4", service.HashPassword("ActualUsername4", "ActualPassword4")));
+            Assert.IsTrue(LoginUser("ActualUsername", service.HashPassword("ActualUsername", "ActualPassword")));
         }
     }
 }
