@@ -26,13 +26,8 @@ namespace Admin.Views
         {
             InitializeComponent();
             DataContext = this;
-
-            for (int i = 0; i < Service.UserService.ApiTest().Count(); i++)
-            {
-                Console.WriteLine(Service.UserService.ApiTest()[i]);
-            }
         }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         // The test we will be doing for this one is just to check if the user has been added to the database when time comes to that.
@@ -75,6 +70,7 @@ namespace Admin.Views
         #endregion
 
         private EmailService mailSender = null;
+        private UserService userService = null;
 
         // A simple method that should run on click of the Send Invite button
         private void SendEmail(object sender, RoutedEventArgs e)
@@ -94,6 +90,7 @@ namespace Admin.Views
             else
             {
                 SendJudgeEmail();
+                userService.
             }
         }
 
