@@ -10,6 +10,7 @@ namespace YoungEnterprise_API.Models
             TblTeam = new HashSet<TblTeam>();
         }
 
+        public int FldEventId { get; set; }
         public int FldSchoolId { get; set; }
         public string FldSchoolUsername { get; set; }
         public string FldSchoolPassword { get; set; }

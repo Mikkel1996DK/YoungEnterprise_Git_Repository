@@ -2,8 +2,9 @@
 
     $('#teamButton').click(function () {
         $.ajax({
-            type: "GET",
+            method: "GET",
             url: "http://localhost:53112/api/TblTeams",
+            dataType: "json",
             contentType: "application/json"
         }).then(function (data) {
             alert("Hello");

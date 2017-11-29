@@ -12,7 +12,7 @@ namespace Service
         {
             databaseContext = GetConnection();
         }
-    
+
         public DB_YoungEnterpriseContext GetConnection()
         {
             //DESKTOP-ACNIRC0 Louise
@@ -29,8 +29,9 @@ namespace Service
             databaseContext = GetConnection();
             using (databaseContext)
             {
-                try { 
-                
+                try
+                {
+
                     TblJudge judge = new TblJudge()
                     {
                         FldEventId = eventID,
@@ -63,6 +64,56 @@ namespace Service
                     }
 
                     return allJudges;
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    return null;
+                }
+            }
+        }
+
+        public void CreateSchool(int eventID, string schoolUsername, string schoolPassword, string schoolName)
+        {
+            databaseContext = GetConnection();
+            using (databaseContext)
+            {
+                try
+                {
+
+                    TblSchool school = new TblSchool()
+                    {
+                        FldEventId = eventID,
+                        FldSchoolUsername = schoolUsername,
+                        FldSchoolPassword = schoolPassword,
+                        FldSchoolName = schoolName
+                    };
+                    databaseContext.TblSchool.Add(school);
+                    databaseContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
+            }
+        }
+
+        public List<TblSchool> GetAllSchools()
+        {
+            databaseContext = GetConnection();
+            using (databaseContext)
+            {
+                try
+                {
+
+                    List<TblSchool> allSchools = new List<TblSchool>();
+                    foreach (TblSchool school in databaseContext.TblSchool)
+                    {
+                        allSchools.Add(school);
+                    }
+
+                    return allSchools;
 
                 }
                 catch (Exception e)
