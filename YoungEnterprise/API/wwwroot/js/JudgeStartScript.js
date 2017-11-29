@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $('#teamButton').click(function () {
+    $(function() {
         $.ajax({
             method: "GET",
             url: "http://localhost:53112/api/TblTeams",
@@ -13,11 +13,11 @@
                 // Loop through the list of teams.
                 $.each(data, function (key, value) {
                     // Add a table row for each team.
-                    var row = '<td>' + value.fld_TeamName + '</td><td>' + value.fld_SubjectCategory + '</td><td>' + <button Give Grade /> + '</td>';
+                    var row = '<td>' + value.fld_TeamName + '</td><td>' + value.fld_SubjectCategory + '</td>'
                     $('<tr/>', { text: row })  // Append the name.
                         .appendTo($('#teams'));
                 });
-            });
+        });
     })
 });
 
