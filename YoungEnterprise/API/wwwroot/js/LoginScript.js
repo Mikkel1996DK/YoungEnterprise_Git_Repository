@@ -1,6 +1,20 @@
 ﻿$(document).ready(function () {
+    $('#loginButton').click(function () {
+        $.ajax({
 
-    $("#loginButton").click(function () {
+
+
+
+        });
+    });
+
+    // Make regular post, then use .then to get the true/false.
+
+
+
+});
+
+    /*$("#loginButton").click(function () {
         var username = document.getElementById("usernameInput").innerText;
         var password = document.getElementById("passwordInput").innerText;
 
@@ -10,11 +24,9 @@
         } else {
             alert("Username and Password does not match. Try again!");
         }
-    });
+    });*/
 
-});
-
-$('#loginButton').click(function () {
+/*$('#loginButton').click(function () {
     $.ajax({
         // Post username, password & the grant type to /token
         url: '/token',
@@ -38,5 +50,4 @@ $('#loginButton').click(function () {
         }
 
     });
-});
-        
+});*/

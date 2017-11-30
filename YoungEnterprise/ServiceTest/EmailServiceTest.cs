@@ -7,13 +7,15 @@ namespace ServiceTest
     public class EmailServiceTest
     {
         private EmailService emailService = null;
+        private UserService userService = null;
 
         [TestMethod]
         public void TestRandomPassword()
         {
-            emailService = new EmailService("smtp.gmail.com", 587, true, "youngenterprise.mail1379@gmail.com", "yprise987");
+            emailService = new EmailService();
+            userService = new UserService();
 
-            string pw = emailService.GetRandomPassword(8);
+            string pw = userService.GetRandomPassword(8);
 
             Assert.IsTrue(RandomPasswordTest(pw, 8));
         }

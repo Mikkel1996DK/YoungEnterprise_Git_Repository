@@ -60,6 +60,8 @@ namespace Admin.ViewModels
                 //mailSender.SendInviteMail(email, "Young Enterprise | Dommer Invitiation", nameText, email, pw);
 
                 //Console.WriteLine("cw2");
+                Console.WriteLine(pw);
+                
 
                 dbService = new DatabaseService();
                 dbService.CreateJudge(1, email, userService.HashPassword(email, pw), nameText);
