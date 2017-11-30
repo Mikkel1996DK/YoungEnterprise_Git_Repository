@@ -1,10 +1,24 @@
 ﻿$(document).ready(function () {
 
+/*    $("#teamButton").click(function () {
+
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "http://localhost:53112/api/TblTeams"
+        }).then(function (data) {
+            alert(JSON.stringify(data));
+            alert("data[1].name: " + data[1].name);
+            alert("data[1].grade: " + data[1].grade);
+        });
+        return false;
+    });
+    */
     $('#teamButton').click(function () {
         $.ajax({
             type: "GET",
             url: "http://localhost:53112/api/TblTeams",
-            contentType: "application/json"
+            dataType: "json"
         }).then(function (data) {
             alert("Hello");
                 $('#teams').empty(); // Clear the table body.

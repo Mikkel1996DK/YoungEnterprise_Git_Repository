@@ -21,7 +21,8 @@ CREATE TABLE tbl_Event (fld_EventID INT IDENTITY(1,1) PRIMARY KEY,
 
 IF Object_ID('tbl_School') IS NOT NULL
 	DROP TABLE tbl_School
-CREATE TABLE tbl_School (fld_SchoolID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+CREATE TABLE tbl_School (fld_EventID INT FOREIGN KEY REFERENCES tbl_Event(fld_EventID) NOT NULL,
+						 fld_SchoolID INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 					     fld_SchoolUsername VARCHAR(40) NOT NULL,
 						 fld_SchoolPassword CHAR(64) NOT NULL, -- Hashed with SHA-256
 						 fld_SchoolName VARCHAR(50) NOT NULL)
