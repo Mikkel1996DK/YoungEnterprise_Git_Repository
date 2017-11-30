@@ -51,7 +51,7 @@ namespace Service
             // Get all the judges in a generic list.
             DatabaseService dbService = new DatabaseService();
             List<TblJudge> judgeList = dbService.GetAllJudges();
-            dbService = null;
+            
 
             // Loops through all the judges in the database and returns true only if it finds a match with both username and password
             // at once.

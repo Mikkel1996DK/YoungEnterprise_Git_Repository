@@ -14,7 +14,6 @@ namespace API.Controllers
 {
     [Produces("application/json")]
     [Route("api/Login")]
-    [EnableCors("AllowSpecificOrigin")]
     public class LoginController : Controller
     {
         private readonly DB_YoungEnterpriseContext _context;
@@ -24,14 +23,28 @@ namespace API.Controllers
             _context = context;
         }
 
-        // POST: api/Login?
+        // POST: api/Login
         [HttpPost]
-        public bool ClientLogin ([FromBody] LoginModel loginModel)
+        public ActionResult ClientLogin ([FromBody] UserPassModel loginModel)
         {
+            Console.WriteLine("Hello test Hello________________________________________________________");
+
             UserService service = new UserService();
+
+            Console.WriteLine("USERNAME: " + loginModel.Username + "        PASSWORD: " + loginModel.Password);
+
+            Console.WriteLine("USER PASS ________________________________________________________" + service.CheckJudgeLogin(loginModel.Username, service.HashPassword(loginModel.Username, loginModel.Password)));
+
+            //Test User:
             //usr: mikkelljungberg@gmail.com
             //pw: Flou92tl
-            return service.CheckJudgeLogin(loginModel.Username, service.HashPassword(loginModel.Username, loginModel.Password));
+
+            
+
+            AuthenticationModel authModel = new AuthenticationModel();
+            authModel.Authenticated = service.CheckJudgeLogin(loginModel.Username, service.HashPassword(loginModel.Username, loginModel.Password));
+
+            return Json(new { authenticated = authModel.Authenticated });
         }
 
 
