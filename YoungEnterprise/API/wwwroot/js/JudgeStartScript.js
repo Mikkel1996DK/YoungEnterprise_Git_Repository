@@ -7,7 +7,6 @@
             dataType: "json",
             contentType: "application/json"
         }).then(function (data) {
-            alert("Hello");
                 $('#teams').empty(); // Clear the table body.
 
                 // Loop through the list of teams.
