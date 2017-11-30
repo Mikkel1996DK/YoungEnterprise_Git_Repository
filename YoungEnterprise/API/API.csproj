@@ -21,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Home\About.cshtml" />
-    <None Include="Views\Home\Contact.cshtml" />
-    <None Include="Views\Home\HomePage.cshtml" />
+    <None Include="wwwroot\HomePage.html" />
     <None Include="wwwroot\index.html" />
     <None Include="wwwroot\js\JudgeStartScript.js" />
     <None Include="wwwroot\js\LoginScript.js" />

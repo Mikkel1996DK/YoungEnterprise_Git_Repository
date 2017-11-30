@@ -46,7 +46,7 @@ namespace YoungEnterprise_API
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=HomePage}/{id?}");
+                    template: "{controller=Home}/{action=APIStartPage}/{id?}");
             });
         }
     }

@@ -8,7 +8,7 @@ namespace YoungEnterprise_API.Controllers
     [EnableCors("AllowSpecificOrigin")]
     public class HomeController : Controller
     {
-        public IActionResult HomePage()
+        public IActionResult APIStartPage()
         {
             return View();
         }
