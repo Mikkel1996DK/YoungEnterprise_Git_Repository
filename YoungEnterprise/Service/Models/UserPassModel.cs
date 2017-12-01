@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Service.Models
+namespace YoungEnterprise_API.Models
 {
-    public class UserPassModel
+    public partial class UserPassModel
     {
         public string Username { get; set; }
         public string Password { get; set; }

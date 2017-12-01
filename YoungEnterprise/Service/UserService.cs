@@ -65,5 +65,61 @@ namespace Service
 
             return false;
         }
+
+
+        // Make test for this.
+        public void CreateJudgePairs ()
+        {
+            DatabaseService dbService = new DatabaseService();
+
+            List<TblJudge> judgeList = dbService.GetAllJudges();
+
+            // We've been told that there will always be 24 judges.
+            // Therefore the method should just pair up the judges as long as there's two judges left.
+            // If there's an excess judge, that judge should not be included.
+            // Then trimming the amount of judgepairs down to 12.
+
+            List<TblJudge> judges = new List<TblJudge>();
+
+            // This trims the amount of judges to be an equal number.
+            if (judgeList.Count() % 2 != 0)
+            {
+                for (int i = 0; i < judgeList.Count() - 1; i++)
+                {
+                    judges.Add(judgeList[i]);
+                }
+            }
+
+            // Make judge pairs
+
+            // i=0 length = 3    | judge1, judge2, judge3, judge4     |
+            // i=0 length = 2    | judge2, judge3, judge4             | judgePair1(judge1,       )
+            // i=0 length = 1    | judge3, judge4                     | judgePair1(judge1, judge2)
+            // i=1 length = 0    | judge4                             | judgePair1(judge1, judge2), judgePair2(judge3,       )
+            // i=1 length = null |                                    | judgePair1(judge1, judge2), judgePair2(judge3, judge4)
+            List<TblJudgePair> judgePairs = new List<TblJudgePair>();
+            for (int i = 0; i < judges.Count() - 1; i++)
+            {
+                TblJudgePair judgePair = new TblJudgePair();
+
+                judgePair.FldJudgeIda = judges[i].FldJudgeId;
+                //judgePair.FldJudgeIdaNavigation = judges[i];
+
+                judgePair.FldJudgeIdb = judges[i + 1].FldJudgeId;
+                //judgePair.FldJudgeIdbNavigation = judges[i + 1];
+
+                i++;
+
+                judgePairs.Add(judgePair);
+            }
+
+            // Add judges to the database.
+            foreach (TblJudgePair pair in judgePairs)
+            {
+                dbService.CreateJudgePair(pair.FldJudgeIda, pair.FldJudgeIdb);
+            }
+
+            dbService = null;
+        }
     }
 }

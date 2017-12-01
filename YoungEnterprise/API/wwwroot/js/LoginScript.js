@@ -14,10 +14,10 @@ $(document).ready(function () {
         var passwordText = document.getElementById('passwordInput').value;
         alert('password: ' + passwordText.toString());
 
-        var user = {
+        /*var user = {
             "username": $("#emailInput").val(),
             "password": $("#passwordInput").val()
-        }
+        }*/
 
         alert(JSON.stringify(user));
 
@@ -26,7 +26,7 @@ $(document).ready(function () {
             url: 'http://localhost:53112/api/login',
             dataType: 'json',
             contentType: 'application/json',
-            data: user,//{ 'username': usernameText, 'password': passwordText },
+            data: { 'username': usernameText, 'password': passwordText },
             success: function (data) {
                 alert(JSON.stringify(data));
                 if (JSON.stringify(data.authenticated) === 'true') {
