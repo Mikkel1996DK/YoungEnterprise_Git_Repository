@@ -30,9 +30,9 @@ namespace ServiceTest
         {
             service = new DatabaseService();
  
-            int number = service.GetAllSchool().Count;
+            int number = service.GetAllSchools().Count;
 
-            Assert.AreEqual(number, service.GetSchool().Count);
+            Assert.AreEqual(number, service.GetAllSchools().Count);
             service.CreateSchool(1, "louisebc@gmail.com", userService.HashPassword("louisebc@gmail.com", "12345"), "Louise");
             // As we have now added a school, the expected number is one more than before
             Assert.AreEqual(number + 1, service.GetAllJudges().Count);

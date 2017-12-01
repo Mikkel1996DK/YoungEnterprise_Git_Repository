@@ -19,8 +19,11 @@ DELETE FROM tbl_Event
 INSERT INTO tbl_Event(fld_EventDate)
 	   VALUES ('2017-11-22')
 
-INSERT INTO tbl_School(fld_SchoolUsername, fld_SchoolPassword, fld_SchoolName)
-	   VALUES ('administrator@bcs.dk', '123456', 'Business College Syd')
+INSERT INTO tbl_School(fld_EventID, fld_SchoolUsername, fld_SchoolPassword, fld_SchoolName)
+	   VALUES (1, 'administrator@bcs.dk', '123456', 'Business College Syd')
+
+INSERT INTO tbl_School(fld_EventID, fld_SchoolUsername, fld_SchoolPassword, fld_SchoolName)
+	   VALUES (1, 'admin@oestreskole.dk', '444555', 'Østre Skole Thisted')
 
 INSERT INTO tbl_Team(fld_TeamName, fld_EventID, fld_SchoolID, fld_SubjectCategory, fld_Report)
 	   VALUES ('TeamNavn_One', 1, 1, 'Trade & Skills', CAST('asdf' as varbinary(max)))

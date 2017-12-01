@@ -13,6 +13,11 @@ namespace YoungEnterprise_API.Controllers
             return View();
         }
 
+        public IActionResult index()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
