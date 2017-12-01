@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using YoungEnterprise_API.Models;
 using Microsoft.EntityFrameworkCore;
+using Service.Models;
 
 namespace Service
 {
@@ -17,7 +18,7 @@ namespace Service
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -174,6 +175,36 @@ namespace Service
                 }
             }
         }
+
+        public List<User> GetUsers ()
+        {
+            List<TblJudge> judges = GetAllJudges();
+            List<TblSchool> schools = GetAllSchools();
+
+            List<User> users = new List<User>();
+
+            
+            foreach (TblJudge judge in judges)
+            {
+                User user = new User(false);
+                user.Name = judge.FldJudgeName;
+                user.UserName = judge.FldJudgeUsername;
+
+                users.Add(user);
+            }
+
+            foreach (TblSchool school in schools)
+            {
+                User user = new User(true);
+
+                user.Name = school.FldSchoolName;
+                user.UserName = school.FldSchoolUsername;
+                users.Add(user);
+            }
+
+            return users;
+        }
+
     }
 }
 

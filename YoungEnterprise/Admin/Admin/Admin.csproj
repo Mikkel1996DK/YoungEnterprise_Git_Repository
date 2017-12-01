@@ -116,6 +116,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\InviteUserViewModel.cs" />
+    <Compile Include="ViewModels\UserDisplayViewModel.cs" />
     <Compile Include="Views\CreateScheduleView.xaml.cs">
       <DependentUpon>CreateScheduleView.xaml</DependentUpon>
     </Compile>

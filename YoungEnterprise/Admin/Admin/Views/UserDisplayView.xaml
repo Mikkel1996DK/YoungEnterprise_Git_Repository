@@ -30,24 +30,25 @@
         <Button x:Name="searchUsersButton" Content="Søg" Grid.Row="1" Grid.Column="3" Margin="12, 20, 12, 4" Style="{StaticResource searchButton}"/>
 
         <!-- ComboBox/Amount-Of-Users Label -->
-        <ComboBox Name="userCombo" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="12, 4, 12, 20" FontSize="24" FontFamily="Arial" VerticalAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="ComboBox_SelectionChanged">
+        <ComboBox Name="userCombo" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2" Margin="12, 4, 12, 20" FontSize="24" FontFamily="Arial" VerticalAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="userCombo_SelectionChanged">
             <ComboBoxItem Content="Skoler"  IsSelected="True"/>
             <ComboBoxItem Content="Dommere"/>
+            <ComboBoxItem Content="Alle"/>
         </ComboBox>
         <Label x:Name="amountOfUsers" Content="0 Brugere" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16" Margin="12, 4, 12, 20"/>
 
         <!-- DataGrid -->
         <!-- The center-header is kind of wonky, a better solution might be needed! -->
-        <DataGrid x:Name="allUsersDataGrid" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="12,0.5,11.5,10.5" AutoGenerateColumns="False" FontFamily="Arial" FontSize="20">
+        <DataGrid x:Name="allUsersDataGrid" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="3" Margin="12,0.5,11.5,10.5" AutoGenerateColumns="False" FontFamily="Arial" FontSize="20" ItemsSource="{Binding Users}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Brugernavn" Width="1*" IsReadOnly="True">
+                <DataGridTextColumn Header="Brugernavn" Width="1*" Binding="{Binding UserName}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Navn" Width="1*" IsReadOnly="True">
+                <DataGridTextColumn Header="Navn" Width="1*" Binding="{Binding Name}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -57,6 +58,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button x:Name="addBruger" Content="Tilføj Bruger" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="120, 10, 120, 10" Style="{StaticResource searchButton}" Click="addBruger_Click"/>
+        <Button x:Name="addBruger" Content="Tilføj Bruger" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="120, 10, 120, 10" Style="{StaticResource searchButton}"/>
     </Grid>
 </UserControl>
