@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Admin
 {
     /// <summary>
@@ -57,6 +58,7 @@ namespace Admin
         private InviteUserView inviteUserControl = new InviteUserView();
         private ResultView viewResultsControl = new ResultView();
         private UserDisplayView viewUsersControl = new UserDisplayView();
+        
 
         public MainWindow()
         {

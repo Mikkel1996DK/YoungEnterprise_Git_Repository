@@ -24,5 +24,12 @@ namespace Admin.Views
         {
             InitializeComponent();
         }
+
+        private void addBruger_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
     }
+
+
 }
