@@ -123,5 +123,56 @@ namespace Service
                 }
             }
         }
+
+        public void CreateJudgePair(int judgeIdA, int judgeIdB)
+        {
+            databaseContext = GetConnection();
+            using (databaseContext)
+            {
+                try
+                {
+
+                    TblJudgePair judgePair = new TblJudgePair()
+                    {
+                        FldJudgeIda = judgeIdA,
+                        //FldJudgeIdaNavigation = judgeNavA,
+                        FldJudgeIdb = judgeIdB
+                        //FldJudgeIdbNavigation = judgeNavB
+                    };
+
+                    databaseContext.TblJudgePair.Add(judgePair);
+                    databaseContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
+            }
+        }
+
+        public List<TblJudgePair> GetAllJudgePairs()
+        {
+            databaseContext = GetConnection();
+            using (databaseContext)
+            {
+                try
+                {
+
+                    List<TblJudgePair> allJudges = new List<TblJudgePair>();
+                    foreach (TblJudgePair judgePair in databaseContext.TblJudgePair)
+                    {
+                        allJudges.Add(judgePair);
+                    }
+
+                    return allJudges;
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    return null;
+                }
+            }
+        }
     }
 }

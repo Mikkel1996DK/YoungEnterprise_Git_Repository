@@ -68,8 +68,12 @@ namespace Service
 
 
         // Make test for this.
-        public List<TblJudgePair> CreateJudgePairs (List<TblJudge> judgeList)
+        public void CreateJudgePairs ()
         {
+            DatabaseService dbService = new DatabaseService();
+
+            List<TblJudge> judgeList = dbService.GetAllJudges();
+
             // We've been told that there will always be 24 judges.
             // Therefore the method should just pair up the judges as long as there's two judges left.
             // If there's an excess judge, that judge should not be included.
@@ -94,23 +98,28 @@ namespace Service
             // i=1 length = 0    | judge4                             | judgePair1(judge1, judge2), judgePair2(judge3,       )
             // i=1 length = null |                                    | judgePair1(judge1, judge2), judgePair2(judge3, judge4)
             List<TblJudgePair> judgePairs = new List<TblJudgePair>();
-            for (int i = 0; i < judges.Count(); i++)
+            for (int i = 0; i < judges.Count() - 1; i++)
             {
                 TblJudgePair judgePair = new TblJudgePair();
+
                 judgePair.FldJudgeIda = judges[i].FldJudgeId;
-                judgePair.FldJudgeIdaNavigation = judges[i];
+                //judgePair.FldJudgeIdaNavigation = judges[i];
 
-                judges.Remove(judges[i]);
+                judgePair.FldJudgeIdb = judges[i + 1].FldJudgeId;
+                //judgePair.FldJudgeIdbNavigation = judges[i + 1];
 
-                judgePair.FldJudgeIdb = judges[i].FldJudgeId;
-                judgePair.FldJudgeIdbNavigation = judges[i];
-
-                judges.Remove(judges[i]);
+                i++;
 
                 judgePairs.Add(judgePair);
             }
 
-            return judgePairs;
+            // Add judges to the database.
+            foreach (TblJudgePair pair in judgePairs)
+            {
+                dbService.CreateJudgePair(pair.FldJudgeIda, pair.FldJudgeIdb);
+            }
+
+            dbService = null;
         }
     }
 }

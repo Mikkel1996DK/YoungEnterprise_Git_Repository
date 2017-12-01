@@ -44,5 +44,21 @@ namespace ServiceTest
             // Should return true.
             Assert.IsTrue(service.CheckJudgeLogin(actualUsername, service.HashPassword(actualUsername, actualPassword)));
         }
+
+        // The problem with testing this is that there's not a defined number of judgepairs that's returned.
+        // 
+        [TestMethod]
+        public void TestMakeJudgePairs ()
+        {
+            DatabaseService database = new DatabaseService();
+
+            int amount = database.GetAllJudgePairs().Count;
+
+            Assert.AreEqual(amount, database.GetAllJudgePairs().Count);
+
+            service.CreateJudgePairs();
+
+            Assert.AreEqual(2, database.GetAllJudgePairs().Count);
+        }
     }
 }
