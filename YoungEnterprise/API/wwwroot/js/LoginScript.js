@@ -11,7 +11,6 @@
             alert("Username and Password does not match. Try again!");
         }
     });
-
 });
 
 $('#loginButton').click(function () {

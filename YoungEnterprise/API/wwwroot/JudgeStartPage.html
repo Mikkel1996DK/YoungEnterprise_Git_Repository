@@ -6,7 +6,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/JudgeStartScript.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="js/JudgeStartScript.js?n=1"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
+
+    <!-- Latest compiled and minified Locales -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
 
     <title> Young Enterprise</title>
 
@@ -49,17 +60,51 @@
     <br />
     <br />
     <br />
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xs-2">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="sel1">Show</label>
+                        <select class="form-control" id="showSelection">
+                            <option selected="selected">All</option>
+                            <option>Without Grade</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-xs-2">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="sel1">Category</label>
+                        <select class="form-control" id="categorySelection">
+                            <option selected="selected">Report</option>
+                            <option>Stand</option>
+                            <option>Interview</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <br />
+    <br />
+
     <div class="container">
         <div class="table-responsive">
-            <table class="table table-hover">
+
+            <table class="table table-hover" id="table">
                 <thead>
                     <tr>
-                        <th>Team Name</th>
-                        <th>Categori</th>
-                        <th>Grade</th>
+                        <th data-field="fldTeamName">Team Name</th>
+                        <th data-field="fldSubjectCategory">Subject</th>
                     </tr>
                 </thead>
-                <tbody id="teams"></tbody>
             </table>
         </div>
     </div>
