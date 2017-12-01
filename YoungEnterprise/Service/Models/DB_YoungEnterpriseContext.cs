@@ -137,6 +137,8 @@ namespace YoungEnterprise_API.Models
 
                 entity.Property(e => e.FldSchoolId).HasColumnName("fld_SchoolID");
 
+                entity.Property(e => e.FldEventId).HasColumnName("fld_EventID");
+
                 entity.Property(e => e.FldSchoolName)
                     .IsRequired()
                     .HasColumnName("fld_SchoolName")

@@ -23,7 +23,8 @@ namespace YoungEnterprise_API
             services.AddCors();
 
             //6D9EMB1 mikkel
-            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            //DESKTOP-ACNIRC0 louise
+            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             services.AddDbContext<DB_YoungEnterpriseContext>(options => options.UseSqlServer(connection));
         }
 

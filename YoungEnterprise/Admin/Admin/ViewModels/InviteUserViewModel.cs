@@ -73,8 +73,14 @@ namespace Admin.ViewModels
                 mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email);
                 mailSender = null;
                 */
+
+                dbService = new DatabaseService();
+                dbService.CreateSchool(1, email, userService.HashPassword(email, pw), nameText);
+                pw = null;
             }
         }
+
+
 
 
 

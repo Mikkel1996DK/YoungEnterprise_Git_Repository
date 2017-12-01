@@ -26,6 +26,7 @@ namespace ServiceTest
             Assert.AreEqual(number + 1, service.GetAllJudges().Count);
         }
 
+        [TestMethod]
         public void CreateSchoolTest()
         {
             service = new DatabaseService();
@@ -35,7 +36,7 @@ namespace ServiceTest
             Assert.AreEqual(number, service.GetAllSchools().Count);
             service.CreateSchool(1, "louisebc@gmail.com", userService.HashPassword("louisebc@gmail.com", "12345"), "Louise");
             // As we have now added a school, the expected number is one more than before
-            Assert.AreEqual(number + 1, service.GetAllJudges().Count);
+            Assert.AreEqual(number + 1, service.GetAllSchools().Count);
         }
     }
 }

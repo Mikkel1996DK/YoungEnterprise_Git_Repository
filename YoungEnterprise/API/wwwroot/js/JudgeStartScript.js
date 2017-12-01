@@ -7,7 +7,7 @@
             dataType: "json",
             contentType: "application/json"
         }).then(function (data) {
-            alert(JSON.stringify(data))
+            
             $('#table').bootstrapTable({
                 data: data
             });

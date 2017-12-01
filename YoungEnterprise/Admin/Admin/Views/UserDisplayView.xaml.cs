@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using YoungEnterprise_API.Models;
 
 namespace Admin.Views
 {
@@ -20,6 +15,13 @@ namespace Admin.Views
     /// </summary>
     public partial class UserDisplayView : UserControl
     {
+        private ObservableCollection<TblJudge> judgeList = new ObservableCollection<TblJudge>();
+        public ObservableCollection<TblJudge> JudgeList { get { return judgeList; } }
+
+
+        private ObservableCollection<TblSchool> schoolList = new ObservableCollection<TblSchool>();
+        public ObservableCollection<TblSchool> SudgeList { get { return schoolList; } }
+
         public UserDisplayView()
         {
             InitializeComponent();
@@ -28,6 +30,18 @@ namespace Admin.Views
         private void addBruger_Click(object sender, RoutedEventArgs e)
         {
            
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (userCombo.SelectedItem.ToString().Equals("Schools")){
+
+            }
+            else if (userCombo.SelectedItem.ToString().Equals("Judges"))
+            {
+
+            }
+            
         }
     }
 

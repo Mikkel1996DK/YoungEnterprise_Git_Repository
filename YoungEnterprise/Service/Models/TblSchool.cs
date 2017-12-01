@@ -16,6 +16,7 @@ namespace YoungEnterprise_API.Models
         public string FldSchoolPassword { get; set; }
         public string FldSchoolName { get; set; }
 
+        public TblEvent FldEvent { get; set; }
         public ICollection<TblTeam> TblTeam { get; set; }
     }
 }
