@@ -16,7 +16,7 @@ namespace API.Controllers
     [Route("api/Login")]
     public class LoginController : Controller
     {
-        private readonly DB_YoungEnterpriseContext _context;
+        private DB_YoungEnterpriseContext _context;
 
         public LoginController(DB_YoungEnterpriseContext context)
         {
@@ -25,13 +25,25 @@ namespace API.Controllers
 
         // POST: api/Login
         [HttpPost]
-        public ActionResult ClientLogin ([FromBody] UserPassModel loginModel)
+        public async Task<IActionResult> ClientLogin ([FromBody] UserPassModel loginModel)
         {
             Console.WriteLine("Hello test Hello________________________________________________________");
+
+            _context = new YoungEnterprise_API.Models.DB_YoungEnterpriseContext();
 
             UserService service = new UserService();
 
             Console.WriteLine("USERNAME: " + loginModel.Username + "        PASSWORD: " + loginModel.Password);
+
+
+
+            var loggedIn = await _context.TblJudge.SingleOrDefaultAsync(n => n.FldJudgeUsername == loginModel.Username 
+                                 && n.FldJudgePassword == service.HashPassword(loginModel.Username, loginModel.Password));
+
+            if (loggedIn == null)
+            {
+                return NotFound();
+            }
 
             Console.WriteLine("USER PASS ________________________________________________________" + service.CheckJudgeLogin(loginModel.Username, service.HashPassword(loginModel.Username, loginModel.Password)));
 
