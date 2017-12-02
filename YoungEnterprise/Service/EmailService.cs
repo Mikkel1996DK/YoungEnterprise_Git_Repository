@@ -49,7 +49,7 @@ namespace Service
             string text = "Hej " + name + "." + Environment.NewLine + Environment.NewLine + "Du er hermed inviteret til YoungEnterprise event!" + Environment.NewLine +
                           "Brugernavn: " + username + Environment.NewLine +
                           "Kodeord   : " + password;
-            mailMessage = new MailMessage(senderAddress, reciever, title, "hello");
+            mailMessage = new MailMessage(senderAddress, reciever, title, text);
 
             client.Send(mailMessage);
 

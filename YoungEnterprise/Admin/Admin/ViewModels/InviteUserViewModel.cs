@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace Admin.ViewModels
 {
+    // EmailService has been outcommented in this class due to it not working on the EASV network (It crashes the application on that network).
+    //  - However it works fine at Mikkel's home network.
     public class InviteUserViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private EmailService mailSender = new EmailService();
+        //private EmailService mailSender = new EmailService();
         private DatabaseService dbService = new DatabaseService();
         private UserService userService = new UserService();
 
@@ -53,14 +55,11 @@ namespace Admin.ViewModels
         {
             string pw = userService.GetRandomPassword(8);
 
-            //Console.WriteLine("cw1");
+            Console.WriteLine(pw);
 
             if (!isSchool)
             {
                 //mailSender.SendInviteMail(email, "Young Enterprise | Dommer Invitiation", nameText, email, pw);
-
-                //Console.WriteLine("cw2");
-                Console.WriteLine(pw);
                 
 
                 dbService = new DatabaseService();
@@ -69,10 +68,8 @@ namespace Admin.ViewModels
             }
             else
             {
-                /*
-                mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email);
-                mailSender = null;
-                */
+                
+                //mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email, pw);
 
                 dbService = new DatabaseService();
                 dbService.CreateSchool(1, email, userService.HashPassword(email, pw), nameText);
