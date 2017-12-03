@@ -7,7 +7,13 @@
             dataType: "json",
             contentType: "application/json"
         }).then(function (data) {
-            
+
+            $.each(data, function (key, value) {
+                $.each(value, function (k, v) {
+                    alert(v.value);
+                });
+            });
+
             $('#table').bootstrapTable({
                 data: data
             });

@@ -27,7 +27,6 @@ namespace Service
 
         public void CreateJudge(int eventID, string judgeUsername, string judgePassword, string judgeName)
         {
-            databaseContext = GetConnection();
             using (databaseContext)
             {
                 try
@@ -52,7 +51,6 @@ namespace Service
 
         public List<TblJudge> GetAllJudges()
         {
-            databaseContext = GetConnection();
             using (databaseContext)
             {
                 try
@@ -77,7 +75,6 @@ namespace Service
 
         public void CreateSchool(int eventID, string schoolUsername, string schoolPassword, string schoolName)
         {
-            databaseContext = GetConnection();
             using (databaseContext)
             {
                 try
@@ -102,7 +99,6 @@ namespace Service
 
         public List<TblSchool> GetAllSchools()
         {
-            databaseContext = GetConnection();
             using (databaseContext)
             {
                 try
@@ -127,7 +123,6 @@ namespace Service
 
         public void CreateJudgePair(int judgeIdA, int judgeIdB)
         {
-            databaseContext = GetConnection();
             using (databaseContext)
             {
                 try
@@ -153,7 +148,6 @@ namespace Service
 
         public List<TblJudgePair> GetAllJudgePairs()
         {
-            databaseContext = GetConnection();
             using (databaseContext)
             {
                 try
@@ -176,14 +170,14 @@ namespace Service
             }
         }
 
-        public List<User> GetUsers ()
+        public List<User> GetUsers()
         {
             List<TblJudge> judges = GetAllJudges();
             List<TblSchool> schools = GetAllSchools();
 
             List<User> users = new List<User>();
 
-            
+
             foreach (TblJudge judge in judges)
             {
                 User user = new User(false);
@@ -205,7 +199,61 @@ namespace Service
             return users;
         }
 
+        public List<TblVoteAnswer> FindVoteAnswers(TblJudgePair judgePair)
+        {
+            using (databaseContext)
+            {
+                try
+                {
+                    List<TblVoteAnswer> allVoteAnswers = new List<TblVoteAnswer>();
+                    foreach (TblVoteAnswer voteAnswer in databaseContext.TblVoteAnswer)
+                    {
+                        voteAnswer.Questiontext = voteAnswer.FldQuestion.FldQuestionText;
+                        voteAnswer.QuestionModifier = voteAnswer.FldQuestion.FldQuestionModifier;
+                        voteAnswer.Points = voteAnswer.FldVote.FldPoints;
+
+                        allVoteAnswers.Add(voteAnswer);
+                    }
+
+                    return allVoteAnswers;
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    return null;
+                }
+            }
+        }
+
+        public List<TblQuestion> FindQuestions(string questionCatagory, string questionSubject)
+        {
+            // Gets a list of questions according to catagory and subject. 
+            // TODO add fldQuestionSubject to db
+
+            using (databaseContext)
+            {
+                try
+                {
+                    List<TblQuestion> questions = new List<TblQuestion>();
+                    foreach (TblQuestion question in databaseContext.TblQuestion)
+                    {
+                       if(question.FldQuestionCategori.Equals(questionCatagory) && question.FldQuestionSubject.Equals(questionSubject))
+                        questions.Add(question);
+                    }
+
+                    return questions;
+                }
+                catch (Exception e)
+                {
+                    // Todo Create Log instead. Look at JAVA example!
+                    Console.WriteLine(e.InnerException.Message);
+                    return null;
+                }
+            }
+        }
     }
 }
+
 
        
