@@ -14,8 +14,7 @@ namespace YoungEnterprise_API.Models
         public string FldQuestionText { get; set; }
         public string FldQuestionCategori { get; set; }
         public double FldQuestionModifier { get; set; }
-        public string FldQuestionSubject { get; set; }
-
+        
         public ICollection<TblVoteAnswer> TblVoteAnswer { get; set; }
     }
 }

@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using YoungEnterprise_API.Models;
 using Microsoft.EntityFrameworkCore;
 using Service.Models;
+using System.Linq;
 
 namespace Service
 {
     public class DatabaseService
     {
-        public DB_YoungEnterpriseContext databaseContext;
         public DatabaseService()
         {
-            databaseContext = GetConnection();
         }
 
         public DB_YoungEnterpriseContext GetConnection()
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -27,7 +26,9 @@ namespace Service
 
         public void CreateJudge(int eventID, string judgeUsername, string judgePassword, string judgeName)
         {
-            using (databaseContext)
+
+
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
@@ -51,7 +52,7 @@ namespace Service
 
         public List<TblJudge> GetAllJudges()
         {
-            using (databaseContext)
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
@@ -75,7 +76,7 @@ namespace Service
 
         public void CreateSchool(int eventID, string schoolUsername, string schoolPassword, string schoolName)
         {
-            using (databaseContext)
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
@@ -99,8 +100,7 @@ namespace Service
 
         public List<TblSchool> GetAllSchools()
         {
-            using (databaseContext)
-            {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
                 try
                 {
 
@@ -118,12 +118,12 @@ namespace Service
                     Console.WriteLine(e.InnerException.Message);
                     return null;
                 }
-            }
         }
+
 
         public void CreateJudgePair(int judgeIdA, int judgeIdB)
         {
-            using (databaseContext)
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
@@ -148,7 +148,7 @@ namespace Service
 
         public List<TblJudgePair> GetAllJudgePairs()
         {
-            using (databaseContext)
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
@@ -201,7 +201,7 @@ namespace Service
 
         public List<TblVoteAnswer> FindVoteAnswers(TblJudgePair judgePair)
         {
-            using (databaseContext)
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
@@ -226,34 +226,61 @@ namespace Service
             }
         }
 
-        public List<TblQuestion> FindQuestions(string questionCatagory, string questionSubject)
+        private List<TblQuestion> FindQuestions(DB_YoungEnterpriseContext databaseContext, string questionCatagory)
         {
-            // Gets a list of questions according to catagory and subject. 
-            // TODO add fldQuestionSubject to db
-
-            using (databaseContext)
+            List<TblQuestion> questions = new List<TblQuestion>();
+            foreach (TblQuestion question in databaseContext.TblQuestion.Where(q => q.FldQuestionCategori.Equals(questionCatagory)))
             {
-                try
-                {
-                    List<TblQuestion> questions = new List<TblQuestion>();
-                    foreach (TblQuestion question in databaseContext.TblQuestion)
-                    {
-                       if(question.FldQuestionCategori.Equals(questionCatagory) && question.FldQuestionSubject.Equals(questionSubject))
-                        questions.Add(question);
-                    }
+                questions.Add(question);
+            }
+            return questions;
+        }
 
-                    return questions;
-                }
-                catch (Exception e)
+        public List<TblVoteAnswer> FindQuestionsAndVotes(string questionCatagory, int judgePairId, string teamName)
+        {
+            List<TblVoteAnswer> result = new List<TblVoteAnswer>();
+
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                foreach (TblQuestion question in FindQuestions(databaseContext, questionCatagory))
                 {
-                    // Todo Create Log instead. Look at JAVA example!
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
+                    TblVote vote = FindJudgePairVotes(databaseContext, question, judgePairId, teamName);
+                    TblVoteAnswer voteAnswer = new TblVoteAnswer
+                    {
+                        FldQuestionId = question.FldQuestionId,
+                        Questiontext = question.FldQuestionText,
+                        QuestionModifier = question.FldQuestionModifier,
+                        FldVoteId = vote == null ? 0 : vote.FldVoteId,
+                        Points = vote == null ? 0 : vote.FldPoints
+                    };
+                    result.Add(voteAnswer);
                 }
             }
+            return result;
+        }
+
+        private TblVote FindJudgePairVotes(DB_YoungEnterpriseContext databaseContext, TblQuestion question, int judgePairId, string teamName)
+        {
+            TblVote result = null;
+            var voteAnswer = databaseContext.TblVoteAnswer
+                         .Where(va =>
+                             va.FldQuestion.FldQuestionId == question.FldQuestionId
+                             && va.FldVote.FldJudgePairId == judgePairId
+                             && va.FldVote.FldTeamName == teamName
+                        )
+                        .FirstOrDefault();
+            if (voteAnswer == null)
+            {
+                result = null;
+            }
+            else
+            {
+                databaseContext.Entry(voteAnswer).Reference(va => va.FldVote).Load();
+                result = voteAnswer.FldVote;
+            }
+            return result;
         }
     }
 }
 
 
-       

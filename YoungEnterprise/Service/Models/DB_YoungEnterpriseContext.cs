@@ -204,8 +204,8 @@ namespace YoungEnterprise_API.Models
                 entity.ToTable("tbl_Vote");
 
                 entity.Property(e => e.FldVoteId).HasColumnName("fld_VoteID");
-
                 entity.Property(e => e.FldJudgePairId).HasColumnName("fld_JudgePairID");
+                entity.Property(e => e.FldPoints).HasColumnName("fld_Points");
 
                 entity.Property(e => e.FldTeamName)
                     .IsRequired()

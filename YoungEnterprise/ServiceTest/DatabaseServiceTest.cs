@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Service;
+using YoungEnterprise_API.Models;
+using System.Linq;
 
 namespace ServiceTest
 {
@@ -37,6 +39,17 @@ namespace ServiceTest
             service.CreateSchool(1, "louisebc@gmail.com", userService.HashPassword("louisebc@gmail.com", "12345"), "Louise");
             // As we have now added a school, the expected number is one more than before
             Assert.AreEqual(number + 1, service.GetAllSchools().Count);
+        }
+
+        [TestMethod]
+        public void FindQuestionAndVotes()
+        {
+            service = new DatabaseService();
+
+            List<TblVoteAnswer> voteAnswer = service.FindQuestionsAndVotes("Trade and Skills", 1, "TeamNavn_One");
+            Assert.AreEqual(2, voteAnswer.Count);
+            Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 0).Count());
+            Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 2).Count());
         }
     }
 }
