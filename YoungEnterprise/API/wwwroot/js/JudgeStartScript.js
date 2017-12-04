@@ -24,10 +24,11 @@
     });
 
         $('#table').on('click-row.bs.table', function (e, row, $element) {
-            //alert($("#elementId :selected").text());
+         
+            var element = document.getElementById("categorySelection");
+            var selectedItem = element.options[element.selectedIndex].value;
+            localStorage.setItem("catagory", selectedItem);
 
-
-            //window.prompt("Giv Point (1 - 10):", "");
 
             // Get Info of TeamName and SubjectCatagory and send to local storage
             

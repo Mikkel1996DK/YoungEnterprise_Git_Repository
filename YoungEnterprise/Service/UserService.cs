@@ -89,6 +89,11 @@ namespace Service
                     judges.Add(judgeList[i]);
                 }
             }
+            else
+            {
+                judges = judgeList;
+            }
+
 
             // Make judge pairs
 
