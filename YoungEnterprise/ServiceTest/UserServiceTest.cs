@@ -46,7 +46,9 @@ namespace ServiceTest
         }
 
         // The problem with testing this is that there's not a defined number of judgepairs that's returned.
-        // 
+        // Test Passed with 2 judges making 1 judgepair.
+        // Test Passed with 3 judges making 1 judgepair (as there's max two judges in a judgepair the last judge is
+        // just thrown out.)
         [TestMethod]
         public void TestMakeJudgePairs ()
         {
@@ -58,7 +60,7 @@ namespace ServiceTest
 
             service.CreateJudgePairs();
 
-            Assert.AreEqual(2, database.GetAllJudgePairs().Count);
+            Assert.AreEqual(1, database.GetAllJudgePairs().Count);
         }
     }
 }
