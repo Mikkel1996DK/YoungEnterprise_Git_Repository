@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    $(function() {
+    $(function () {
         $.ajax({
             method: "GET",
             url: "http://localhost:53112/api/TblTeams",
@@ -8,36 +8,27 @@
             contentType: "application/json"
         }).then(function (data) {
 
-            $.each(data, function (key, value) {
-                $.each(value, function (k, v) {
-                    alert(v.value);
-                });
-            });
-
             $('#table').bootstrapTable({
                 data: data
             });
-
-            //alert("Test: " + data[0].fldTeamName + data[0].fldSubjectCategory);
-            //    // Loop through the list of teams.
-            //for (i = 0; i < data.length; i++) {
-            //    // Add a table row for each team.
-                
-            //    var row = JSON.stringify(data[i].fldTeamName) + JSON.stringify(data[i].fldSubjectCategory);
-            //    $('<tr/>','<td/>', { text: row })  
-            //        .appendTo($('#teams'));
-            //}                  
         });
+
     });
 
-    $('#table').on('click-row.bs.table', function (e, row, $element) {
-        //alert($("#elementId :selected").text());
-
-        // Change HTML page accordling
-        window.location.href = "http://localhost:53112/ReportTradeSkillPage.html";
-
-        alert("Hello");
-    });
-})
+        $('#table').on('click-row.bs.table', function (e, row, $element) {
+            //alert($("#elementId :selected").text());
 
 
+            //window.prompt("Giv Point (1 - 10):", "");
+
+            // Get Info of TeamName and SubjectCatagory and send to local storage
+            
+            var TeamName = row["fldTeamName"];
+            var SubjectCatagory = row["SubjectCatagory"];
+            localStorage.setItem("TeamName", TeamName);
+            localStorage.setItem("SubjectCatagory", SubjectCatagory);
+
+            // Change HTML page accordling
+            window.location.href = "http://localhost:53112/ReportTradeSkillPage.html";
+        });
+});
