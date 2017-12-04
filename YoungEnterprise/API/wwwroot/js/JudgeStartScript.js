@@ -1,5 +1,9 @@
 ﻿$(document).ready(function () {
 
+    $("#logoutButton").click(function () {
+        window.location.href = "http://localhost:53112/HomePage.html";
+    });
+
     $(function () {
         var userName = localStorage.getItem("userName")
 
@@ -20,7 +24,6 @@
                 data: data
             });
         });
-
     });
 
         $('#table').on('click-row.bs.table', function (e, row, $element) {
@@ -33,9 +36,9 @@
             // Get Info of TeamName and SubjectCatagory and send to local storage
             
             var TeamName = row["fldTeamName"];
-            var SubjectCatagory = row["SubjectCatagory"];
-            localStorage.setItem("TeamName", TeamName);
-            localStorage.setItem("SubjectCatagory", SubjectCatagory);
+            var Subject = row["SubjectCatagory"];
+            localStorage.setItem("teamName", TeamName);
+            localStorage.setItem("subject", Subject);
 
             // Change HTML page accordling
             window.location.href = "http://localhost:53112/ReportTradeSkillPage.html";

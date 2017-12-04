@@ -92,12 +92,7 @@ namespace Service
             {
                 judges = judgeList;
             }
-            else
-            {
-                judges = judgeList;
-            }
-
-
+            
             // Make judge pairs
             List<TblJudgePair> judgePairs = new List<TblJudgePair>();
             for (int i = 0; i < judges.Count() - 1; i++)
@@ -124,7 +119,7 @@ namespace Service
             dbService = null;
         }
 
-        public TblJudgePair GetJudgePair (string judgeUsername)
+        public int GetJudgePairID (string judgeUsername)
         {
             DatabaseService dbService = new DatabaseService();
             List<TblJudge> judges = dbService.GetAllJudges();
@@ -151,7 +146,7 @@ namespace Service
                 }
             }
 
-            return selectedJudgePair;
+            return selectedJudgePair.FldJudgePairId;
         }
     }
 }

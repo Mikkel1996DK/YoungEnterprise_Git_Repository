@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/ReportTradeSkillPage.js"></script>
+    <script src="js/ReportTradeSkillPage.js?n=1"></script>
 
     <title> Young Enterprise</title>
 </head>
@@ -36,7 +36,7 @@
                     <li class="dropdown">
                         <a class="dropdown-toggle" id="userNameField" href="#login" data-toggle="dropdown"> Username <strong class="caret"></strong></a>
                         <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px; padding-right: 10px">
-                            <button type="submit" class="btn btn-primary btn-block">Log Out</button>
+                            <button id="logoutButton"type="submit" class="btn btn-primary btn-block">Log Out</button>
                         </div>
                     </li>
                 </ul>
@@ -48,7 +48,7 @@
 
     <div class="container">
         <h3>Report - Trade and Skill </h3>
-        <h4> Team Name: </h4>
+        <h4 id="teamNameField"> Team Name: </h4>
 
         <br />
         <br />
