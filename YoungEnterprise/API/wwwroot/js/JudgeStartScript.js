@@ -2,7 +2,7 @@
 
     $(function () {
         var userName = localStorage.getItem("UserName")
-        document.getElementById("userNameField").innertext = userName;
+        document.getElementById("userNameField").innerText = userName;
     });
 
     $(function () {
