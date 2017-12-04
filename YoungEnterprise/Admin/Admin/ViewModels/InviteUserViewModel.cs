@@ -76,10 +76,5 @@ namespace Admin.ViewModels
                 pw = null;
             }
         }
-
-
-
-
-
     }
 }
