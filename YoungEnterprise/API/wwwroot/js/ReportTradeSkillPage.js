@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
 
-    alert(localStorage.getItem("TeamName"));
+    var userName = localStorage.getItem("userName");
+    document.getElementById('userNameField').innerHTML = userName;
+
+
 });

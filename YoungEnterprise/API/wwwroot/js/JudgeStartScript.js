@@ -1,8 +1,11 @@
 ﻿$(document).ready(function () {
 
     $(function () {
-        var userName = localStorage.getItem("UserName")
-        document.getElementById("userNameField").innerText = userName;
+        var userName = localStorage.getItem("userName")
+
+        alert(userName);
+
+        document.getElementById('userNameField').innerHTML = userName;
     });
 
     $(function () {

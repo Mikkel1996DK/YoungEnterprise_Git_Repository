@@ -22,9 +22,9 @@ $(document).ready(function () {
             success: function (data) {
                 alert(JSON.stringify(data));
                 if (JSON.stringify(data.authenticated) === 'true') {
-                    //localStorage.setItem("userName", usernameText);
+                    localStorage.setItem("userName", usernameText);
                     alert('Logged in!! :D');
-                    //window.location.href = "http://localhost:53112/JudgeStartPage.html"
+                    window.location.href = "http://localhost:53112/JudgeStartPage.html"
 
                 } else {
                     alert('Could not login!! :D');
