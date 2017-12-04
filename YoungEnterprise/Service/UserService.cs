@@ -88,6 +88,9 @@ namespace Service
                 {
                     judges.Add(judgeList[i]);
                 }
+            } else
+            {
+                judges = judgeList;
             }
             else
             {
@@ -96,12 +99,6 @@ namespace Service
 
 
             // Make judge pairs
-
-            // i=0 length = 3    | judge1, judge2, judge3, judge4     |
-            // i=0 length = 2    | judge2, judge3, judge4             | judgePair1(judge1,       )
-            // i=0 length = 1    | judge3, judge4                     | judgePair1(judge1, judge2)
-            // i=1 length = 0    | judge4                             | judgePair1(judge1, judge2), judgePair2(judge3,       )
-            // i=1 length = null |                                    | judgePair1(judge1, judge2), judgePair2(judge3, judge4)
             List<TblJudgePair> judgePairs = new List<TblJudgePair>();
             for (int i = 0; i < judges.Count() - 1; i++)
             {
@@ -125,6 +122,36 @@ namespace Service
             }
 
             dbService = null;
+        }
+
+        public TblJudgePair GetJudgePair (string judgeUsername)
+        {
+            DatabaseService dbService = new DatabaseService();
+            List<TblJudge> judges = dbService.GetAllJudges();
+            List<TblJudgePair> judgePairs = dbService.GetAllJudgePairs();
+            dbService = null;
+
+            TblJudge selectedJudge = null;
+            foreach (TblJudge judge in judges)
+            {
+                if (judge.FldJudgeUsername == judgeUsername)
+                {
+                    selectedJudge = judge;
+                    break;
+                }
+            }
+
+            TblJudgePair selectedJudgePair = null;
+            foreach (TblJudgePair judgePair in judgePairs)
+            {
+                if (judgePair.FldJudgeIda == selectedJudge.FldJudgeId || judgePair.FldJudgeIdb == selectedJudge.FldJudgeId)
+                {
+                    selectedJudgePair = judgePair;
+                    break;
+                }
+            }
+
+            return selectedJudgePair;
         }
     }
 }
