@@ -1,6 +1,6 @@
 ﻿//Test User:
 //usr: mikkelljungberg@gmail.com
-//pw: Flou92tl
+//pw: ls99cTO9
 
 $(document).ready(function () {
     alert('Page Loaded!');
@@ -14,19 +14,14 @@ $(document).ready(function () {
         var passwordText = document.getElementById('passwordInput').value;
         alert('password: ' + passwordText.toString());
 
-        /*var user = {
-            "username": $("#emailInput").val(),
-            "password": $("#passwordInput").val()
-        }*/
+        
 
-        alert(JSON.stringify(user));
+        alert(JSON.stringify({ username: usernameText, password: passwordText } ));
 
         $.ajax({
-            method: 'POST',
-            url: 'http://localhost:53112/api/login',
-            dataType: 'json',
-            contentType: 'application/json',
-            data: { 'username': usernameText, 'password': passwordText },
+            type: 'POST',
+            url: 'http://localhost:53112/api/Login',
+            data: { Username: usernameText, Password: passwordText },
             success: function (data) {
                 alert(JSON.stringify(data));
                 if (JSON.stringify(data.authenticated) === 'true') {
@@ -40,14 +35,7 @@ $(document).ready(function () {
             }
 
             
-        });/*.then(function (data) {
-            if (data === true) {
-                alert('Logged in');
-            } else {
-                alert('Could not login');
-            }
-
-        });*/
+        });
 
 
         return false;

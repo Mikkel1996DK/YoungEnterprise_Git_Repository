@@ -26,7 +26,7 @@ namespace ServiceTest
             string wrongUsername = "madsandersenmadsen@gmail.com";
             string wrongPassword = "Tlou81tl";
             string actualUsername = "mikkelljungberg@gmail.com";
-            string actualPassword = "Flou92tl";
+            string actualPassword = "ls99cTO9";
 
             // Tests if the user can log in with wrong username and password
             // Should return false
