@@ -1,6 +1,11 @@
 ﻿$(document).ready(function () {
 
     $(function () {
+        var userName = localStorage.getItem("UserName")
+        document.getElementById("userNameField").innertext = userName;
+    });
+
+    $(function () {
         $.ajax({
             method: "GET",
             url: "http://localhost:53112/api/TblTeams",
