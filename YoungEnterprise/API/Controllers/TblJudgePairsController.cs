@@ -103,7 +103,7 @@ namespace YoungEnterprise_API.Controllers
         // POST: api/TblJudgePairs
         [HttpPost]
         [Route("JudgeID")]
-        public async Task<IActionResult> PostTblJudgePairID([FromBody] TblJudge judge)
+        public async Task<IActionResult> PostTblJudgePairID(TblJudge judge)
         {
             if (!ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace YoungEnterprise_API.Controllers
             }
 
             UserService userService = new UserService();
-            return CreatedAtAction("GetTblJudgePair",userService.GetJudgePairID(judge.FldJudgeUsername));
+            return CreatedAtAction("GetTblJudgePair", userService.GetJudgePairID(judge.FldJudgeUsername));
         }
 
         // DELETE: api/TblJudgePairs/5
