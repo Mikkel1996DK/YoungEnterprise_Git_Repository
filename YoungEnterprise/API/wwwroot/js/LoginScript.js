@@ -1,6 +1,6 @@
 ﻿//Test User:
 //usr: mikkelljungberg@gmail.com
-//pw: ls99cTO9
+//pw: 8YGPAQqC
 //dawdawdwa
 
 $(document).ready(function () {
@@ -31,8 +31,6 @@ $(document).ready(function () {
             error: function (data) {
                 console.log(data.statusCode);
             }
-
-            
         });
 
 

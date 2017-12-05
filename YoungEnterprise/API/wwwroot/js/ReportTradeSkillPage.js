@@ -21,12 +21,12 @@
     var teamNameText = localStorage.getItem("teamName");
     var userName = localStorage.getItem("userName");
 
-    var judgepairIDNumber = 0;
-
     // Getting judgepairID
-    function getJudgePairID() {
+    $(function getJudgePairID() {
         $.ajax({
             type: 'POST',
+            dataType: "json",
+            contentType: "application/json",
             url: 'http://localhost:53112/api/TblJudgePairs/JudgeID',
             data: {
                 "FldJudgeID": 0,
@@ -37,71 +37,43 @@
             },
             success: function (data) {
                 //alert(JSON.stringify(data));
-                GetQuestionsAndVotes();
-                judgepairIDNumber = data;
+
+                GetQuestionsAndVotes(data);
             },
             error: function (data) {
                 console.log(data.statusCode);
             }
         });
-
-    };
-
-    // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
-    function GetQuestionsAndVotes() {
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
-            data: {
-                'TeamName': teamNameText,
-                'Subject': subjectText,
-                'Category': categoryText,
-                'JudgePairID': judgepairIDNumber
-            },
-            success: function (data) {
-                //alert(JSON.stringify(data));
-                $('#table').bootstrapTable({
-                    data: data
-                });
-            },
-            error: function (data) {
-                console.log(data.statusCode);
-            }
-        });
-
-        //window.prompt("Giv Point (1 - 10):", "");
-    };
-
-    /*
-    function GetQuestionsAndVotes() {
-        return $.ajax({
-            type: 'POST',
-            url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
-            data: {
-                'TeamName': teamNameText,
-                'Subject': subjectText,
-                'Category': categoryText,
-                'JudgePairID': judgepairIDNumber
-            },
-            success: function (data) {
-                //alert(JSON.stringify(data));
-                $('#table').bootstrapTable({
-                    data: data
-                });
-            },
-            error: function (data) {
-                console.log(data.statusCode);
-            }
-        });
-    }
-
-    
-    $.when(getJudgePairID(), GetQuestionsAndVotes()).done(function (res1, res2) {
-        var id = 0;
-        id = res1;
-        alert(id);
-        alert(JSON.stringify(res2));
 
     });
-    */
+
+    //Test User:
+    //usr: mikkelljungberg@gmail.com
+    //pw: 8YGPAQqC
+
+    // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
+    function GetQuestionsAndVotes(judgepairIDNumber) {
+        $.ajax({
+            type: 'POST',
+            dataType: "json",
+            contentType: "application/json",
+            url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
+            data: {
+                'TeamName': teamNameText,
+                'Subject': subjectText,
+                'Category': categoryText,
+                'JudgePairID': judgepairIDNumber
+            },
+            success: function (data) {
+                alert(JSON.stringify(data));
+
+                $('#table').bootstrapTable({
+                    data: data
+                });
+            },
+            error: function (data) {
+                console.log(data.statusCode);
+            }
+        });
+    };
 });
