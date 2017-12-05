@@ -111,7 +111,17 @@ namespace YoungEnterprise_API.Controllers
             }
 
             DatabaseService dbService = new DatabaseService();
-            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.JudgePairID, questionAndVotesModel.TeamName));
+            TestObject obj = new TestObject();
+            obj.VoteAnswers = dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.JudgePairID, questionAndVotesModel.TeamName);
+
+            Console.WriteLine("________________________________________________________" + obj.VoteAnswers.Count());
+
+            foreach (TblVoteAnswer answer in obj.VoteAnswers)
+            {
+                Console.WriteLine("_______________________________ " + answer.FldQuestion + "  " + answer.FldVote);
+            }
+
+            return CreatedAtAction("GetQuestionsAndVotes", obj);
         }
 
         // DELETE: api/TblVoteAnswers/5
