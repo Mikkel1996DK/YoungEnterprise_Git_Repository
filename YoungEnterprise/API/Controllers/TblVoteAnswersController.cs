@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Service;
 using Microsoft.AspNetCore.Cors;
+using YoungEnterprise_API.Models;
 
 namespace YoungEnterprise_API.Controllers
 {
@@ -95,6 +96,20 @@ namespace YoungEnterprise_API.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTblVoteAnswer", new { id = tblVoteAnswer.FldVoteAnswerId }, tblVoteAnswer);
+        }
+
+        // POST: api/TblVoteAnswers/QuestionsAndVotes
+        [HttpPost]
+        [Route("QuestionsAndVotes")]
+        public async Task<IActionResult> PostQuestionAndVotes([FromBody] TblVoteAnswer voteAnswer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            DatabaseService dbService = new DatabaseService();
+            return CreatedAtAction("GetQuestionsAndVotes", dbService.ge));
         }
 
         // DELETE: api/TblVoteAnswers/5

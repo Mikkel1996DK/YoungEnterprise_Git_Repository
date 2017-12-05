@@ -19,13 +19,14 @@
             dataType: "json",
             contentType: "application/json"
         }).then(function (data) {
-
+        
             $('#table').bootstrapTable({
                 data: data
             });
         });
     });
 
+    /*
         $('#table').on('click-row.bs.table', function (e, row, $element) {
          
             var element = document.getElementById("categorySelection");
@@ -43,4 +44,5 @@
             // Change HTML page accordling
             window.location.href = "http://localhost:53112/ReportTradeSkillPage.html";
         });
+    */
 });
