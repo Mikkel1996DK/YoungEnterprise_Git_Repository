@@ -86,6 +86,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblJudgePairs
         [HttpPost]
+        [Route("post1")]
         public async Task<IActionResult> PostTblJudgePair([FromBody] Models.TblJudgePair tblJudgePair)
         {
             if (!ModelState.IsValid)
@@ -99,14 +100,32 @@ namespace YoungEnterprise_API.Controllers
             return CreatedAtAction("GetTblJudgePair", new { id = tblJudgePair.FldJudgePairId }, tblJudgePair);
         }
 
-        // POST: api/TblJudgePairsID
-        [HttpPost("/api/TblJudgePairsID")]
-        public int PostTblJudgePairID(String userName)
+        // POST: api/TblJudgePairs
+        /*[HttpPost]
+        [Route("post2")]
+        public async Task<IActionResult> PostTblJudgePairID([FromBody] UserPassModel upm)
         {
-            Console.WriteLine("________________________________________________________________" + userName + "______________________________________________________");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            _context.TblJudgePair.Add(tblJudgePair);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetTblJudgePair", new { id = tblJudgePair.FldJudgePairId }, tblJudgePair);
+        }*/
+
+        // POST: api/TblJudgePairsID
+        /*[HttpPost]
+        [Route("post2")]
+        public int PostTblJudgePairID(UserPassModel userModel)
+        {
+            Console.WriteLine("________________________________________________________________" + userModel.Username + "______________________________________________________");
             UserService userService = new UserService();
-            return userService.GetJudgePairID(userName);
-        }
+
+            return userService.GetJudgePairID(userModel.Username);
+        }*/
 
         // DELETE: api/TblJudgePairs/5
         [HttpDelete("{id}")]
