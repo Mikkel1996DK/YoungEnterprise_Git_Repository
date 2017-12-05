@@ -109,7 +109,7 @@ namespace YoungEnterprise_API.Controllers
             }
 
             DatabaseService dbService = new DatabaseService();
-            return CreatedAtAction("GetQuestionsAndVotes", dbService.ge));
+            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes()));
         }
 
         // DELETE: api/TblVoteAnswers/5
