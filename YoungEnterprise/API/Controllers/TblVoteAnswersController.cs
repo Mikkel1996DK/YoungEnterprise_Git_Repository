@@ -104,6 +104,8 @@ namespace YoungEnterprise_API.Controllers
         [Route("QuestionsAndVotes")]
         public async Task<IActionResult> PostQuestionAndVotes([FromBody] QuestionAndVotesModel questionAndVotesModel)
         {
+            Console.WriteLine(questionAndVotesModel.JudgePairID + questionAndVotesModel.TeamName + questionAndVotesModel.Subject + questionAndVotesModel.Category);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
