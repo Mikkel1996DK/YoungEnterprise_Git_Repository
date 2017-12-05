@@ -101,7 +101,7 @@ namespace YoungEnterprise_API.Controllers
         // POST: api/TblVoteAnswers/QuestionsAndVotes
         [HttpPost]
         [Route("QuestionsAndVotes")]
-        public async Task<IActionResult> PostQuestionAndVotes([FromBody] TblVoteAnswer voteAnswer)
+        public async Task<IActionResult> PostQuestionAndVotes([FromBody] )
         {
             if (!ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace YoungEnterprise_API.Controllers
             }
 
             DatabaseService dbService = new DatabaseService();
-            return CreatedAtAction("GetQuestionsAndVotes", dbService.ge));
+            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(voteAnswer.));
         }
 
         // DELETE: api/TblVoteAnswers/5
