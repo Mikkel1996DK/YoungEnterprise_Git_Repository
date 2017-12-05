@@ -105,6 +105,7 @@ namespace YoungEnterprise_API.Controllers
         [Route("JudgeID")]
         public async Task<IActionResult> PostTblJudgePairID(TblJudge judge)
         {
+            Console.WriteLine("______________________ USERNAMEEEEE _____________________" + judge.FldJudgeUsername);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
