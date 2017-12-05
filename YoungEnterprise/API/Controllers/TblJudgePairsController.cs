@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Service;
 using Microsoft.AspNetCore.Cors;
 using Service.Models;
+using YoungEnterprise_API.Models;
 
 namespace YoungEnterprise_API.Controllers
 {
@@ -86,7 +87,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblJudgePairs
         [HttpPost]
-        [Route("post1")]
+        [Route("All")]
         public async Task<IActionResult> PostTblJudgePair([FromBody] Models.TblJudgePair tblJudgePair)
         {
             if (!ModelState.IsValid)
@@ -101,31 +102,18 @@ namespace YoungEnterprise_API.Controllers
         }
 
         // POST: api/TblJudgePairs
-        /*[HttpPost]
-        [Route("post2")]
-        public async Task<IActionResult> PostTblJudgePairID([FromBody] UserPassModel upm)
+        [HttpPost]
+        [Route("JudgeID")]
+        public async Task<IActionResult> PostTblJudgePairID([FromBody] TblJudge judge)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.TblJudgePair.Add(tblJudgePair);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTblJudgePair", new { id = tblJudgePair.FldJudgePairId }, tblJudgePair);
-        }*/
-
-        // POST: api/TblJudgePairsID
-        /*[HttpPost]
-        [Route("post2")]
-        public int PostTblJudgePairID(UserPassModel userModel)
-        {
-            Console.WriteLine("________________________________________________________________" + userModel.Username + "______________________________________________________");
             UserService userService = new UserService();
-
-            return userService.GetJudgePairID(userModel.Username);
-        }*/
+            return CreatedAtAction("GetTblJudgePair",userService.GetJudgePairID(judge.FldJudgeUsername));
+        }
 
         // DELETE: api/TblJudgePairs/5
         [HttpDelete("{id}")]

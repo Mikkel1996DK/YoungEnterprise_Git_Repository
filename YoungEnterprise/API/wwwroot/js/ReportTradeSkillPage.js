@@ -27,7 +27,13 @@
     $.ajax({
         type: 'POST',
         url: 'http://localhost:53112/api/TblJudgePairsID',
-        data: { Username: userName },
+        data: {
+            "FldJudgeID": 0,
+            "FldEventID": 0,
+            "FldJudgeUsername": userName,
+            "FldJudgePassword": "",
+            "FldJudgeName": ""
+        } ,
         success: function (data) {
              var judgepairID = data;
         },
@@ -57,4 +63,4 @@
 
     */
 
-});
+   });
