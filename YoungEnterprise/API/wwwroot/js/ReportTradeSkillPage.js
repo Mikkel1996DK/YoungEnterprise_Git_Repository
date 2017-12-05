@@ -24,11 +24,9 @@
     var judgepairIDNumber = 0;
 
     // Getting judgepairID
-    $(function getJudgePairID() {
+    function getJudgePairID() {
         $.ajax({
             type: 'POST',
-            dataType: "json",
-            contentType: "application/json",
             url: 'http://localhost:53112/api/TblJudgePairs/JudgeID',
             data: {
                 "FldJudgeID": 0,
@@ -39,6 +37,7 @@
             },
             success: function (data) {
                 //alert(JSON.stringify(data));
+                GetQuestionsAndVotes();
                 judgepairIDNumber = data;
             },
             error: function (data) {
@@ -46,14 +45,12 @@
             }
         });
 
-    });
+    };
 
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
-    $(function GetQuestionsAndVotes() {
+    function GetQuestionsAndVotes() {
         $.ajax({
             type: 'POST',
-            dataType: "json",
-            contentType: "application/json",
             url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
             data: {
                 'TeamName': teamNameText,
@@ -63,9 +60,9 @@
             },
             success: function (data) {
                 //alert(JSON.stringify(data));
-                /*$('#table').bootstrapTable({
+                $('#table').bootstrapTable({
                     data: data
-                });*/
+                });
             },
             error: function (data) {
                 console.log(data.statusCode);
@@ -73,9 +70,10 @@
         });
 
         //window.prompt("Giv Point (1 - 10):", "");
-    });
+    };
 
-    /*function GetQuestionsAndVotes() {
+    /*
+    function GetQuestionsAndVotes() {
         return $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
@@ -87,23 +85,23 @@
             },
             success: function (data) {
                 //alert(JSON.stringify(data));
-                /*$('#table').bootstrapTable({
+                $('#table').bootstrapTable({
                     data: data
-                });*/
-            },*/
-            /*error: function (data) {
+                });
+            },
+            error: function (data) {
                 console.log(data.statusCode);
             }
         });
-    }*/
+    }
 
     
-
-    /*$.when(getJudgePairID(), GetQuestionsAndVotes()).done(function (res1, res2) {
+    $.when(getJudgePairID(), GetQuestionsAndVotes()).done(function (res1, res2) {
         var id = 0;
         id = res1;
         alert(id);
         alert(JSON.stringify(res2));
 
-    });*/
+    });
+    */
 });
