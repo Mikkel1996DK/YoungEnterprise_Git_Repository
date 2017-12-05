@@ -27,7 +27,7 @@
     $(function getJudgePairID() {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:53112/api/TblJudgePairsID',
+            url: 'http://localhost:53112/api/TblJudgePairs/JudgeID',
             data: {
                 "FldJudgeID": 0,
                 "FldEventID": 0,
@@ -36,7 +36,7 @@
                 "FldJudgeName": ""
             },
             success: function (data) {
-                 judgepairIDNumber = data;
+                judgepairIDNumber = data;
             },
             error: function (data) {
                 console.log(data.statusCode);
@@ -49,7 +49,7 @@
     $(function GetQuestionsAndVotes() {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:53112/api/',
+            url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
             data: {
                 TeamName: teamNameText,
                 Subject: subjectText,

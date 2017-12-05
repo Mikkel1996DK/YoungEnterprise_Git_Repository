@@ -13,7 +13,6 @@ namespace YoungEnterprise_API.Controllers
 {
     [Produces("application/json")]
     [Route("api/TblVoteAnswers")]
-    [EnableCors("AllowSpecificOrigin")]
     public class TblVoteAnswersController : Controller
     {
         private readonly Models.DB_YoungEnterpriseContext _context;
@@ -102,7 +101,7 @@ namespace YoungEnterprise_API.Controllers
         // POST: api/TblVoteAnswers/QuestionsAndVotes
         [HttpPost]
         [Route("QuestionsAndVotes")]
-        public async Task<IActionResult> PostQuestionAndVotes([FromBody] QuestionAndVotesModel questionAndVotesModel)
+        public async Task<IActionResult> PostQuestionAndVotes(QuestionAndVotesModel questionAndVotesModel)
         {
             Console.WriteLine(questionAndVotesModel.JudgePairID + questionAndVotesModel.TeamName + questionAndVotesModel.Subject + questionAndVotesModel.Category);
 
