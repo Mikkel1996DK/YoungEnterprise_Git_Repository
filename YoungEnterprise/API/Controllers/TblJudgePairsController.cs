@@ -14,7 +14,6 @@ namespace YoungEnterprise_API.Controllers
 {
     [Produces("application/json")]
     [Route("api/TblJudgePairs")]
-    [EnableCors("AllowSpecificOrigin")]
     public class TblJudgePairsController : Controller
     {
         private readonly Models.DB_YoungEnterpriseContext _context;

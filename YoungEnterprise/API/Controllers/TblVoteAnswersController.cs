@@ -13,7 +13,7 @@ namespace YoungEnterprise_API.Controllers
 {
     [Produces("application/json")]
     [Route("api/TblVoteAnswers")]
-    [EnableCors("AllowSpecificOrigin")]
+    
     public class TblVoteAnswersController : Controller
     {
         private readonly Models.DB_YoungEnterpriseContext _context;
