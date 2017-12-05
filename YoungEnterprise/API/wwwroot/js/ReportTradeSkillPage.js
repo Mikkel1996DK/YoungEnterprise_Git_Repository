@@ -59,8 +59,9 @@
                 JudgepairID =  judgepairID
             },
             success: function (data) {
-
-
+                $('#table').bootstrapTable({
+                    data: data
+                });
             },
             error: function (data) {
                 console.log(data.statusCode);

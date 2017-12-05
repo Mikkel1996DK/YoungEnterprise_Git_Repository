@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Service;
 using Microsoft.AspNetCore.Cors;
 using YoungEnterprise_API.Models;
+using Service.Models;
 
 namespace YoungEnterprise_API.Controllers
 {
@@ -101,7 +102,7 @@ namespace YoungEnterprise_API.Controllers
         // POST: api/TblVoteAnswers/QuestionsAndVotes
         [HttpPost]
         [Route("QuestionsAndVotes")]
-        public async Task<IActionResult> PostQuestionAndVotes([FromBody] )
+        public async Task<IActionResult> PostQuestionAndVotes([FromBody] QuestionAndVotesModel questionAndVotesModel)
         {
             if (!ModelState.IsValid)
             {
@@ -109,7 +110,7 @@ namespace YoungEnterprise_API.Controllers
             }
 
             DatabaseService dbService = new DatabaseService();
-            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(voteAnswer.));
+            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.JudgePairID, questionAndVotesModel.TeamName));
         }
 
         // DELETE: api/TblVoteAnswers/5
