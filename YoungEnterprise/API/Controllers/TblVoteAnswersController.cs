@@ -101,27 +101,16 @@ namespace YoungEnterprise_API.Controllers
         // POST: api/TblVoteAnswers/QuestionsAndVotes
         [HttpPost]
         [Route("QuestionsAndVotes")]
-        public async Task<IActionResult> PostQuestionAndVotes(QuestionAndVotesModel questionAndVotesModel)
+        public async Task<IActionResult> PostQuestionAndVotes( [FromBody] QuestionAndVotesModel questionAndVotesModel)
         {
-            Console.WriteLine(questionAndVotesModel.JudgePairID + questionAndVotesModel.TeamName + questionAndVotesModel.Subject + questionAndVotesModel.Category);
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             DatabaseService dbService = new DatabaseService();
-            TestObject obj = new TestObject();
-            obj.VoteAnswers = dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.JudgePairID, questionAndVotesModel.TeamName);
 
-            Console.WriteLine("________________________________________________________" + obj.VoteAnswers.Count());
-
-            foreach (TblVoteAnswer answer in obj.VoteAnswers)
-            {
-                Console.WriteLine("_______________________________ " + answer.FldQuestion + "  " + answer.FldVote);
-            }
-
-            return CreatedAtAction("GetQuestionsAndVotes", obj);
+            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.JudgePairID, questionAndVotesModel.TeamName));
         }
 
         // DELETE: api/TblVoteAnswers/5
