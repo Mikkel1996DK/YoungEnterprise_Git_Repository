@@ -9,9 +9,7 @@ $(document).ready(function () {
         
         // Username and password text variables.
         var usernameText = document.getElementById('emailInput').value;
-        alert('username: ' + usernameText.toString());
         var passwordText = document.getElementById('passwordInput').value;
-        alert('password: ' + passwordText.toString());
 
         alert(JSON.stringify({ username: usernameText, password: passwordText } ));
 

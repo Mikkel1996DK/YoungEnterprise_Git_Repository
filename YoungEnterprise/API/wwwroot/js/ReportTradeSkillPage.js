@@ -21,21 +21,24 @@
     var teamNameText = localStorage.getItem("teamName");
     var userName = localStorage.getItem("userName");
 
-    /*
+    
     // Getting judgepairID
+    function getJudgePairID () {
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:53112/api/Login',
+        url: 'http://localhost:53112/api/TblJudgePairsID',
         data: { Username: userName },
         success: function (data) {
-
-
+             var judgepairID = data;
         },
         error: function (data) {
             console.log(data.statusCode);
         }
     });
 
+    var judgepairID= getJudgePairID();
+
+    /*
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
     $.ajax({
         type: 'POST',

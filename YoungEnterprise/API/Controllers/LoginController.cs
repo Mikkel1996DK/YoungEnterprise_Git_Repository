@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Models;
 using Service;
@@ -18,11 +14,7 @@ namespace API.Controllers
         [HttpPost]
         public AuthenticationModel ClientLogin(UserPassModel loginModel)
         {
-            Console.WriteLine("Hello test Hello________________________________________________________");
-
             UserService service = new UserService();
-
-            Console.WriteLine("USERNAME: " + loginModel.Username + "        PASSWORD: " + loginModel.Password);
 
             //Test User:
             //usr: mikkelljungberg@gmail.com

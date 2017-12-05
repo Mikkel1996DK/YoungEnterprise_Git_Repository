@@ -98,6 +98,14 @@ namespace YoungEnterprise_API.Controllers
             return CreatedAtAction("GetTblJudgePair", new { id = tblJudgePair.FldJudgePairId }, tblJudgePair);
         }
 
+        // POST: api/TblJudgePairsID
+        [HttpPost("/api/TblJudgePairsID")]
+        public int PostTblJudgePairID(String userName)
+        {
+            UserService userService = new UserService();
+            return userService.GetJudgePairID(userName);
+        }
+
         // DELETE: api/TblJudgePairs/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTblJudgePair([FromRoute] int id)
