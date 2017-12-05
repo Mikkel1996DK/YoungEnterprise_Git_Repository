@@ -17,10 +17,11 @@
 
     // Getting teamName, subject, catagory and judgeusername from local storage
     var subjectText = localStorage.getItem("subject");
-    var catagoryText = localStorage.getItem("catagory");
+    var categoryText = localStorage.getItem("catagory");
     var teamNameText = localStorage.getItem("teamName");
     var userName = localStorage.getItem("userName");
 
+    var judgepairIDNumber = 0;
 
     // Getting judgepairID
     $(function getJudgePairID() {
@@ -35,7 +36,7 @@
                 "FldJudgeName": ""
             },
             success: function (data) {
-                var judgepairID = data;
+                 judgepairIDNumber = data;
             },
             error: function (data) {
                 console.log(data.statusCode);
@@ -44,19 +45,16 @@
 
     });
 
-    var judgepairID = getJudgePairID();
-
-
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
-    $(function getJudgePairID() {
+    $(function GetQuestionsAndVotes() {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/',
             data: {
                 TeamName: teamNameText,
                 Subject: subjectText,
-                Catagory: catagoryText,
-                JudgepairID =  judgepairID
+                Category: categoryText,
+                JudgePairID: judgepairIDNumber
             },
             success: function (data) {
                 $('#table').bootstrapTable({

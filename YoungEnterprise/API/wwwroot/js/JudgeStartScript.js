@@ -26,7 +26,6 @@
         });
     });
 
-    /*
         $('#table').on('click-row.bs.table', function (e, row, $element) {
          
             var element = document.getElementById("categorySelection");
@@ -44,5 +43,4 @@
             // Change HTML page accordling
             window.location.href = "http://localhost:53112/ReportTradeSkillPage.html";
         });
-    */
 });
