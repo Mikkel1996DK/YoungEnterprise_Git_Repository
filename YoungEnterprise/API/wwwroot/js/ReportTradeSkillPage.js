@@ -42,7 +42,7 @@
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
     $.ajax({
         type: 'POST',
-        url: 'http://localhost:53112/api/Login',
+        url: 'http://localhost:53112/api/',
         data: { TeamName: teamNameText, Subject: subjectText, Catagory: catagoryText, JudgepairID =  judgepairID},
         success: function (data) {
 

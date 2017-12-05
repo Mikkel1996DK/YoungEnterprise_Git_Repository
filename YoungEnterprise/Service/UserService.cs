@@ -126,7 +126,7 @@ namespace Service
             List<TblJudgePair> judgePairs = dbService.GetAllJudgePairs();
             dbService = null;
 
-            TblJudge selectedJudge = null;
+            TblJudge selectedJudge = new TblJudge();
             foreach (TblJudge judge in judges)
             {
                 if (judge.FldJudgeUsername == judgeUsername)
