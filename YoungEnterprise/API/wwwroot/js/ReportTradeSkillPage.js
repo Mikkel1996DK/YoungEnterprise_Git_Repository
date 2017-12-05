@@ -3,7 +3,7 @@
     $("#logoutButton").click(function () {
         window.location.href = "http://localhost:53112/HomePage.html";
     });
-   
+
     $(function () {
         var userName = localStorage.getItem("userName");
         document.getElementById('userNameField').innerHTML = userName;
@@ -21,46 +21,52 @@
     var teamNameText = localStorage.getItem("teamName");
     var userName = localStorage.getItem("userName");
 
-    
+
     // Getting judgepairID
-    function getJudgePairID () {
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:53112/api/TblJudgePairsID',
-        data: {
-            "FldJudgeID": 0,
-            "FldEventID": 0,
-            "FldJudgeUsername": userName,
-            "FldJudgePassword": "",
-            "FldJudgeName": ""
-        } ,
-        success: function (data) {
-             var judgepairID = data;
-        },
-        error: function (data) {
-            console.log(data.statusCode);
-        }
+    $(function getJudgePairID() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:53112/api/TblJudgePairsID',
+            data: {
+                "FldJudgeID": 0,
+                "FldEventID": 0,
+                "FldJudgeUsername": userName,
+                "FldJudgePassword": "",
+                "FldJudgeName": ""
+            },
+            success: function (data) {
+                var judgepairID = data;
+            },
+            error: function (data) {
+                console.log(data.statusCode);
+            }
+        });
+
     });
 
-    var judgepairID= getJudgePairID();
+    var judgepairID = getJudgePairID();
 
-    /*
+
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
-    $.ajax({
-        type: 'POST',
-        url: 'http://localhost:53112/api/',
-        data: { TeamName: teamNameText, Subject: subjectText, Catagory: catagoryText, JudgepairID =  judgepairID},
-        success: function (data) {
+    $(function getJudgePairID() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:53112/api/',
+            data: {
+                TeamName: teamNameText,
+                Subject: subjectText,
+                Catagory: catagoryText,
+                JudgepairID =  judgepairID
+            },
+            success: function (data) {
 
 
-        },
-        error: function (data) {
-            console.log(data.statusCode);
-        }
+            },
+            error: function (data) {
+                console.log(data.statusCode);
+            }
+        });
+
+        //window.prompt("Giv Point (1 - 10):", "");
     });
-
-    //window.prompt("Giv Point (1 - 10):", "");
-
-    */
-
-   });
+});
