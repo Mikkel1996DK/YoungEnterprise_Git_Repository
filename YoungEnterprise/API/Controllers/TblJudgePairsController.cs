@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Service;
 using Microsoft.AspNetCore.Cors;
+using Service.Models;
 
 namespace YoungEnterprise_API.Controllers
 {
@@ -102,6 +103,7 @@ namespace YoungEnterprise_API.Controllers
         [HttpPost("/api/TblJudgePairsID")]
         public int PostTblJudgePairID(String userName)
         {
+            Console.WriteLine("________________________________________________________________" + userName + "______________________________________________________");
             UserService userService = new UserService();
             return userService.GetJudgePairID(userName);
         }
