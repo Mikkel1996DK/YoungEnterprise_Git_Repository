@@ -38,6 +38,7 @@
                 "FldJudgeName": ""
             },
             success: function (data) {
+                //alert(JSON.stringify(data));
                 judgepairIDNumber = data;
             },
             error: function (data) {
@@ -55,15 +56,16 @@
             contentType: "application/json",
             url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
             data: {
-                TeamName: teamNameText,
-                Subject: subjectText,
-                Category: categoryText,
-                JudgePairID: judgepairIDNumber
+                'TeamName': teamNameText,
+                'Subject': subjectText,
+                'Category': categoryText,
+                'JudgePairID': judgepairIDNumber
             },
             success: function (data) {
-                $('#table').bootstrapTable({
+                //alert(JSON.stringify(data));
+                /*$('#table').bootstrapTable({
                     data: data
-                });
+                });*/
             },
             error: function (data) {
                 console.log(data.statusCode);
@@ -72,4 +74,36 @@
 
         //window.prompt("Giv Point (1 - 10):", "");
     });
+
+    /*function GetQuestionsAndVotes() {
+        return $.ajax({
+            type: 'POST',
+            url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
+            data: {
+                'TeamName': teamNameText,
+                'Subject': subjectText,
+                'Category': categoryText,
+                'JudgePairID': judgepairIDNumber
+            },
+            success: function (data) {
+                //alert(JSON.stringify(data));
+                /*$('#table').bootstrapTable({
+                    data: data
+                });*/
+            },*/
+            /*error: function (data) {
+                console.log(data.statusCode);
+            }
+        });
+    }*/
+
+    
+
+    /*$.when(getJudgePairID(), GetQuestionsAndVotes()).done(function (res1, res2) {
+        var id = 0;
+        id = res1;
+        alert(id);
+        alert(JSON.stringify(res2));
+
+    });*/
 });
