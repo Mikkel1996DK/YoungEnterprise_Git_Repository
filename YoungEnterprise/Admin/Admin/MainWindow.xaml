@@ -10,31 +10,17 @@
     <!-- Replaced the default grid with a dockpanel to allow for the menu to resize as intended -->
     <!-- The grid containing the content is inside the dockpanel below the menu -->
     <DockPanel>
-        <!-- The menu below can be changed later on! -->
         <Menu DockPanel.Dock="Top" Background="#969696" FontFamily="Arial" FontSize="20">
-            <MenuItem Header="Brugere">
-                <MenuItem x:Name="viewAllUsers" Header="Vis Alle Brugere" FontSize="12" Click="viewAllUsers_Click"/>
-                <MenuItem x:Name="inviteUser" Header="Inviter Bruger" FontSize="12" Click="inviteUser_Click"/>
+            <MenuItem Header="Event" Click="ViewEvent_Click"/>
 
-                <!-- I was't certain whether or not this was nessecary, or how it should be done (as in auto-make judge pairs, or pair judges together) -->
-                <MenuItem x:Name="createJudgePairs" Header="Lav Dommerpar" FontSize="12"/>
-            </MenuItem>
+            <MenuItem x:Name="viewAllUsers" Header="Bruger" Click="viewAllUsers_Click"/>
 
-            <MenuItem Header="Resultater">
-                <MenuItem x:Name="viewResults" Header="Vis Resultater" FontSize="12" Click="viewResults_Click"/>
-            </MenuItem>
-
-            <MenuItem Header="Program">
-                <MenuItem x:Name="createSchedule" Header="Lav Program" FontSize="12" Click="createSchedule_Click"/>
-            </MenuItem>
-
-            <MenuItem Header="Status">
-                <MenuItem x:Name="viewStatus" Header="Se Status" FontSize="12"/>
-            </MenuItem>
+            <MenuItem x:Name="viewResults" Header="Resultater" Click="viewResults_Click"/>
         </Menu>
 
         <Grid x:Name="userControlGrid" DockPanel.Dock="Bottom">
-
+            
         </Grid>
+
     </DockPanel>
 </Window>

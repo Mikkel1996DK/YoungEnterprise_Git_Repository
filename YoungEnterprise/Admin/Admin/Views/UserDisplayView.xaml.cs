@@ -17,6 +17,16 @@ namespace Admin.Views
     public partial class UserDisplayView : UserControl
     {
         private UserDisplayViewModel viewModel = new UserDisplayViewModel();
+        private MainWindow mw = null;
+
+        public UserDisplayView(MainWindow win)
+        {
+            InitializeComponent();
+            DataContext = viewModel;
+
+            mw = win;
+
+        }
 
         public UserDisplayView()
         {
@@ -27,6 +37,12 @@ namespace Admin.Views
         private void userCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             viewModel.ChangeSelection((userCombo.SelectedValue as ComboBoxItem).Content.ToString());
+        }
+
+        private void addBruger_Click(object sender, RoutedEventArgs e)
+        {
+            InviteUserView iuv = new InviteUserView();
+            mw.ShiftUserControl(iuv);
         }
     }
 }
