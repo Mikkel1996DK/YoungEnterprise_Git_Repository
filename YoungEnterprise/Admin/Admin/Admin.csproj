@@ -115,10 +115,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\InviteUserViewModel.cs" />
     <Compile Include="ViewModels\UserDisplayViewModel.cs" />
     <Compile Include="Views\CreateScheduleView.xaml.cs">
       <DependentUpon>CreateScheduleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EventView.xaml.cs">
+      <DependentUpon>EventView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InviteUserView.xaml.cs">
       <DependentUpon>InviteUserView.xaml</DependentUpon>
@@ -142,6 +146,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CreateScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EventView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

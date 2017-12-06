@@ -54,17 +54,21 @@ namespace Admin
         // 1*
         #endregion
 
-        private CreateScheduleView createScheduleControl = new CreateScheduleView();
-        private InviteUserView inviteUserControl = new InviteUserView();
+        //private InviteUserView inviteUserControl = new InviteUserView();
         private ResultView viewResultsControl = new ResultView();
-        private UserDisplayView viewUsersControl = new UserDisplayView();
+        //private UserDisplayView viewUsersControl = new UserDisplayView();
+        private UserDisplayView viewUsersControl = null;
+        private EventView eventView = new EventView();
         
 
         public MainWindow()
         {
             InitializeComponent();
+            viewUsersControl = new UserDisplayView(this);
             userControlGrid.Children.Add(viewUsersControl);
         }
+
+        
 
         // Shifts a usercontrol with another usercontrol
         public void ShiftUserControl(Control userControl)
@@ -79,20 +83,16 @@ namespace Admin
             ShiftUserControl(viewUsersControl);
         }
 
-        private void inviteUser_Click(object sender, RoutedEventArgs e)
-        {
-            ShiftUserControl(inviteUserControl);
-        }
-
         private void viewResults_Click(object sender, RoutedEventArgs e)
         {
             ShiftUserControl(viewResultsControl);
         }
 
-        private void createSchedule_Click(object sender, RoutedEventArgs e)
+        private void ViewEvent_Click(object sender, RoutedEventArgs e)
         {
-            ShiftUserControl(createScheduleControl);
+            ShiftUserControl(eventView);
         }
         #endregion
+
     }
 }
