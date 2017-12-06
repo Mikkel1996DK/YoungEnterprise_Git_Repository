@@ -352,6 +352,52 @@ namespace Service
                 }
             }
         }
+
+        public void CreateEvent(DateTime dateTime)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+
+                    TblEvent tblEvent = new TblEvent()
+                    {
+                        FldEventDate = dateTime
+                    };
+
+                    databaseContext.TblEvent.Add(tblEvent);
+                    databaseContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
+            }
+        }
+
+        public void DeleteAllRecords()
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    databaseContext.TblVoteAnswer.RemoveRange(databaseContext.TblVoteAnswer);
+                    databaseContext.TblVote.RemoveRange(databaseContext.TblVote);
+                    databaseContext.TblQuestion.RemoveRange(databaseContext.TblQuestion);
+                    databaseContext.TblJudgePair.RemoveRange(databaseContext.TblJudgePair);
+                    databaseContext.TblJudge.RemoveRange(databaseContext.TblJudge);
+                    databaseContext.TblTeam.RemoveRange(databaseContext.TblTeam);
+                    databaseContext.TblSchool.RemoveRange(databaseContext.TblSchool);
+                    databaseContext.TblEvent.RemoveRange(databaseContext.TblEvent);
+                    databaseContext.SaveChanges();
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                }
+            }
+        }
     }
 }
 
