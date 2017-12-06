@@ -5,10 +5,7 @@
     });
 
     $(function () {
-        var userName = localStorage.getItem("userName")
-
-        alert(userName);
-
+        var userName = localStorage.getItem("userName");
         document.getElementById('userNameField').innerHTML = userName;
     });
 
@@ -36,7 +33,8 @@
             // Get Info of TeamName and SubjectCatagory and send to local storage
             
             var TeamName = row["fldTeamName"];
-            var Subject = row["SubjectCatagory"];
+            var Subject = row["fldSubjectCategory"];
+            alert(Subject);
             localStorage.setItem("teamName", TeamName);
             localStorage.setItem("subject", Subject);
 

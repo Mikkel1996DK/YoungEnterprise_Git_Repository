@@ -37,14 +37,17 @@ INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_Jud
 INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_JudgeName)
 	   VALUES (1, 'judgeTwo@gmail.com', '654321', 'Mads Petersen')
 
-INSERT INTO tbl_JudgePair(fld_JudgeIDA, fld_JudgeIDB)
-	   VALUES (1, 2)
+INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_JudgeName)
+	   VALUES (1, 'judgeThreeo@gmail.com', '123456', 'Hans Jensen')
+	 
+INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionModifier)
+	   VALUES ('Hvem spiller trommer?', 'Trade and Skills', 1.5)
 
 INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionModifier)
-	   VALUES ('Hvem spiller trommer?', 'Trade & Skills', 1.5)
+	   VALUES ('Hvem var Nikola Tesla?', 'Science and Technology', 1)
 
 INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionModifier)
-	   VALUES ('Hvem var Nikola Tesla?', 'Science & Technology', 1)
+	   VALUES ('Hvem var Jesus?', 'Trade and Skills', 1)
 
 INSERT INTO tbl_Vote (fld_Points, fld_JudgePairID, fld_TeamName)
 	   VALUES (2, 1, 'TeamNavn_One')

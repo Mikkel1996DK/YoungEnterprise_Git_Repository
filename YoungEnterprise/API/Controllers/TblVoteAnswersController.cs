@@ -83,6 +83,7 @@ namespace YoungEnterprise_API.Controllers
             return NoContent();
         }
 
+        /*
         // POST: api/TblVoteAnswers
         [HttpPost]
         public async Task<IActionResult> PostTblVoteAnswer([FromBody] Models.TblVoteAnswer tblVoteAnswer)
@@ -97,22 +98,23 @@ namespace YoungEnterprise_API.Controllers
 
             return CreatedAtAction("GetTblVoteAnswer", new { id = tblVoteAnswer.FldVoteAnswerId }, tblVoteAnswer);
         }
+        */
 
-        // POST: api/TblVoteAnswers/QuestionsAndVotes
+        // POST: api/TblVoteAnswers
         [HttpPost]
-        [Route("QuestionsAndVotes")]
+        //[Route("QuestionsAndVotes")]
         public async Task<IActionResult> PostQuestionAndVotes(QuestionAndVotesModel questionAndVotesModel)
         {
-            Console.WriteLine(questionAndVotesModel.JudgePairID + questionAndVotesModel.TeamName + questionAndVotesModel.Subject + questionAndVotesModel.Category);
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            UserService userService = new UserService();
+            int judgePairID = userService.GetJudgePairID(questionAndVotesModel.JudgeUsername);
             DatabaseService dbService = new DatabaseService();
             TestObject obj = new TestObject();
-            obj.VoteAnswers = dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.JudgePairID, questionAndVotesModel.TeamName);
+            obj.VoteAnswers = dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, judgePairID, questionAndVotesModel.TeamName);
 
             Console.WriteLine("________________________________________________________" + obj.VoteAnswers.Count());
 

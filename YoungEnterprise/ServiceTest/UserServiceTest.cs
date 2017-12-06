@@ -3,6 +3,7 @@ using Service;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using YoungEnterprise_API.Models;
 
 namespace ServiceTest
 {
@@ -53,14 +54,14 @@ namespace ServiceTest
         public void TestMakeJudgePairs ()
         {
             DatabaseService database = new DatabaseService();
-
+            List<TblJudge> judges = database.GetAllJudges();
             int amount = database.GetAllJudgePairs().Count;
 
-            Assert.AreEqual(amount, database.GetAllJudgePairs().Count);
+            Assert.AreEqual(0, database.GetAllJudgePairs().Count);
 
             service.CreateJudgePairs();
 
-            Assert.AreEqual(1, database.GetAllJudgePairs().Count);
+            Assert.AreEqual(judges.Count/2, database.GetAllJudgePairs().Count);
         }
     }
 }

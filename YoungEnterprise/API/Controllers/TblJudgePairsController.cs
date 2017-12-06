@@ -48,7 +48,7 @@ namespace YoungEnterprise_API.Controllers
 
             return Ok(tblJudgePair);
         }
-
+        
         // PUT: api/TblJudgePairs/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutTblJudgePair([FromRoute] int id, [FromBody] Models.TblJudgePair tblJudgePair)
@@ -98,21 +98,6 @@ namespace YoungEnterprise_API.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTblJudgePair", new { id = tblJudgePair.FldJudgePairId }, tblJudgePair);
-        }
-
-        // POST: api/TblJudgePairs
-        [HttpPost]
-        [Route("JudgeID")]
-        public async Task<IActionResult> PostTblJudgePairID(TblJudge judge)
-        {
-            Console.WriteLine("______________________ USERNAMEEEEE _____________________" + judge.FldJudgeUsername);
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            UserService userService = new UserService();
-            return CreatedAtAction("GetTblJudgePair", userService.GetJudgePairID(judge.FldJudgeUsername));
         }
 
         // DELETE: api/TblJudgePairs/5

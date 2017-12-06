@@ -9,6 +9,6 @@ namespace Service.Models
         public string TeamName { get; set; }
         public string Subject { get; set; }
         public string Category { get; set; }
-        public int JudgePairID { get; set; }
+        public string JudgeUsername { get; set; }
     }
 }

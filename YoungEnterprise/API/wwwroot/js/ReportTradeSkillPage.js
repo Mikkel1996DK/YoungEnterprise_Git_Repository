@@ -21,48 +21,23 @@
     var teamNameText = localStorage.getItem("teamName");
     var userName = localStorage.getItem("userName");
 
-    // Getting judgepairID
-    $(function getJudgePairID() {
-        $.ajax({
-            type: 'POST',
-            dataType: "json",
-            contentType: "application/json",
-            url: 'http://localhost:53112/api/TblJudgePairs/JudgeID',
-            data: {
-                "FldJudgeID": 0,
-                "FldEventID": 0,
-                "FldJudgeUsername": userName,
-                "FldJudgePassword": "",
-                "FldJudgeName": ""
-            },
-            success: function (data) {
-                //alert(JSON.stringify(data));
-
-                GetQuestionsAndVotes(data);
-            },
-            error: function (data) {
-                console.log(data.statusCode);
-            }
-        });
-
-    });
-
     //Test User:
     //usr: mikkelljungberg@gmail.com
     //pw: 8YGPAQqC
 
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
-    function GetQuestionsAndVotes(judgepairIDNumber) {
+    $(function GetQuestionsAndVotes() {
         $.ajax({
             type: 'POST',
-            dataType: "json",
-            contentType: "application/json",
-            url: 'http://localhost:53112/api/TblVoteAnswers/QuestionsAndVotes',
+            //dataType: "json",
+            //contentType: "application/json",
+            url: 'http://localhost:53112/api/TblVoteAnswers',
             data: {
-                'TeamName': teamNameText,
-                'Subject': subjectText,
-                'Category': categoryText,
-                'JudgePairID': judgepairIDNumber
+                TeamName: teamNameText,
+                Subject: categoryText,
+                Category: subjectText,
+                JudgeUsername: userName
+                
             },
             success: function (data) {
                 alert(JSON.stringify(data));
@@ -75,5 +50,5 @@
                 console.log(data.statusCode);
             }
         });
-    };
+    });
 });
