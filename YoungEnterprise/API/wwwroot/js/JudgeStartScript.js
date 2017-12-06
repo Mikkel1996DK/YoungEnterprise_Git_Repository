@@ -34,7 +34,6 @@
             
             var TeamName = row["fldTeamName"];
             var Subject = row["fldSubjectCategory"];
-            alert(Subject);
             localStorage.setItem("teamName", TeamName);
             localStorage.setItem("subject", Subject);
 

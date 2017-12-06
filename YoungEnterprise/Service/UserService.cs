@@ -155,5 +155,23 @@ namespace Service
                 return selectedJudgePair.FldJudgePairId;
             }
         }
+
+        public int GetQuestionID(string questionText, double questionModifier)
+        {
+            DatabaseService dbService = new DatabaseService();
+            List<TblQuestion> questions = dbService.GetAllQuestions();
+            dbService = null;
+
+            TblQuestion selectedQuestion = new TblQuestion();
+            foreach (TblQuestion question in questions)
+            {
+                if (question.FldQuestionText.Equals(questionText) || question.FldQuestionModifier == questionModifier)
+                {
+                    selectedQuestion = question;
+                    break;
+                }
+            }
+            return selectedQuestion.FldQuestionId;
+        }
     }
 }

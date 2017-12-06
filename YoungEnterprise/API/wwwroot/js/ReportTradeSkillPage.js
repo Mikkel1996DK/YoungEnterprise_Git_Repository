@@ -37,11 +37,10 @@
                 Subject: categoryText,
                 Category: subjectText,
                 JudgeUsername: userName
-                
+
             },
             success: function (data) {
-                alert(JSON.stringify(data));
-
+              
                 $('#table').bootstrapTable({
                     data: data
                 });
@@ -51,4 +50,42 @@
             }
         });
     });
+
+    $('#table').on('click-row.bs.table', function (e, row, $element) {
+        //var Questiontext = row["questiontext"];
+        //var QuestionModifier = row["questionModifier"];
+
+        //var QuestionText = "1234";
+        //var QuestionModifier = 1.5;
+        //alert(Questiontext, questionModifier);
+        var points = prompt("Giv Point (1-10):");
+        SavePoints(points, "Hvem var Jesus", 1, 5);
+        GetQuestionsAndVotes();
+        
+    });
+
 });
+
+function SavePoints(points, questionText, questionModifier) {
+    alert("Hello");
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:53112/api/CreateVote',
+            data: {
+
+                FldTeamName: localStorage.getItem("teamName"),
+                FldJudgeUsername: localStorage.getItem("userName"),
+                FldPoints: points,
+                FldQuestionText: questionText,
+                FldQuestionModifier: questionModifier
+            },
+            success: function (data) {
+                alert("Point Gemt!");
+
+            },
+            error: function (data) {
+                console.log(data.statusCode);
+            }
+        });
+};
+

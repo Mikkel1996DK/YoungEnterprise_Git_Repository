@@ -74,6 +74,30 @@ namespace Service
             }
         }
 
+        public List<TblQuestion> GetAllQuestions()
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+
+                    List<TblQuestion> allQuestions = new List<TblQuestion>();
+                    foreach (TblQuestion question in databaseContext.TblQuestion)
+                    {
+                        allQuestions.Add(question);
+                    }
+
+                    return allQuestions;
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    return null;
+                }
+            }
+        }
+
         public void CreateSchool(int eventID, string schoolUsername, string schoolPassword, string schoolName)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
@@ -279,6 +303,54 @@ namespace Service
                 result = voteAnswer.FldVote;
             }
             return result;
+        }
+
+        public int CreateVote(int judgePairID, string teamName, int points)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    TblVote vote = new TblVote()
+                    {
+                        FldJudgePairId = judgePairID,
+                        FldTeamName = teamName,
+                        FldPoints = points
+                    };
+
+                    databaseContext.TblVote.Add(vote);
+                    databaseContext.SaveChanges();
+                    return vote.FldVoteId;
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                    return 0;
+                }
+            }
+        }
+
+        public void CreateVoteAnswer(int questionID, int voteID)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    TblVoteAnswer voteAnswer = new TblVoteAnswer()
+                    {
+                        FldQuestionId = questionID,
+                        FldVoteId = voteID
+                    };
+
+                    databaseContext.TblVoteAnswer.Add(voteAnswer);
+                    databaseContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
+            }
         }
     }
 }

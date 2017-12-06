@@ -113,20 +113,10 @@ namespace YoungEnterprise_API.Controllers
             UserService userService = new UserService();
             int judgePairID = userService.GetJudgePairID(questionAndVotesModel.JudgeUsername);
             DatabaseService dbService = new DatabaseService();
-            TestObject obj = new TestObject();
-            obj.VoteAnswers = dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, judgePairID, questionAndVotesModel.TeamName);
-
-            Console.WriteLine("________________________________________________________" + obj.VoteAnswers.Count());
-
-            foreach (TblVoteAnswer answer in obj.VoteAnswers)
-            {
-                Console.WriteLine("_______________________________ " + answer.FldQuestion + "  " + answer.FldVote);
-            }
-
-            return CreatedAtAction("GetQuestionsAndVotes", obj);
+            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, judgePairID, questionAndVotesModel.TeamName));
         }
 
-        // DELETE: api/TblVoteAnswers/5
+        // DELETE: api/TblVoteAnswers/5s
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTblVoteAnswer([FromRoute] int id)
         {
