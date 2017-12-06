@@ -18,6 +18,7 @@ namespace Admin.ViewModels
         private DatabaseService dbService = new DatabaseService();
         private UserService userService = new UserService();
 
+        #region databinded variables inside this region!!
         private string nameText;
         public string NameText
         {
@@ -50,6 +51,7 @@ namespace Admin.ViewModels
                 if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs("IsSchool"));
             }
         }
+        #endregion
 
         public void InviteUser ()
         {
@@ -61,9 +63,7 @@ namespace Admin.ViewModels
             {
                 //mailSender.SendInviteMail(email, "Young Enterprise | Dommer Invitiation", nameText, email, pw);
                 
-
-                dbService = new DatabaseService();
-                dbService.CreateJudge(1, email, userService.HashPassword(email, pw), nameText);
+                dbService.CreateJudge(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
                 pw = null;
             }
             else
@@ -71,8 +71,7 @@ namespace Admin.ViewModels
                 
                 //mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email, pw);
 
-                dbService = new DatabaseService();
-                dbService.CreateSchool(1, email, userService.HashPassword(email, pw), nameText);
+                dbService.CreateSchool(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
                 pw = null;
             }
         }
