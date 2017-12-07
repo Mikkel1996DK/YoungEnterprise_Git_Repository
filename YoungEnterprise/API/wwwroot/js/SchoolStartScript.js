@@ -18,7 +18,7 @@
             type: 'POST',
             url: 'http://localhost:53112/api/TblTeams/ForSchool',
             data: {
-                FldSchoolUsername: localStorage.getItem("userName");
+                FldSchoolUsername: localStorage.getItem("userName")
             },
             success: function (data) {
 
@@ -30,6 +30,6 @@
                 console.log(data.statusCode);
             }
         });
-    }) ´;
+    });
 });
 
