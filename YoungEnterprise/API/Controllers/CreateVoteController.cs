@@ -27,9 +27,18 @@ namespace API.Controllers
             // get JudgePairID
             int judgePairID = service.GetJudgePairID(createVoteModel.FldJudgeUsername);
 
-            // TODO check if vote alreafy exists!
             // New Vote and get voteID returned
-            int voteID = dbService.CreateVote(judgePairID, createVoteModel.FldTeamName, createVoteModel.FldPoints);
+            int voteID = 0;
+            bool voteExist = dbService.DoesVoteExist();
+
+            if (!voteExist)
+            {
+                voteID = dbService.CreateVote(judgePairID, createVoteModel.FldTeamName, createVoteModel.FldPoints);
+            }
+            else
+            {
+                voteID = dbService.UpdateVote(judgePairID, createVoteModel.FldTeamName, createVoteModel.FldPoints);
+            }
 
             // New VoteAnswer
             dbService.CreateVoteAnswer(questionID, voteID);
