@@ -29,8 +29,6 @@
     $(function GetQuestionsAndVotes() {
         $.ajax({
             type: 'POST',
-            //dataType: "json",
-            //contentType: "application/json",
             url: 'http://localhost:53112/api/TblVoteAnswers',
             data: {
                 TeamName: teamNameText,
@@ -59,7 +57,7 @@
         //var QuestionModifier = 1.5;
         //alert(Questiontext, questionModifier);
         var points = prompt("Giv Point (1-10):");
-        SavePoints(points, "Hvem var Jesus", 1, 5);
+        SavePoints(points, "Hvem var Jesus", 1.5);
         GetQuestionsAndVotes();
         
     });

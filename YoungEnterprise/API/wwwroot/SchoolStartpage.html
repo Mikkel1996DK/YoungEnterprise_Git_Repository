@@ -6,9 +6,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/LoginScript.js"></script>
-    <title> Young Enterprise</title>
-
+    <script src="js/SchoolStartScript.js?n=1"></script>
+    <title> Young Enterprise </title>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -31,38 +30,50 @@
                     <li><a class="nav-link" href="#Contact">Kontakt</a></li>
                 </ul>
 
-                <!-- The dropdown menu -->
                 <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-item"> <a> Logget ind som: </a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" href="#login" data-toggle="dropdown">Login <strong class="caret"></strong></a>
-                        <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px; padding-right: 10px; width: 300px">
-
-                            <!--The login form-->
-                            <form class="form" role="form" width="300px">
-
-                                <div class="form-group">
-                                    <input id="emailInput" placeholder="Email" class="form-control form-control-sm" type="text" required="">
-                                </div>
-                                <div class="form-group">
-                                    <input id="passwordInput" placeholder="Password" class="form-control form-control-sm" type="password" required="">
-                                </div>
-                                <div class="form-group">
-                                    <button id="loginButton" type="submit" class="btn btn-primary btn-block">Login</button>
-                                </div>
-                                <div class="form-group text-xs-center">
-                                    <small><a href="#">Forgot password?</a></small>
-                                </div>
-                            </form>
+                        <a class="dropdown-toggle" id="userNameField" href="#login" data-toggle="dropdown"> Brugernavn <strong class="caret"></strong></a>
+                        <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px; padding-right: 10px">
+                            <button id="logoutButton" type="submit" class="btn btn-primary btn-block">Log ud</button>
                         </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+
+    <br />
+    <br />
     <br />
 
     <div class="container">
-        <h3 Align="Center">Young Enterprise SønderJylland</h3>
+        <h3 id="TeamsForSchoolField">Teams For School Name</h3>
+
+        <br />
+        <br />
+
+        <div class="table-responsive">
+            <table class="table table-bordered" id="table">
+                <thead>
+                    <tr>
+                        <th data-field="fldTeamName">Team Navn</th>
+                        <th data-field="fldSubjectCategory">Subject</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <br />
+
+        <div align="center">
+            <button id="createTeamButton"type="submit" class="btn btn-primary btn-block" align="center" style="width: 20%;"> Tilføj Team </button>
+        </div>
     </div>
+
+    <br />
+    <br />
 
 </body>
 </html>

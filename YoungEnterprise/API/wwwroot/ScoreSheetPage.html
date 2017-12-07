@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="js/ReportTradeSkillPage.js?n=1"></script>
+    <script src="js/ScoreSheet.js?n=1"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -30,16 +30,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li><a class="nav-link" href="#Program">Program</a></li>
-                    <li><a class="nav-link" href="#About">About</a></li>
-                    <li><a class="nav-link" href="#Contact">Contact</a></li>
+                    <li><a class="nav-link" href="#About">Om</a></li>
+                    <li><a class="nav-link" href="#Contact">Kontakt</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="navbar-item"> <a> Logget in as: </a></li>
+                    <li class="navbar-item"> <a> Logget ind som: </a></li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle" id="userNameField" href="#login" data-toggle="dropdown"> Username <strong class="caret"></strong></a>
+                        <a class="dropdown-toggle" id="userNameField" href="#login" data-toggle="dropdown"> Brugernavn <strong class="caret"></strong></a>
                         <div class="dropdown-menu" style="padding: 15px; padding-bottom: 10px; padding-right: 10px">
-                            <button id="logoutButton"type="submit" class="btn btn-primary btn-block">Log Out</button>
+                            <button id="logoutButton"type="submit" class="btn btn-primary btn-block">Log ud</button>
                         </div>
                     </li>
                 </ul>
@@ -50,8 +50,8 @@
     <br />
 
     <div class="container">
-        <h3>Report - Trade and Skill </h3>
-        <h4 id="teamNameField"> Team Name: </h4>
+        <h3 id="toicField">Report - Trade and Skill </h3>
+        <h4 id="teamNameField"> Team Navn: </h4>
 
         <br />
         <br />
@@ -60,9 +60,9 @@
             <table class="table table-bordered" id="table">
                 <thead>
                     <tr>
-                        <th data-field="questiontext"> Question </th>
-                        <th data-field="questionModifier"> Modifier </th>
-                        <th data-field="points"> Points (1 - 10)</th>
+                        <th data-field="questiontext"> Kriterier </th>
+                        <th data-field="questionModifier"> Vægtning </th>
+                        <th data-field="points"> Point (1 - 10)</th>
                     </tr>
                 </thead>
                 <tbody>
