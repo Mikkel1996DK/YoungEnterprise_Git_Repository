@@ -29,7 +29,7 @@ CREATE TABLE tbl_School (fld_EventID INT FOREIGN KEY REFERENCES tbl_Event(fld_Ev
 
 IF Object_ID('tbl_Team') IS NOT NULL
 	DROP TABLE tbl_Team
-CREATE TABLE tbl_Team (fld_TeamName VARCHAR(30) PRIMARY KEY, 
+CREATE TABLE tbl_Team (fld_TeamName VARCHAR(30) PRIMARY KEY,
 					   fld_SchoolID INT FOREIGN KEY REFERENCES tbl_School(fld_SchoolID) NOT NULL,
 					   fld_SubjectCategory VARCHAR(30) NOT NULL,
 					   fld_Report VARBINARY(MAX) NOT NULL)

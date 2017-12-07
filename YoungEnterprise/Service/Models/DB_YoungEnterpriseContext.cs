@@ -120,6 +120,12 @@ namespace YoungEnterprise_API.Models
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
+                entity.Property(e => e.FldQuestionSubject)
+                    .IsRequired()
+                    .HasColumnName("fld_QuestionSubject")
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.FldQuestionModifier).HasColumnName("fld_QuestionModifier");
 
                 entity.Property(e => e.FldQuestionText)

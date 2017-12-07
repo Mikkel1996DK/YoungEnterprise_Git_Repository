@@ -250,23 +250,23 @@ namespace Service
             }
         }
 
-        private List<TblQuestion> FindQuestions(DB_YoungEnterpriseContext databaseContext, string questionCatagory)
+        private List<TblQuestion> FindQuestions(DB_YoungEnterpriseContext databaseContext, string questionCategory, string questionSubject)
         {
             List<TblQuestion> questions = new List<TblQuestion>();
-            foreach (TblQuestion question in databaseContext.TblQuestion.Where(q => q.FldQuestionCategori.Equals(questionCatagory)))
+            foreach (TblQuestion question in databaseContext.TblQuestion.Where(q => q.FldQuestionCategori.Equals(questionCategory) && q.FldQuestionSubject.Equals(questionSubject)))
             {
                 questions.Add(question);
             }
             return questions;
         }
 
-        public List<TblVoteAnswer> FindQuestionsAndVotes(string questionCatagory, int judgePairId, string teamName)
+        public List<TblVoteAnswer> FindQuestionsAndVotes(string questionCategory, string questionSubject, int judgePairId, string teamName)
         {
             List<TblVoteAnswer> result = new List<TblVoteAnswer>();
 
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                foreach (TblQuestion question in FindQuestions(databaseContext, questionCatagory))
+                foreach (TblQuestion question in FindQuestions(databaseContext, questionCategory, questionSubject))
                 {
                     TblVote vote = FindJudgePairVotes(databaseContext, question, judgePairId, teamName);
                     TblVoteAnswer voteAnswer = new TblVoteAnswer
