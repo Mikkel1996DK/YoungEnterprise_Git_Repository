@@ -147,10 +147,11 @@ namespace Service
                 if (school.FldSchoolUsername.Equals(schoolUsername))
                 {
                     selectedSchool = school;
-                    break;
+                    return selectedSchool.FldSchoolId;
                 }
             }
-            return selectedSchool.FldSchoolId;
+
+            return 0;
         }
     
 

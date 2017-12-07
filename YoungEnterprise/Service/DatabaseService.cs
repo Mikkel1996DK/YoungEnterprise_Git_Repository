@@ -17,7 +17,7 @@ namespace Service
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -164,9 +164,15 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
+                List<TblTeam> teams = new List<TblTeam>();
+
+                foreach (TblTeam team in databaseContext.TblTeam)
+                {
+                    Console.WriteLine("__________________________________________________________" + team.FldTeamName);
+                }
+
                 try
                 {
-                    List<TblTeam> teams = new List<TblTeam>();
                     foreach (TblTeam team in databaseContext.TblTeam.Where(q => q.FldSchoolId == schoolID))
                     {
                         teams.Add(team);
@@ -176,7 +182,8 @@ namespace Service
                 catch (Exception e)
                 {
                     Console.WriteLine(e.InnerException.Message);
-                    return null;
+                    
+                    return teams;
                 }
             }
         }

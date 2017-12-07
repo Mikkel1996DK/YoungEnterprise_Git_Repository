@@ -176,8 +176,6 @@ namespace YoungEnterprise_API.Models
                     .IsUnicode(false)
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.FldEventId).HasColumnName("fld_EventID");
-
                 entity.Property(e => e.FldReport)
                     .IsRequired()
                     .HasColumnName("fld_Report");
@@ -189,12 +187,6 @@ namespace YoungEnterprise_API.Models
                     .HasColumnName("fld_SubjectCategory")
                     .HasMaxLength(30)
                     .IsUnicode(false);
-
-                entity.HasOne(d => d.FldEvent)
-                    .WithMany(p => p.TblTeam)
-                    .HasForeignKey(d => d.FldEventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__tbl_Team__fld_Ev__276EDEB3");
 
                 entity.HasOne(d => d.FldSchool)
                     .WithMany(p => p.TblTeam)
