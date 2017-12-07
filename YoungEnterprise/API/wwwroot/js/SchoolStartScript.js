@@ -17,7 +17,7 @@
     $(function GetTeamsForSchool() {
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:53112/api/TblTeams/ForSchool',
+            url: 'http://localhost:53112/api/TeamsForSchool',
             data: {
                 FldSchoolUsername: localStorage.getItem("userName")
             },
