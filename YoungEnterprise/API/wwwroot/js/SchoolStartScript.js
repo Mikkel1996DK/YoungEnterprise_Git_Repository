@@ -13,7 +13,8 @@
         window.location.href = "http://localhost:53112/CreateTeamPage.html";
     });
 
-    $(function GetQuestionsAndVotes() {
+    // Gets teams based on school ID found by schoolusername
+    $(function GetTeamsForSchool() {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/TblTeams/ForSchool',
