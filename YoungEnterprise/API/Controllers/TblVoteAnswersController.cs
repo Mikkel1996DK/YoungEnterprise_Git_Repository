@@ -113,7 +113,7 @@ namespace YoungEnterprise_API.Controllers
             UserService userService = new UserService();
             int judgePairID = userService.GetJudgePairID(questionAndVotesModel.JudgeUsername);
             DatabaseService dbService = new DatabaseService();
-            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, judgePairID, questionAndVotesModel.TeamName));
+            return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.Subject, judgePairID, questionAndVotesModel.TeamName));
         }
 
         // DELETE: api/TblVoteAnswers/5s

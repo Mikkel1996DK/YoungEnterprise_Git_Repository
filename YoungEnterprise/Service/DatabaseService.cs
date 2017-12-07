@@ -144,6 +144,26 @@ namespace Service
                 }
         }
 
+        public List<TblTeam> GetTeamsForSchool(int schoolID)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    List<TblTeam> teams = new List<TblTeam>();
+                    foreach (TblTeam team in databaseContext.TblTeam.Where(q => q.FldSchoolId == schoolID))
+                    {
+                        teams.Add(team);
+                    }
+                    return teams;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    return null;
+                }
+            }
+        }
 
         public void CreateJudgePair(int judgeIdA, int judgeIdB)
         {

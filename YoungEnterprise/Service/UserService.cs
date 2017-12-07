@@ -119,6 +119,25 @@ namespace Service
             dbService = null;
         }
 
+        public int GetSchoolID(string schoolUsername)
+        {
+            DatabaseService dbService = new DatabaseService();
+            List<TblSchool> schools = dbService.GetAllSchools();
+            dbService = null;
+
+            TblSchool selectedSchool = new TblSchool();
+            foreach (TblSchool school in schools)
+            {
+                if (school.FldSchoolUsername.Equals(schoolUsername))
+                {
+                    selectedSchool = school;
+                    break;
+                }
+            }
+            return selectedSchool.FldSchoolId;
+        }
+    
+
         public int GetJudgePairID (string judgeUsername)
         {
             DatabaseService dbService = new DatabaseService();
@@ -135,7 +154,6 @@ namespace Service
                     break;
                 }
             }
-
 
             TblJudgePair selectedJudgePair = null;
             foreach (TblJudgePair judgePair in judgePairs)

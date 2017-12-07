@@ -100,8 +100,9 @@ namespace YoungEnterprise_API.Controllers
             return NoContent();
         }
 
-        // POST: api/TblTeams
+        // POST: api/TblTeams/CreateTeam
         [HttpPost]
+        [Route("CreateTeam")]
         public async Task<IActionResult> PostTblTeam([FromBody] Models.TblTeam tblTeam)
         {
             if (!ModelState.IsValid)
@@ -127,6 +128,22 @@ namespace YoungEnterprise_API.Controllers
             }
 
             return CreatedAtAction("GetTblTeam", new { id = tblTeam.FldTeamName }, tblTeam);
+        }
+
+        // POST: api/TblTeams/ForSchool
+        [HttpPost]
+        [Route("ForSchool")]
+        public async Task<IActionResult> GetTeamsForSchool([FromBody] string schoolUsername)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            UserService userService = new UserService();
+            int schoolID = userService.GetSchoolID(schoolUsername);
+            DatabaseService dbService = new DatabaseService();
+            return CreatedAtAction("GetTeamsForSchool", dbService.GetTeamsForSchool(schoolID));
         }
 
         // DELETE: api/TblTeams/5

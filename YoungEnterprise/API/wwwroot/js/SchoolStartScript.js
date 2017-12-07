@@ -13,21 +13,23 @@
         window.location.href = "http://localhost:53112/CreateTeamPage.html";
     });
 
-    /*
-    $(function () {
+    $(function GetQuestionsAndVotes() {
         $.ajax({
-            method: "GET",
-            url: "http://localhost:53112/api/TblTeams",
-            dataType: "json",
-            contentType: "application/json"
-        }).then(function (data) {
+            type: 'POST',
+            url: 'http://localhost:53112/api/TblTeams/ForSchool',
+            data: {
+                FldSchoolUsername: localStorage.getItem("userName");
+            },
+            success: function (data) {
 
-            $('#table').bootstrapTable({
-                data: data
-            });
+                $('#table').bootstrapTable({
+                    data: data
+                });
+            },
+            error: function (data) {
+                console.log(data.statusCode);
+            }
         });
-    });
-    */
-
+    }) ´;
 });
 
