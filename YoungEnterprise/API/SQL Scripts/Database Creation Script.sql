@@ -30,7 +30,6 @@ CREATE TABLE tbl_School (fld_EventID INT FOREIGN KEY REFERENCES tbl_Event(fld_Ev
 IF Object_ID('tbl_Team') IS NOT NULL
 	DROP TABLE tbl_Team
 CREATE TABLE tbl_Team (fld_TeamName VARCHAR(30) PRIMARY KEY, 
-					   fld_EventID INT FOREIGN KEY REFERENCES tbl_Event(fld_EventID) NOT NULL,
 					   fld_SchoolID INT FOREIGN KEY REFERENCES tbl_School(fld_SchoolID) NOT NULL,
 					   fld_SubjectCategory VARCHAR(30) NOT NULL,
 					   fld_Report VARBINARY(MAX) NOT NULL)
@@ -54,6 +53,7 @@ IF Object_ID('tbl_Question') IS NOT NULL
 CREATE TABLE tbl_Question (fld_QuestionID INT IDENTITY(1,1)PRIMARY KEY, 
                            fld_QuestionText VARCHAR(260) NOT NULL,
 						   fld_QuestionCategori VARCHAR(30) NOT NULL,
+						   fld_QuestionSubject VARCHAR(30) NOT NULL,
 						   fld_QuestionModifier FLOAT NOT NULL)
 
 IF Object_ID('tbl_Vote') IS NOT NULL
