@@ -27,7 +27,9 @@ namespace Admin.ViewModels
         {
             dbService = new DatabaseService();
 
-            users = ConvertToObservableCollection(dbService.GetUsers());
+            ShowAll();
+
+            //users = ConvertToObservableCollection(dbService.GetUsers());
         }
 
         private ObservableCollection<Service.Models.User> ConvertToObservableCollection (IEnumerable<Service.Models.User> list)
@@ -45,33 +47,45 @@ namespace Admin.ViewModels
         {
             Console.WriteLine(selection);
 
-            if (selection == "Skoler")
+            if (selection == "Skoler") ShowSchools();
+            else if (selection == "Dommere") ShowJudges();
+            else if (selection == "Alle") ShowAll();
+        }
+
+        // Returns amount of users currently selected
+        // Apparently not working
+        public int GetAmountOfUsers ()
+        {
+            return users.Count();
+        }
+
+        private void ShowAll ()
+        {
+            users.Clear();
+
+            foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers()))
             {
-                users.Clear();
+                users.Add(user);
+            }
+        }
 
-                foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == true)))
-                {
-                    users.Add(user);
-                }
+        private void ShowSchools ()
+        {
+            users.Clear();
 
-            } else if (selection == "Dommere")
+            foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == true)))
             {
-                users.Clear();
+                users.Add(user);
+            }
+        }
 
-                foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == false)))
-                {
-                    users.Add(user);
-                }
+        private void ShowJudges ()
+        {
+            users.Clear();
 
-            } else if (selection == "Alle")
+            foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == false)))
             {
-                users.Clear();
-
-                foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers()))
-                {
-                    users.Add(user);
-                }
-
+                users.Add(user);
             }
         }
     }

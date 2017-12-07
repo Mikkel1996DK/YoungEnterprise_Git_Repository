@@ -25,11 +25,11 @@ INSERT INTO tbl_School(fld_EventID, fld_SchoolUsername, fld_SchoolPassword, fld_
 INSERT INTO tbl_School(fld_EventID, fld_SchoolUsername, fld_SchoolPassword, fld_SchoolName)
 	   VALUES (1, 'admin@oestreskole.dk', '444555', 'Østre Skole Thisted')
 
-INSERT INTO tbl_Team(fld_TeamName, fld_EventID, fld_SchoolID, fld_SubjectCategory, fld_Report)
-	   VALUES ('TeamNavn_One', 1, 1, 'Trade & Skills', CAST('asdf' as varbinary(max)))
+INSERT INTO tbl_Team(fld_TeamName, fld_SchoolID, fld_SubjectCategory, fld_Report)
+	   VALUES ('TeamNavn_One', 1, 'Trade & Skills', CAST('asdf' as varbinary(max)))
 
-INSERT INTO tbl_Team(fld_TeamName, fld_EventID, fld_SchoolID, fld_SubjectCategory, fld_Report)
-	   VALUES ('TeamNavn_Two', 1, 1, 'Science & Technology', CAST('xysv' as varbinary(max)))
+INSERT INTO tbl_Team(fld_TeamName, fld_SchoolID, fld_SubjectCategory, fld_Report)
+	   VALUES ('TeamNavn_Two', 2, 'Science & Technology', CAST('xysv' as varbinary(max)))
 
 INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_JudgeName)
 	   VALUES (1, 'judgeOne@gmail.com', '112233', 'Jøren Hansen')
@@ -39,15 +39,18 @@ INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_Jud
 
 INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_JudgeName)
 	   VALUES (1, 'judgeThreeo@gmail.com', '123456', 'Hans Jensen')
+
+INSERT INTO tbl_JudgePair(fld_JudgeIDA, fld_JudgeIDB)
+	   VALUES (1, 2)
 	 
-INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionModifier)
-	   VALUES ('Hvem spiller trommer?', 'Trade and Skills', 1.5)
+INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionSubject, fld_QuestionModifier)
+	   VALUES ('Hvem spiller trommer?', 'Report', 'Trade and Skills', 1.5)
 
-INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionModifier)
-	   VALUES ('Hvem var Nikola Tesla?', 'Science and Technology', 1)
+INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionSubject, fld_QuestionModifier)
+	   VALUES ('Hvem var Nikola Tesla?', 'Interview', 'Science and Technology', 1)
 
-INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionModifier)
-	   VALUES ('Hvem var Jesus?', 'Trade and Skills', 1)
+INSERT INTO tbl_Question (fld_QuestionText, fld_QuestionCategori, fld_QuestionSubject, fld_QuestionModifier)
+	   VALUES ('Hvem var Jesus?', 'Report', 'Trade and Skills', 1)
 
 INSERT INTO tbl_Vote (fld_Points, fld_JudgePairID, fld_TeamName)
 	   VALUES (2, 1, 'TeamNavn_One')

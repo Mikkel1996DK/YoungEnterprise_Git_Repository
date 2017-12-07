@@ -32,6 +32,7 @@ namespace Admin.Views
         {
             InitializeComponent();
             DataContext = viewModel;
+
         }
 
         private void userCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
