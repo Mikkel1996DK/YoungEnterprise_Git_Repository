@@ -50,6 +50,22 @@ namespace Service
             }
         }
 
+        public bool DoesVoteExist()
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    databaseContext.TblVote.
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    return false;
+                }
+            }
+        }
+
         public List<TblJudge> GetAllJudges()
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
