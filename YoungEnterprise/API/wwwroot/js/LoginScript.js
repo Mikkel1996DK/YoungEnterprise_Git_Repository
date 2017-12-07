@@ -1,9 +1,4 @@
-﻿//Test User:
-//usr: mikkelljungberg@gmail.com
-//pw: 8YGPAQqC
-//dawdawdwa
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
   
     $('#loginButton').click(function () {
         
@@ -20,9 +15,25 @@ $(document).ready(function () {
             success: function (data) {
                 alert(JSON.stringify(data));
                 if (JSON.stringify(data.authenticated) === 'true') {
+                    if (JSON.stringify(data.isSchool) === 'true') {
+                        // school login
+                        alert("School logged in!");
+                        // School Test User (in Mikkels DB):
+                        // user: SchoolTest@gmail.com
+                        // pass: OM0KLjdn
+                        window.location.href = "http://localhost:53112/SchoolStartpage.html"
+                    } else {
+                        // judge login
+                        alert("Judge logged in!");
+                        // Judge Test User (in Mikkels DB):
+                        // user: JudgeTest@gmail.com
+                        // pass: TZuZzlCh
+                        window.location.href = "http://localhost:53112/JudgeStartPage.html"
+                    }
+
+
                     localStorage.setItem("userName", usernameText);
                     alert('Logged in!! :D');
-                    window.location.href = "http://localhost:53112/JudgeStartPage.html"
 
                 } else {
                     alert('Could not login!! :D');
@@ -36,8 +47,6 @@ $(document).ready(function () {
 
         return false;
     });
-
-    // Make regular post, then use .then to get the true/false.
 });
 
    

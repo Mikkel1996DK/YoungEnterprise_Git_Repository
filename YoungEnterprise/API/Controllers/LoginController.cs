@@ -20,7 +20,20 @@ namespace API.Controllers
             //usr: mikkelljungberg@gmail.com
             //pw: ls99cTO9
             AuthenticationModel authModel = new AuthenticationModel();
+
+            authModel.IsSchool = false;
             authModel.Authenticated = service.CheckJudgeLogin(loginModel.Username, service.HashPassword(loginModel.Username, loginModel.Password));
+            if (authModel.Authenticated)
+            {
+                return authModel;
+            }
+
+            authModel.IsSchool = true;
+            authModel.Authenticated = service.CheckSchoolLogin(loginModel.Username, service.HashPassword(loginModel.Username, loginModel.Password));
+            if (authModel.Authenticated)
+            {
+                return authModel;
+            }
 
             return authModel;
         }
