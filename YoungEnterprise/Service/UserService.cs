@@ -66,6 +66,22 @@ namespace Service
             return false;
         }
 
+        public bool CheckSchoolLogin (string username, string password)
+        {
+            DatabaseService dbService = new DatabaseService();
+            List<TblSchool> schoolList = dbService.GetAllSchools();
+
+            foreach (TblSchool school in schoolList)
+            {
+                if (school.FldSchoolUsername == username && school.FldSchoolPassword == password)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
 
         // Make test for this.
         public void CreateJudgePairs ()

@@ -1,9 +1,4 @@
-﻿//Test User:
-//usr: mikkelljungberg@gmail.com
-//pw: 8YGPAQqC
-//dawdawdwa
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
   
     $('#loginButton').click(function () {
         
@@ -20,8 +15,17 @@ $(document).ready(function () {
             success: function (data) {
                 alert(JSON.stringify(data));
                 if (JSON.stringify(data.authenticated) === 'true') {
+                    if (JSON.stringify(data.isSchool) === 'true') {
+                        // school login
+
+                    } else {
+                        // judge login
+                    }
+
+
                     localStorage.setItem("userName", usernameText);
                     alert('Logged in!! :D');
+
                     window.location.href = "http://localhost:53112/JudgeStartPage.html"
 
                 } else {
@@ -36,8 +40,6 @@ $(document).ready(function () {
 
         return false;
     });
-
-    // Make regular post, then use .then to get the true/false.
 });
 
    
