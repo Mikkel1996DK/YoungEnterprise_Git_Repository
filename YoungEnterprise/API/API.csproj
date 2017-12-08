@@ -24,7 +24,7 @@
     <None Include="wwwroot\HomePage.html" />
     <None Include="wwwroot\index.html" />
     <None Include="wwwroot\js\JudgeStartScript.js" />
-    <None Include="wwwroot\js\LoginScript.js" />
+    <None Include="wwwroot\js\Navbar.js" />
   </ItemGroup>
 
   <ItemGroup>

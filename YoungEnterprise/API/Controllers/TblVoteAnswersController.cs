@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Service;
-using Microsoft.AspNetCore.Cors;
-using YoungEnterprise_API.Models;
 using Service.Models;
 
 namespace YoungEnterprise_API.Controllers

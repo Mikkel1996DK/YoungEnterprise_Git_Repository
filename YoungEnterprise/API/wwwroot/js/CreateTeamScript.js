@@ -9,6 +9,8 @@
         document.getElementById('userNameField').innerHTML = userName;
     });
 
+
+
         /*
         $('#table').bootstrapTable({
              data: data

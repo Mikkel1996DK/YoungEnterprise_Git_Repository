@@ -1,14 +1,5 @@
 ﻿$(document).ready(function () {
 
-    $("#logoutButton").click(function () {
-        window.location.href = "http://localhost:53112/HomePage.html";
-    });
-
-    $(function () {
-        var userName = localStorage.getItem("userName");
-        document.getElementById('userNameField').innerHTML = userName;
-    });
-
     $(function () {
         $.ajax({
             method: "GET",
@@ -37,6 +28,6 @@
             localStorage.setItem("subject", Subject);
 
             // Change HTML page accordling
-            window.location.href = "http://localhost:53112/ReportTradeSkillPage.html";
+            window.location.href = "http://localhost:53112/ScoreSheetPage.html";
         });
 });
