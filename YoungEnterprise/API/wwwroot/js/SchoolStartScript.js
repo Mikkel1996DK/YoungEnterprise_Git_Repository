@@ -13,39 +13,43 @@
         window.location.href = "http://localhost:53112/CreateTeamPage.html";
     });
 
-    $(function () {
-        $.ajax({
-            method: "GET",
-            url: "http://localhost:53112/api/TblTeams",
-            contentType: "application/json"
-        }).then(function (data) {
 
-            $('#table').bootstrapTable({
-                data: data
-            });
-        });
-    });
-
-    /*
-    // Gets teams based on school ID found by schoolusername
-    $(function GetTeamsForSchool() {
+    $(function GetSchoolsCreateTeam() {
         $.ajax({
-            type: 'POST',
-            url: 'http://localhost:53112/api/TeamsForSchool',
-            data: {
-                SchoolUsername: localStorage.getItem("userName")
-            },
+            type: 'GET',
+            url: 'http://localhost:53112/api/TblSchools',
+            contentType: 'application/json',
             success: function (data) {
+                for (i = 0; i < data.length; i++) {
+                    console.log(JSON.stringify(data[i]))
+
+                    if (data[i].fldSchoolUsername == 'administrator@bcs.dk')/*localStorage.getItem('userName'))*/ {
+                        var identifier = data[i].fldSchoolId;
+                        GetTeams(identifier);
+
+                    } else {
+                        alert('Could not find current user! Please login again.');
+                    }
+                }
+            }
+        });
+
+        function GetTeams(schoolID) {
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:53112/api/TblTeams",
+                contentType: "application/json"
+            }).then(function (data) {
+                for (i = 0; i < data.length; i++) {
+                    if (!data[i].fldSchoolId == schoolID) {
+                        data.splice(i, 1)
+                    }
+                }
 
                 $('#table').bootstrapTable({
                     data: data
                 });
-            },
-            error: function (data) {
-                console.log(data.statusCode);
-            }
-        });
-    })
-    */
+            });
+        };
+    });
 });
-
