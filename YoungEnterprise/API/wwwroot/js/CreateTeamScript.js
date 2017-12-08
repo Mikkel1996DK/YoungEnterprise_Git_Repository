@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     $("#logoutButton").click(function () {
         window.location.href = "http://localhost:53112/HomePage.html";
     });
@@ -8,65 +9,40 @@
         document.getElementById('userNameField').innerHTML = userName;
     });
 
-
-
-    function () {
+    $(function GetSchoolsCreateTeam() {
         $.ajax({
             type: 'GET',
             url: 'http://localhost:53112/api/TblSchools',
             contentType: 'application/json',
             success: function (data) {
-                for (i = 0; i < data) {
+                for (i = 0; i < data.length; i++) {
+                    console.log(JSON.stringify(data[i]))
+
+                    if (data[i].fldSchoolUsername === localStorage.getItem('userName')) {
+                        var identifier = data[i].fldSchoolId;
+
+
+
+                    } else {
+                        alert('Could not find current user! Please login again.');
+                    }
+
 
                 }
 
 
+
             },
             error: function (data) {
                 console.log(data.statusCode);
             }
         });
-    }
 
-
-
-    // Create new team
-    $(function CreateTeam() {
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:53112/api/TblTeam',
-            data: {
-                FldSchoolUsername: localStorage.getItem("userName"),
-                FldTeamName: ,
-                FldSubjectCategory: ,
-                FldReport:
-            },
-            success: function (data) {
-
-                $('#table').bootstrapTable({
-                    data: data
-                });
-            },
-            error: function (data) {
-                console.log(data.statusCode);
-            }
+        /*
+        $('#table').bootstrapTable({
+             data: data
         });
+        */
+
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
