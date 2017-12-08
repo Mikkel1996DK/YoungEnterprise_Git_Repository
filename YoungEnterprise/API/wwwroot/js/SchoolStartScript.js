@@ -19,6 +19,11 @@
             url: "http://localhost:53112/api/TblTeams",
             contentType: "application/json"
         }).then(function (data) {
+            for (i = 0; i < data.length; i++) {
+                if (!data[i].schoolID == schoolID) {
+                    data.splice(i, 1)
+                }
+            }
 
             $('#table').bootstrapTable({
                 data: data
