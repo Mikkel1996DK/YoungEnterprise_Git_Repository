@@ -13,13 +13,27 @@
         window.location.href = "http://localhost:53112/CreateTeamPage.html";
     });
 
+    $(function () {
+        $.ajax({
+            method: "GET",
+            url: "http://localhost:53112/api/TblTeams",
+            contentType: "application/json"
+        }).then(function (data) {
+
+            $('#table').bootstrapTable({
+                data: data
+            });
+        });
+    });
+
+    /*
     // Gets teams based on school ID found by schoolusername
     $(function GetTeamsForSchool() {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/TeamsForSchool',
             data: {
-                FldSchoolUsername: localStorage.getItem("userName")
+                SchoolUsername: localStorage.getItem("userName")
             },
             success: function (data) {
 
@@ -31,6 +45,7 @@
                 console.log(data.statusCode);
             }
         });
-    });
+    })
+    */
 });
 
