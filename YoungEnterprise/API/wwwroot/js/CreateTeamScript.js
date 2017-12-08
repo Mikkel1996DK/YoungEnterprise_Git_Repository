@@ -47,7 +47,7 @@
             type: 'POST',
             url: '',
             contentType: 'application/json',
-            data: { FldTeamName: , FldSchoolId: , FldSubjectCategory: ,  },
+            //data: { FldTeamName: , FldSchoolId: , FldSubjectCategory: ,  }, fix this whole ajax function.
             success: function (data) {
                 alert('Team created!')
 

@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
 
+    var selectedTeamName;
+    var selectedTeamObj;
+
     $("#logoutButton").click(function () {
         window.location.href = "http://localhost:53112/HomePage.html";
     });
@@ -13,8 +16,56 @@
         window.location.href = "http://localhost:53112/CreateTeamPage.html";
     });
 
+    $('#table').on('click-row.bs.table', function (e, row, $element) {
+        selectedTeamName = row["fldTeamName"];
+    });
 
-    $(function GetSchoolsCreateTeam() {
+
+    $("#deleteButton").click(function GetAndDeleteTeam() {
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:53112/api/TblTeams',
+            contentType: 'application/json',
+            success: function (data) {
+                for (i = 0; i < data.length; i++) {
+                    if (data[i].fldTeamName === selectedTeamName) {
+                        selectedTeamObj = data[i];
+                    }
+                }
+
+                if (selectedTeamObj == undefined) {
+                    alert('Could not find team!');
+                } else {
+                    alert(selectedTeamObj.fldTeamName);
+                    DeleteTeam(selectedTeamObj);
+                }
+            },
+            error: function (data) {
+                console.log(data.statusCode);
+            }
+        });
+    });
+
+    // This delete function is not functioning for some reason. Fix.
+    function DeleteTeam(team) {
+        $.ajax({
+            type: 'DELETE',
+            url: 'http://localhost:53112/api/TblTeams/' + team.fldTeamName,
+            contentType: 'application/json',
+            success: function (data) {
+                location.reload();
+            },
+            error: function(data) {
+                console.log(data.statusCode);
+            }
+        });
+    };
+
+
+
+
+
+    $(function GetSchoolID() {
         $.ajax({
             type: 'GET',
             url: 'http://localhost:53112/api/TblSchools',
@@ -23,12 +74,11 @@
                 for (i = 0; i < data.length; i++) {
                     console.log(JSON.stringify(data[i]))
 
-                    if (data[i].fldSchoolUsername == 'administrator@bcs.dk')/*localStorage.getItem('userName'))*/ {
+                    if (data[i].fldSchoolUsername == localStorage.getItem('userName'))/*'administrator@bcs.dk'*/ {
                         var identifier = data[i].fldSchoolId;
+                        alert(identifier);
                         GetTeams(identifier);
 
-                    } else {
-                        alert('Could not find current user! Please login again.');
                     }
                 }
             }
@@ -40,15 +90,26 @@
                 url: "http://localhost:53112/api/TblTeams",
                 contentType: "application/json"
             }).then(function (data) {
+                var jsonData = [];
+
                 for (i = 0; i < data.length; i++) {
-                    if (!data[i].fldSchoolId == schoolID) {
-                        data.splice(i, 1)
+                    if (data[i].fldSchoolId === schoolID) {
+                        jsonData.push({
+                            "fldTeamName": data[i].fldTeamName,
+                            "fldSchoolId": data[i].fldSchoolId,
+                            "fldSubjectCategory": data[i].fldSubjectCategory,
+                            "fldReport": data[i].fldReport
+                        });
                     }
                 }
 
-                $('#table').bootstrapTable({
-                    data: data
-                });
+                if (jsonData.length === 0) {
+
+                } else {
+                    $('#table').bootstrapTable({
+                        data: jsonData
+                    });
+                }
             });
         };
     });
