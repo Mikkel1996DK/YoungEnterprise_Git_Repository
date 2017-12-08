@@ -17,7 +17,7 @@ namespace Service
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -50,13 +50,18 @@ namespace Service
             }
         }
 
+        public int UpdateVote(int judgePairID, string fldTeamName, int fldPoints)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool DoesVoteExist()
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
-                    databaseContext.TblVote.
+                    return true;
                 }
                 catch (Exception e)
                 {

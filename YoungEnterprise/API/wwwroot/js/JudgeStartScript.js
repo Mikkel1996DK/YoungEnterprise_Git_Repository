@@ -13,7 +13,6 @@
         $.ajax({
             method: "GET",
             url: "http://localhost:53112/api/TblTeams",
-            dataType: "json",
             contentType: "application/json"
         }).then(function (data) {
         

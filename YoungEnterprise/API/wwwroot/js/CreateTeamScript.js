@@ -16,7 +16,6 @@ $(function () {
             data: {
                 FldSchoolUsername: localStorage.getItem("userName"),
                 FldTeamName: ,
-                FldEventId:  ,
                 FldSubjectCategory: ,
                 FldReport:
             },
