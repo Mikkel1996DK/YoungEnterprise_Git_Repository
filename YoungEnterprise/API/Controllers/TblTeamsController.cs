@@ -12,7 +12,6 @@ namespace YoungEnterprise_API.Controllers
 {
     [Produces("application/json")]
     [Route("api/TblTeams")]
-    [EnableCors("AllowSpecificOrigin")]
     public class TblTeamsController : Controller
     {
         private readonly Models.DB_YoungEnterpriseContext _context;
@@ -129,9 +128,16 @@ namespace YoungEnterprise_API.Controllers
             return CreatedAtAction("GetTblTeam", new { id = tblTeam.FldTeamName }, tblTeam);
         }
 
+
+        /*[HttpOptions("{id}")]
+        public void Option (string id)
+        {
+            string str = "hi"; // ????
+        }*/
+
         // DELETE: api/TblTeams/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTblTeam([FromRoute] string id)
+        public async Task<IActionResult> DeleteTblTeam(string id) //[FromRoute] deleted from input
         {
             if (!ModelState.IsValid)
             {

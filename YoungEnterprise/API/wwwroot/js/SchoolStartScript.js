@@ -46,12 +46,10 @@
         });
     });
 
-    // This delete function is not functioning for some reason. Fix.
     function DeleteTeam(team) {
         $.ajax({
             type: 'DELETE',
             url: 'http://localhost:53112/api/TblTeams/' + team.fldTeamName,
-            contentType: 'application/json',
             success: function (data) {
                 location.reload();
             },

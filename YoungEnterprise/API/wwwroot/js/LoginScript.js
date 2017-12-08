@@ -16,13 +16,13 @@
                         //  school login
                         // School Test User (in Mikkels DB):
                         // user: SchoolTest@gmail.com
-                        // pass: OM0KLjdn
+                        // pass: Vvj7kvPz
                         window.location.href = "http://localhost:53112/SchoolStartpage.html"
                     } else {
                         // judge login
                         // Judge Test User (in Mikkels DB):
                         // user: JudgeTest@gmail.com
-                        // pass: TZuZzlCh
+                        // pass: WyclgMPj
                         window.location.href = "http://localhost:53112/JudgeStartPage.html"
                     }
 
