@@ -17,7 +17,7 @@ namespace Service
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -26,13 +26,10 @@ namespace Service
 
         public void CreateJudge(int eventID, string judgeUsername, string judgePassword, string judgeName)
         {
-
-
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
-
                     TblJudge judge = new TblJudge()
                     {
                         FldEventId = eventID,
@@ -49,25 +46,33 @@ namespace Service
                 }
             }
         }
-
-        public int UpdateVote(int judgePairID, string fldTeamName, int fldPoints)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DoesVoteExist()
+        public TblJudge GetJudgeByID(int fldJudgeId)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
-                    return true;
+                    return databaseContext.TblJudge.Find(fldJudgeId);
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.InnerException.Message);
-                    return false;
+                    //Console.WriteLine(e.InnerException.Message);
+                    throw e;
                 }
+            }
+        }
+
+
+        private TblVote TryFindVote(int questionID, int judgepairID, string teamName)
+        {
+            try
+            {
+                return FindJudgePairVotes(questionID, judgepairID, teamName);
+            }
+            catch (Exception e)
+            {
+                //Console.WriteLine(e.InnerException.Message);
+                throw e;
             }
         }
 
@@ -119,7 +124,7 @@ namespace Service
             }
         }
 
-        public void CreateSchool(int eventID, string schoolUsername, string schoolPassword, string schoolName)
+        public TblSchool CreateSchool(int eventID, string schoolUsername, string schoolPassword, string schoolName)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
@@ -135,10 +140,12 @@ namespace Service
                     };
                     databaseContext.TblSchool.Add(school);
                     databaseContext.SaveChanges();
+                    return school;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.InnerException.Message);
+                    //Console.WriteLine(ex.InnerException.Message);
+                    throw ex;
                 }
             }
         }
@@ -165,6 +172,30 @@ namespace Service
                 }
         }
 
+        public void CreateTeam(string teamName, int schoolID, string subject)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+
+                    TblTeam team = new TblTeam()
+                    {
+                       FldTeamName = teamName,
+                       FldSchoolId = schoolID,
+                       FldSubjectCategory = subject
+                    };
+                    databaseContext.TblTeam.Add(team);
+                    databaseContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine(ex.InnerException.Message);
+                    throw ex;
+                }
+            }
+        }
+
         public List<TblTeam> GetTeamsForSchool(int schoolID)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
@@ -187,7 +218,7 @@ namespace Service
                 catch (Exception e)
                 {
                     Console.WriteLine(e.InnerException.Message);
-                    
+
                     return teams;
                 }
             }
@@ -271,6 +302,7 @@ namespace Service
             return users;
         }
 
+        /*
         public List<TblVoteAnswer> FindVoteAnswers(TblJudgePair judgePair)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
@@ -297,6 +329,7 @@ namespace Service
                 }
             }
         }
+        */
 
         private List<TblQuestion> FindQuestions(DB_YoungEnterpriseContext databaseContext, string questionCategory, string questionSubject)
         {
@@ -316,7 +349,7 @@ namespace Service
             {
                 foreach (TblQuestion question in FindQuestions(databaseContext, questionCategory, questionSubject))
                 {
-                    TblVote vote = FindJudgePairVotes(databaseContext, question, judgePairId, teamName);
+                    TblVote vote = FindJudgePairVotes(question.FldQuestionId, judgePairId, teamName);
                     TblVoteAnswer voteAnswer = new TblVoteAnswer
                     {
                         FldQuestionId = question.FldQuestionId,
@@ -331,29 +364,98 @@ namespace Service
             return result;
         }
 
-        private TblVote FindJudgePairVotes(DB_YoungEnterpriseContext databaseContext, TblQuestion question, int judgePairId, string teamName)
+        public TblVote FindJudgePairVotes(int questionID, int judgePairId, string teamName)
         {
-            TblVote result = null;
-            var voteAnswer = databaseContext.TblVoteAnswer
-                         .Where(va =>
-                             va.FldQuestion.FldQuestionId == question.FldQuestionId
-                             && va.FldVote.FldJudgePairId == judgePairId
-                             && va.FldVote.FldTeamName == teamName
-                        )
-                        .FirstOrDefault();
-            if (voteAnswer == null)
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                result = null;
+
+                TblVote result = null;
+                var voteAnswer = databaseContext.TblVoteAnswer
+                             .Where(va =>
+                                 va.FldQuestion.FldQuestionId == questionID
+                                 && va.FldVote.FldJudgePairId == judgePairId
+                                 && va.FldVote.FldTeamName == teamName
+                            )
+                            .FirstOrDefault();
+                if (voteAnswer == null)
+                {
+                    result = null;
+                }
+                else
+                {
+                    databaseContext.Entry(voteAnswer).Reference(va => va.FldVote).Load();
+                    result = voteAnswer.FldVote;
+                }
+                return result;
             }
-            else
-            {
-                databaseContext.Entry(voteAnswer).Reference(va => va.FldVote).Load();
-                result = voteAnswer.FldVote;
-            }
-            return result;
         }
 
-        public int CreateVote(int judgePairID, string teamName, int points)
+        private void UpdateVote(int voteID, int judgePairID, string teamName, int points)
+        {
+            TblVote vote = null;
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    // Get existing vote using context
+                    vote = databaseContext.TblVote.Where(v => v.FldVoteId == voteID).FirstOrDefault<TblVote>();
+
+
+                    // Change values
+                    if (vote != null)
+                    {
+                        vote.FldJudgePairId = judgePairID;
+                        vote.FldTeamName = teamName;
+                        vote.FldPoints = points;
+                    }
+
+                    // save changes using context. 
+                    databaseContext.SaveChanges();
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.InnerException.Message);
+                }
+            }
+
+
+        }
+
+
+        public void Vote(CreateVoteModel createVoteModel)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    var service = new UserService();
+                    int questionID = service.GetQuestionID(createVoteModel.FldQuestiontext, createVoteModel.FldQuestionModifier);
+                    int judgePairID = service.GetJudgePairID(createVoteModel.FldJudgeUsername);
+                    // todo validate above + FldTeamName
+
+                    // New Vote and get voteID returned
+                    int voteID = 0;
+                    TblVote vote = TryFindVote(questionID, judgePairID, createVoteModel.FldTeamName);
+                    if (vote == null)
+                    {
+                        voteID = CreateVote(judgePairID, createVoteModel.FldTeamName, createVoteModel.FldPoints);
+                        CreateVoteAnswer(questionID, voteID);
+                    }
+                    else
+                    {
+                        UpdateVote(vote.FldVoteId, judgePairID, createVoteModel.FldTeamName, createVoteModel.FldPoints);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    //Console.WriteLine(ex.InnerException.Message);
+                    throw ex;
+                }
+            }
+        }
+
+        private int CreateVote(int judgePairID, string teamName, int points)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
@@ -379,7 +481,7 @@ namespace Service
             }
         }
 
-        public void CreateVoteAnswer(int questionID, int voteID)
+        private void CreateVoteAnswer(int questionID, int voteID)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
@@ -401,13 +503,13 @@ namespace Service
             }
         }
 
-        public void CreateEvent(DateTime dateTime)
+        public int CreateEvent(DateTime dateTime)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
                 try
                 {
-
+                    DeleteAllExceptQuestions(databaseContext);
                     TblEvent tblEvent = new TblEvent()
                     {
                         FldEventDate = dateTime
@@ -415,10 +517,12 @@ namespace Service
 
                     databaseContext.TblEvent.Add(tblEvent);
                     databaseContext.SaveChanges();
+                    return tblEvent.FldEventId;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.InnerException.Message);
+                    throw ex;
                 }
             }
         }
@@ -447,7 +551,19 @@ namespace Service
             }
         }
 
-        public TblEvent GetCurrentEvent ()
+        private void DeleteAllExceptQuestions(DB_YoungEnterpriseContext databaseContext)
+        {
+            databaseContext.TblVoteAnswer.RemoveRange(databaseContext.TblVoteAnswer);
+            databaseContext.TblVote.RemoveRange(databaseContext.TblVote);
+            databaseContext.TblJudgePair.RemoveRange(databaseContext.TblJudgePair);
+            databaseContext.TblJudge.RemoveRange(databaseContext.TblJudge);
+            databaseContext.TblTeam.RemoveRange(databaseContext.TblTeam);
+            databaseContext.TblSchool.RemoveRange(databaseContext.TblSchool);
+            databaseContext.TblEvent.RemoveRange(databaseContext.TblEvent);
+            databaseContext.SaveChanges();
+        }
+
+        public TblEvent GetCurrentEvent()
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
@@ -462,7 +578,8 @@ namespace Service
                     }
 
                     return allEvents[0];
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e.InnerException.Message);
                     return null;

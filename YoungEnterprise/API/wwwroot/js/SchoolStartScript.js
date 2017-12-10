@@ -59,10 +59,6 @@
         });
     };
 
-
-
-
-
     $(function GetSchoolID() {
         $.ajax({
             type: 'GET',

@@ -1,5 +1,21 @@
 ﻿$(document).ready(function () {
-  
+
+    $('#homeMenu').click(function () {
+            window.location.href = "http://localhost:53112/HomePage.html";
+    });
+
+    $('#programMenu').click(function () {
+        window.location.href = "http://localhost:53112/ProgramPage.html";
+    });
+
+    $('#aboutMenu').click(function () {
+        window.location.href = "http://localhost:53112/AboutPage.html";
+    });
+
+    $('#contactMenu').click(function () {
+        window.location.href = "http://localhost:53112/ContactPage.html";
+    });
+
     $('#loginButton').click(function () {
         
         // Username and password text variables.

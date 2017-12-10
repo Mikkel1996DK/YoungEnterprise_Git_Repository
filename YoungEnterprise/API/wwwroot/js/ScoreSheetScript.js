@@ -1,25 +1,25 @@
 ﻿$(document).ready(function () {
 
-    $("#logoutButton").click(function () {
-        window.location.href = "http://localhost:53112/HomePage.html";
+    $("#saveButton").click(function () {
+        window.location.href = "http://localhost:53112/JudgeStartPage.html";
     });
+    // Getting teamName, subject, catagory and judgeusername from local storage
+    var subjectText = localStorage.getItem("subject");
+    var categoryText = localStorage.getItem("category");
+    var teamNameText = localStorage.getItem("teamName");
+    var userName = localStorage.getItem("userName");
 
+    // Changes the header team name to include the teamname for chosen team
     $(function () {
-        var userName = localStorage.getItem("userName");
-        document.getElementById('userNameField').innerHTML = userName;
-    });
-
-    // Getting teamName from local storage and changes the header team name to include the teamname fr chosen team
-    $(function () {
-        var teamNameText = localStorage.getItem("teamName");
         document.getElementById('teamNameField').innerHTML = "Team Name: " + teamNameText;
     });
 
-    // Getting teamName, subject, catagory and judgeusername from local storage
-    var subjectText = localStorage.getItem("subject");
-    var categoryText = localStorage.getItem("catagory");
-    var teamNameText = localStorage.getItem("teamName");
-    var userName = localStorage.getItem("userName");
+    // Changes Header od scoresheet to match choosen catagory and team subject
+    $(function () {
+        document.getElementById('topicField').innerHTML = categoryText + " - " + subjectText;
+    });
+
+    
 
     //Test User:
     //usr: mikkelljungberg@gmail.com
@@ -32,12 +32,13 @@
             url: 'http://localhost:53112/api/TblVoteAnswers',
             data: {
                 TeamName: teamNameText,
-                Subject: categoryText,
-                Category: subjectText,
+                Subject: subjectText,
+                Category: categoryText,
                 JudgeUsername: userName
 
             },
             success: function (data) {
+                alert(JSON.stringify(data));
               
                 $('#table').bootstrapTable({
                     data: data

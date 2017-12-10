@@ -46,22 +46,5 @@ namespace ServiceTest
             Assert.IsTrue(service.CheckJudgeLogin(actualUsername, service.HashPassword(actualUsername, actualPassword)));
         }
 
-        // The problem with testing this is that there's not a defined number of judgepairs that's returned.
-        // Test Passed with 2 judges making 1 judgepair.
-        // Test Passed with 3 judges making 1 judgepair (as there's max two judges in a judgepair the last judge is
-        // just thrown out.)
-        [TestMethod]
-        public void TestMakeJudgePairs ()
-        {
-            DatabaseService database = new DatabaseService();
-            List<TblJudge> judges = database.GetAllJudges();
-            int amount = database.GetAllJudgePairs().Count;
-
-            Assert.AreEqual(0, database.GetAllJudgePairs().Count);
-
-            service.CreateJudgePairs();
-
-            Assert.AreEqual(judges.Count/2, database.GetAllJudgePairs().Count);
-        }
     }
 }

@@ -26,10 +26,10 @@ INSERT INTO tbl_School(fld_EventID, fld_SchoolUsername, fld_SchoolPassword, fld_
 	   VALUES (1, 'admin@oestreskole.dk', '444555', 'Østre Skole Thisted')
 
 INSERT INTO tbl_Team(fld_TeamName, fld_SchoolID, fld_SubjectCategory, fld_Report)
-	   VALUES ('TeamNavn_One', 1, 'Trade & Skills', CAST('asdf' as varbinary(max)))
+	   VALUES ('TeamNavn_One', 1, 'Trade and Skills', CAST('asdf' as varbinary(max)))
 
 INSERT INTO tbl_Team(fld_TeamName, fld_SchoolID, fld_SubjectCategory, fld_Report)
-	   VALUES ('TeamNavn_Two', 2, 'Science & Technology', CAST('xysv' as varbinary(max)))
+	   VALUES ('TeamNavn_Two', 2, 'Science and Technology', CAST('xysv' as varbinary(max)))
 
 INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_JudgeName)
 	   VALUES (1, 'judgeOne@gmail.com', '112233', 'Jøren Hansen')
@@ -38,7 +38,7 @@ INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_Jud
 	   VALUES (1, 'judgeTwo@gmail.com', '654321', 'Mads Petersen')
 
 INSERT INTO tbl_Judge(fld_EventID, fld_JudgeUsername, fld_JudgePassword, fld_JudgeName)
-	   VALUES (1, 'judgeThreeo@gmail.com', '123456', 'Hans Jensen')
+	   VALUES (1, 'judgeThree@gmail.com', '123456', 'Hans Jensen')
 
 INSERT INTO tbl_JudgePair(fld_JudgeIDA, fld_JudgeIDB)
 	   VALUES (1, 2)

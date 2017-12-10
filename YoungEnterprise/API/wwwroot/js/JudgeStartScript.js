@@ -17,7 +17,7 @@
          
             var element = document.getElementById("categorySelection");
             var selectedItem = element.options[element.selectedIndex].value;
-            localStorage.setItem("catagory", selectedItem);
+            localStorage.setItem("category", selectedItem);
 
 
             // Get Info of TeamName and SubjectCatagory and send to local storage
