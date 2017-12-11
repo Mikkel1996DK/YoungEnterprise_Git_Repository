@@ -17,16 +17,11 @@
     // Changes Header od scoresheet to match choosen catagory and team subject
     $(function () {
         document.getElementById('topicField').innerHTML = categoryText + " - " + subjectText;
+        GetQuestionsAndVotes();
     });
 
-    
-
-    //Test User:
-    //usr: mikkelljungberg@gmail.com
-    //pw: 8YGPAQqC
-
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
-    $(function GetQuestionsAndVotes() {
+    function GetQuestionsAndVotes() {
         $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/TblVoteAnswers',
@@ -38,8 +33,6 @@
 
             },
             success: function (data) {
-                alert(JSON.stringify(data));
-              
                 $('#table').bootstrapTable({
                     data: data
                 });
@@ -48,25 +41,17 @@
                 console.log(data.statusCode);
             }
         });
-    });
+    }
 
     $('#table').on('click-row.bs.table', function (e, row, $element) {
-        //var Questiontext = row["questiontext"];
-        //var QuestionModifier = row["questionModifier"];
-
-        //var QuestionText = "1234";
-        //var QuestionModifier = 1.5;
-        //alert(Questiontext, questionModifier);
+        var Questiontext = row["questiontext"];
+        var QuestionModifier = row["questionModifier"];
         var points = prompt("Giv Point (1-10):");
-        SavePoints(points, "Hvem var Jesus", 1.5);
-        GetQuestionsAndVotes();
-        
+        SavePoints(points, Questiontext, QuestionModifier);
     });
-
 });
 
 function SavePoints(points, questionText, questionModifier) {
-    alert("Hello");
         $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/CreateVote',
@@ -80,11 +65,11 @@ function SavePoints(points, questionText, questionModifier) {
             },
             success: function (data) {
                 alert("Point Gemt!");
-
+                    window.location.reload(true);
             },
             error: function (data) {
                 console.log(data.statusCode);
             }
         });
-};
+    };
 
