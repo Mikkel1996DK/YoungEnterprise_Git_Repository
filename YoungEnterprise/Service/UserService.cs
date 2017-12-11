@@ -191,7 +191,7 @@ namespace Service
             }
         }
 
-        public int GetQuestionID(string questionText, double questionModifier)
+        public int GetQuestionID(string questionText)
         {
             DatabaseService dbService = new DatabaseService();
             List<TblQuestion> questions = dbService.GetAllQuestions();
@@ -200,7 +200,7 @@ namespace Service
             TblQuestion selectedQuestion = new TblQuestion();
             foreach (TblQuestion question in questions)
             {
-                if (question.FldQuestionText.Equals(questionText) || question.FldQuestionModifier == questionModifier)
+                if (question.FldQuestionText.Equals(questionText))
                 {
                     selectedQuestion = question;
                     break;

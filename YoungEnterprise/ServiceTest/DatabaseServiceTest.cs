@@ -116,6 +116,7 @@ namespace ServiceTest
             // Questions (already setup)
             var questions = service.GetAllQuestions();
             var question1 = questions[0];
+            var question2 = questions[1];
 
             // Do
             var voteModel = new CreateVoteModel()
@@ -127,28 +128,74 @@ namespace ServiceTest
                 FldTeamName = "EasyOn"
             };
             service.Vote(voteModel);
-            
+
+            var voteModel2 = new CreateVoteModel()
+            {
+                FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
+                FldPoints = 3,
+                FldQuestionModifier = question2.FldQuestionModifier,  // todo remove
+                FldQuestiontext = question2.FldQuestionText,
+                FldTeamName = "EasyOn"
+            };
+            service.Vote(voteModel2);
+
             // Assertions
             var vote1 = service.FindJudgePairVotes(question1.FldQuestionId, pair1.FldJudgePairId, "EasyOn");
             Assert.IsNotNull(vote1);
             Assert.AreEqual(10, vote1.FldPoints);
+
+            var vote2 = service.FindJudgePairVotes(question2.FldQuestionId, pair1.FldJudgePairId, "EasyOn");
+            Assert.IsNotNull(vote2);
+            Assert.AreEqual(3, vote2.FldPoints);
 
             // Revote
             voteModel.FldPoints = 5;
             service.Vote(voteModel);
 
             // Assertions
-            var vote2 = service.FindJudgePairVotes(question1.FldQuestionId, pair1.FldJudgePairId, "EasyOn");
-            Assert.IsNotNull(vote2);
-            Assert.AreEqual(5, vote2.FldPoints);
+            var vote3 = service.FindJudgePairVotes(question1.FldQuestionId, pair1.FldJudgePairId, "EasyOn");
+            Assert.IsNotNull(vote3);
+            Assert.AreEqual(5, vote3.FldPoints);
         }
 
         [TestMethod]
         public void FindQuestionAndVotes()
         {
-            service = new DatabaseService();
+            
+            var eventID = service.CreateEvent(DateTime.Now);
+            // Judges
+            service.CreateJudge(eventID, "a@gmail.com", userService.HashPassword("a@gmail.com", "12345"), "A");
+            service.CreateJudge(eventID, "b@gmail.com", userService.HashPassword("b@gmail.com", "12345"), "B");
+            service.CreateJudge(eventID, "c@gmail.com", userService.HashPassword("c@gmail.com", "12345"), "C");
+            service.CreateJudge(eventID, "d@gmail.com", userService.HashPassword("d@gmail.com", "12345"), "D");
+            userService.CreateJudgePairs();
+            var judgePairs = service.GetAllJudgePairs();
+            Assert.AreEqual(2, judgePairs.Count());
+            var pair1 = judgePairs[0];
+            var pair2 = judgePairs[1];
 
-            List<TblVoteAnswer> voteAnswer = service.FindQuestionsAndVotes("report", "Trade and Skills", 1, "TeamNavn_One");
+            // School
+            var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
+
+            // Teams 
+            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills");
+            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills");
+            // Questions (already setup)
+            var questions = service.GetAllQuestions();
+            var question1 = questions[0];
+
+            // Votes
+            var voteModel = new CreateVoteModel()
+            {
+                FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
+                FldPoints = 2,
+                FldQuestionModifier = question1.FldQuestionModifier,  
+                FldQuestiontext = question1.FldQuestionText,
+                FldTeamName = "EasyOn"
+            };
+            service.Vote(voteModel);
+
+            List<TblVoteAnswer> voteAnswer = service.FindQuestionsAndVotes("Report", "Trade and Skills", pair1.FldJudgePairId, "EasyOn");
             Assert.AreEqual(2, voteAnswer.Count);
             Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 0).Count());
             Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 2).Count());

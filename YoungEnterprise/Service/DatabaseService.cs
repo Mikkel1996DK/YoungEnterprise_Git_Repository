@@ -302,35 +302,6 @@ namespace Service
             return users;
         }
 
-        /*
-        public List<TblVoteAnswer> FindVoteAnswers(TblJudgePair judgePair)
-        {
-            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
-            {
-                try
-                {
-                    List<TblVoteAnswer> allVoteAnswers = new List<TblVoteAnswer>();
-                    foreach (TblVoteAnswer voteAnswer in databaseContext.TblVoteAnswer)
-                    {
-                        voteAnswer.Questiontext = voteAnswer.FldQuestion.FldQuestionText;
-                        voteAnswer.QuestionModifier = voteAnswer.FldQuestion.FldQuestionModifier;
-                        voteAnswer.Points = voteAnswer.FldVote.FldPoints;
-
-                        allVoteAnswers.Add(voteAnswer);
-                    }
-
-                    return allVoteAnswers;
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
-                }
-            }
-        }
-        */
-
         private List<TblQuestion> FindQuestions(DB_YoungEnterpriseContext databaseContext, string questionCategory, string questionSubject)
         {
             List<TblQuestion> questions = new List<TblQuestion>();
@@ -345,7 +316,7 @@ namespace Service
         {
             List<TblVoteAnswer> result = new List<TblVoteAnswer>();
 
-            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection()) 
             {
                 foreach (TblQuestion question in FindQuestions(databaseContext, questionCategory, questionSubject))
                 {
@@ -411,15 +382,12 @@ namespace Service
 
                     // save changes using context. 
                     databaseContext.SaveChanges();
-
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.InnerException.Message);
                 }
             }
-
-
         }
 
 
@@ -430,7 +398,7 @@ namespace Service
                 try
                 {
                     var service = new UserService();
-                    int questionID = service.GetQuestionID(createVoteModel.FldQuestiontext, createVoteModel.FldQuestionModifier);
+                    int questionID = service.GetQuestionID(createVoteModel.FldQuestiontext);
                     int judgePairID = service.GetJudgePairID(createVoteModel.FldJudgeUsername);
                     // todo validate above + FldTeamName
 
