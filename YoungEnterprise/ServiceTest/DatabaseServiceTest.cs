@@ -153,12 +153,5 @@ namespace ServiceTest
             Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 0).Count());
             Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 2).Count());
         }
-
-        [TestMethod]
-        public void AddVote()
-        {
-            service = new DatabaseService();
-
-        }
     }
 }
