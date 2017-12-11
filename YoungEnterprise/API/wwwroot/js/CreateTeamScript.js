@@ -30,12 +30,12 @@
                     
                     if (data[i].fldSchoolUsername === localStorage.getItem('userName')) {
                         identifier = data[i].fldSchoolId;
-
+                        
                     }
                 }
 
                 if (identifier != undefined) {
-
+                    CreateTeam();
                 }
             },
             error: function (data) {
