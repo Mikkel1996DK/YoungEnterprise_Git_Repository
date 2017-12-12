@@ -101,7 +101,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblTeams
         [HttpPost]
-        public async Task<IActionResult> PostTblTeam([FromBody] Models.TblTeam tblTeam)
+        public async Task<IActionResult> PostTblTeam(Models.TblTeam tblTeam)
         {
             if (!ModelState.IsValid)
             {
@@ -127,13 +127,6 @@ namespace YoungEnterprise_API.Controllers
 
             return CreatedAtAction("GetTblTeam", new { id = tblTeam.FldTeamName }, tblTeam);
         }
-
-
-        /*[HttpOptions("{id}")]
-        public void Option (string id)
-        {
-            string str = "hi"; // ????
-        }*/
 
         // DELETE: api/TblTeams/5
         [HttpDelete("{id}")]

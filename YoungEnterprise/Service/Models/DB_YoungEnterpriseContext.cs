@@ -177,7 +177,6 @@ namespace YoungEnterprise_API.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.FldReport)
-                    .IsRequired()
                     .HasColumnName("fld_Report");
 
                 entity.Property(e => e.FldSchoolId).HasColumnName("fld_SchoolID");
