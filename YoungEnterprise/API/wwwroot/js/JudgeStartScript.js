@@ -3,7 +3,7 @@
     $(function () {
         $.ajax({
             method: "GET",
-            url: "http://localhost:53112/api/TblTeams",
+            url: "/api/TblTeams",
             contentType: "application/json"
         }).then(function (data) {
         

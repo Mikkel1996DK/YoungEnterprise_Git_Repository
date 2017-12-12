@@ -161,7 +161,7 @@ namespace ServiceTest
         [TestMethod]
         public void FindQuestionAndVotes()
         {
-            
+
             var eventID = service.CreateEvent(DateTime.Now);
             // Judges
             service.CreateJudge(eventID, "a@gmail.com", userService.HashPassword("a@gmail.com", "12345"), "A");
@@ -189,7 +189,7 @@ namespace ServiceTest
             {
                 FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
                 FldPoints = 2,
-                FldQuestionModifier = question1.FldQuestionModifier,  
+                FldQuestionModifier = question1.FldQuestionModifier,
                 FldQuestiontext = question1.FldQuestionText,
                 FldTeamName = "EasyOn"
             };
@@ -199,6 +199,47 @@ namespace ServiceTest
             Assert.AreEqual(2, voteAnswer.Count);
             Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 0).Count());
             Assert.AreEqual(1, voteAnswer.Where(a => a.Points == 2).Count());
+        }
+
+        [TestMethod]
+        public void FindTeamResultsTest()
+        {
+            var eventID = service.CreateEvent(DateTime.Now);
+            // Judges
+            service.CreateJudge(eventID, "a@gmail.com", userService.HashPassword("a@gmail.com", "12345"), "A");
+            service.CreateJudge(eventID, "b@gmail.com", userService.HashPassword("b@gmail.com", "12345"), "B");
+            service.CreateJudge(eventID, "c@gmail.com", userService.HashPassword("c@gmail.com", "12345"), "C");
+            service.CreateJudge(eventID, "d@gmail.com", userService.HashPassword("d@gmail.com", "12345"), "D");
+            userService.CreateJudgePairs();
+            var judgePairs = service.GetAllJudgePairs();
+            Assert.AreEqual(2, judgePairs.Count());
+            var pair1 = judgePairs[0];
+            var pair2 = judgePairs[1];
+
+            // School
+            var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
+
+            // Teams 
+            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills");
+            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills");
+            // Questions (already setup)
+            var questions = service.GetAllQuestions();
+            var question1 = questions[0];
+
+            // Votes
+            var voteModel = new CreateVoteModel()
+            {
+                FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
+                FldPoints = 2,
+                FldQuestionModifier = question1.FldQuestionModifier,
+                FldQuestiontext = question1.FldQuestionText,
+                FldTeamName = "EasyOn"
+            };
+            service.Vote(voteModel);
+
+            List<TeamResultModel> teamResults = service.FindTeamResults();
+            Assert.AreEqual(2, teamResults.Count);
+            Assert.AreEqual(2*question1.FldQuestionModifier, teamResults[0].OverallPoints);
         }
     }
 }

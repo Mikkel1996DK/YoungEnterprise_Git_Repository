@@ -17,7 +17,7 @@ namespace Service
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -171,6 +171,29 @@ namespace Service
                     return null;
                 }
         }
+
+        public List<TblTeam> GetAllTeams()
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+                try
+                {
+
+                    List<TblTeam> allTeams = new List<TblTeam>();
+                    foreach (TblTeam team in databaseContext.TblTeam)
+                    {
+                        allTeams.Add(team);
+                    }
+
+                    return allTeams;
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+                    return null;
+                }
+        }
+
 
         public void CreateTeam(string teamName, int schoolID, string subject)
         {
@@ -333,6 +356,54 @@ namespace Service
                 }
             }
             return result;
+        }
+
+        public List<TeamResultModel> FindTeamResults()
+        {
+            List<TeamResultModel> teamResults = new List<TeamResultModel>();
+            foreach(TblTeam team in GetAllTeams())
+            {
+                double overallPoints = 0;
+                foreach (TblQuestion question in GetAllQuestions())
+                {
+                    double points = FindTeamVotes(question.FldQuestionId, team.FldTeamName);
+                    points = points * question.FldQuestionModifier;
+                    overallPoints = overallPoints + points;
+                }
+                TeamResultModel teamResult = new TeamResultModel
+                    {
+                        TeamName = team.FldTeamName,
+                        OverallPoints = overallPoints,
+                        Subject = team.FldSubjectCategory
+                    };
+                teamResults.Add(teamResult);
+            }
+            return teamResults;
+        }
+
+        public double FindTeamVotes(int questionID, string teamName)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+
+                double result = 0;
+                var voteAnswer = databaseContext.TblVoteAnswer
+                             .Where(va =>
+                                 va.FldQuestion.FldQuestionId == questionID
+                                 && va.FldVote.FldTeamName == teamName
+                            )
+                            .FirstOrDefault();
+                if (voteAnswer == null)
+                {
+                    result = 0;
+                }
+                else
+                {
+                    databaseContext.Entry(voteAnswer).Reference(va => va.FldVote).Load();
+                    result = voteAnswer.FldVote.FldPoints;
+                }
+                return result;
+            }
         }
 
         public TblVote FindJudgePairVotes(int questionID, int judgePairId, string teamName)
