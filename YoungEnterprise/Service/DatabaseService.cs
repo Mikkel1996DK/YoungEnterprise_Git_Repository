@@ -195,7 +195,7 @@ namespace Service
         }
 
 
-        public void CreateTeam(string teamName, int schoolID, string subject)
+        public void CreateTeam(string teamName, int schoolID, string subject, byte[] report)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
@@ -206,7 +206,8 @@ namespace Service
                     {
                        FldTeamName = teamName,
                        FldSchoolId = schoolID,
-                       FldSubjectCategory = subject
+                       FldSubjectCategory = subject,
+                       FldReport = report
                     };
                     databaseContext.TblTeam.Add(team);
                     databaseContext.SaveChanges();
