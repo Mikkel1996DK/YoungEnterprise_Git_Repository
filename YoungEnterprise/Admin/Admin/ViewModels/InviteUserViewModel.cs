@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Admin.ViewModels
 {
@@ -62,16 +63,15 @@ namespace Admin.ViewModels
             if (!isSchool)
             {
                 //mailSender.SendInviteMail(email, "Young Enterprise | Dommer Invitiation", nameText, email, pw);
-                
                 dbService.CreateJudge(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
+                MessageBox.Show("Dommer Tilføjet!");
                 pw = null;
             }
             else
             {
-                
                 //mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email, pw);
-
                 dbService.CreateSchool(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
+                MessageBox.Show("Skole Tilføjet!");
                 pw = null;
             }
         }
