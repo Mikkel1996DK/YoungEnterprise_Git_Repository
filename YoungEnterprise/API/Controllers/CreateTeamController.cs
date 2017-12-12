@@ -13,17 +13,16 @@ namespace API.Controllers
     public class CreateTeamController : Controller
     {
         [HttpPost]
-        public String CreateTeam (TeamWithFile team)
+        public IActionResult CreateTeam ()
         {
-            long size;
+            IFormFileCollection files = Request.Form.Files;
 
-            IFormFile file = team.FldReports.FirstOrDefault();
-            var filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            
+            foreach(IFormFile file in files)
+            {
+                Console.WriteLine("_A FILE HERE____________________________________________________________________________________________________");
+            }
 
-
-
-            return "Team Created!";
+            return Json("Team Created!");
         }
 
     }

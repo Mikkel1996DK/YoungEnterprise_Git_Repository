@@ -45,14 +45,18 @@
     });
 
     function CreateTeam() {
+        var data = new FormData();
+        data.append(files.name, files);
+
         $.ajax({
             type: 'POST',
-            url: '',
-            contentType: 'application/json',
-            //data: { FldTeamName: , FldSchoolId: , FldSubjectCategory: ,  }, fix this whole ajax function.
+            url: 'http://localhost:53112/api/CreateTeam',
+            contentType: false,
+            processData: false,
+            data: data,
             success: function (data) {
-                alert('Team created!')
-
+                alert(data)
+                // Not working
 
             },
             error: function (data) {

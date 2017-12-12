@@ -117,6 +117,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="ViewModels\InviteUserViewModel.cs" />
+    <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\UserDisplayViewModel.cs" />
     <Compile Include="Views\CreateScheduleView.xaml.cs">
       <DependentUpon>CreateScheduleView.xaml</DependentUpon>

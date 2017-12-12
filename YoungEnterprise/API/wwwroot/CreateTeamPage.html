@@ -65,12 +65,12 @@
             </div>
         </form>
 
-        <form asp-action="UploadFiles" 
-              asp-controller="CreateTeamController"
+        <form asp-action="CreateTeam"
+              asp-controller="http://localhost:53112/api/CreateTeam"
               method="post"
               enctype="multipart/form-data">
-            <label> Report </label>
-            <input type="file" name="files" multiple />
+            <input type="file" name="files" />
+            <input type="submit" value="Upload Selected File" />
         </form>
 
         <br />
