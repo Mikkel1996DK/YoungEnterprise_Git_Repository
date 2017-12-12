@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Admin.Views
 {
     /// <summary>
-    /// Interaction logic for ResultView.xaml
+    /// Interaction logic for StatusView.xaml
     /// </summary>
-    public partial class ResultView : UserControl
+    public partial class StatusView : UserControl
     {
-        public ResultView()
+        public StatusView()
         {
             InitializeComponent();
         }

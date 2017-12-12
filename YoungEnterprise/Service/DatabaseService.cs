@@ -46,6 +46,7 @@ namespace Service
                 }
             }
         }
+
         public TblJudge GetJudgeByID(int fldJudgeId)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
@@ -61,7 +62,6 @@ namespace Service
                 }
             }
         }
-
 
         private TblVote TryFindVote(int questionID, int judgepairID, string teamName)
         {
@@ -193,7 +193,6 @@ namespace Service
                     return null;
                 }
         }
-
 
         public void CreateTeam(string teamName, int schoolID, string subject, byte[] report)
         {
@@ -462,7 +461,6 @@ namespace Service
             }
         }
 
-
         public void Vote(CreateVoteModel createVoteModel)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
@@ -626,6 +624,23 @@ namespace Service
                 }
             }
         }
+
+        public TblTeam GetSpecificTeam (string teamName)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    return databaseContext.TblTeam.Find(teamName);
+                }
+                catch (Exception e)
+                {
+                    //Console.WriteLine(e.InnerException.Message);
+                    throw e;
+                }
+            }
+        }
+
     }
 }
 

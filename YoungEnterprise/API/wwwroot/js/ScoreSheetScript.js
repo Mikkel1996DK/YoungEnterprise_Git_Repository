@@ -49,6 +49,43 @@
         var points = prompt("Giv Point (1-10):");
         SavePoints(points, Questiontext, QuestionModifier);
     });
+
+    $('#reportButton').click(function () {
+        var name = localStorage.getItem("teamName");
+
+        alert("LUL");
+            $.ajax({
+            type: 'POST',
+            url: 'http://localhost:53112/api/DownloadReport',
+            data: { TeamName: name },
+            success: function (data) {
+                alert(data);
+                
+            },
+            error: function (data) {
+                console.log(data.statusCode);
+            }
+        });
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
 function SavePoints(points, questionText, questionModifier) {

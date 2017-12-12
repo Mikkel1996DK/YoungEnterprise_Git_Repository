@@ -14,7 +14,7 @@ namespace API.Controllers
     public class UploadReportController : Controller
     {
         [HttpPost]
-        public IActionResult UploadFilesAjax()
+        public IActionResult UploadReport()
         {
             DatabaseService dbService = new DatabaseService();
 
