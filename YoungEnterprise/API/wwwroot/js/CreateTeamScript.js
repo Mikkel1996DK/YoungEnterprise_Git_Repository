@@ -17,7 +17,12 @@
         });
         */
 
-    $(function GetSchoolsCreateTeam() {
+    /*
+        $("#logoutButton").click(function () {
+        window.location.href = "http://localhost:53112/HomePage.html";
+    });*/
+
+    $('#CreateTeamButton').click(function () {
         $.ajax({
             type: 'GET',
             url: 'http://localhost:53112/api/TblSchools',
@@ -35,7 +40,7 @@
                 }
 
                 if (identifier != undefined) {
-                    CreateTeam();
+                    CreateTeam(identifier);
                 }
             },
             error: function (data) {
@@ -44,19 +49,17 @@
         });
     });
 
-    function CreateTeam() {
-        var data = new FormData();
-        data.append(files.name, files);
+    function CreateTeam(schoolID) {
+        var element = document.getElementById("subjectSelection");
+        var subject = element.options[element.selectedIndex].value;
+        var name = document.getElementById('nameInput').value;
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost:53112/api/CreateTeam',
-            contentType: false,
-            processData: false,
-            data: data,
+            url: 'http://localhost:53112/api/TblTeams',
+            data: { FldTeamName: name, FldSchoolId: schoolID, FldSubjectCategory: subject },
             success: function (data) {
-                alert(data)
-                // Not working
+                alert('Team oprettet!');
 
             },
             error: function (data) {
