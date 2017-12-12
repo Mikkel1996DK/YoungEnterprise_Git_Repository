@@ -5,5 +5,6 @@
         public string TeamName { get; set; }
         public double OverallPoints { get; set; }
         public string Subject { get; set; }
+        public int Place { get; set; }
     }
 }

@@ -92,6 +92,15 @@ namespace ServiceTest
         }
 
         [TestMethod]
+        public void CreateTeamTest()
+        {
+            var eventID = service.CreateEvent(DateTime.Now);
+            var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
+            service.CreateTeam("TestTeam", school.FldSchoolId, "Trade and Skills");
+            Assert.AreEqual(1, service.GetAllTeams().Count());
+        }
+
+        [TestMethod]
         public void VoteTest()
         {
             var eventID = service.CreateEvent(DateTime.Now);
