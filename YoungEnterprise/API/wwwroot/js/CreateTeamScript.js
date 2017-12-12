@@ -49,7 +49,7 @@
         });
     });
 
-    function CreateTeam(schoolID) {
+    /*function CreateTeam(schoolID) {
         var element = document.getElementById("subjectSelection");
         var subject = element.options[element.selectedIndex].value;
         var name = document.getElementById('nameInput').value;
@@ -59,12 +59,49 @@
             url: 'http://localhost:53112/api/TblTeams',
             data: { FldTeamName: name, FldSchoolId: schoolID, FldSubjectCategory: subject },
             success: function (data) {
-                alert('Team oprettet!');
-
+                UploadReport(name);
             },
             error: function (data) {
                 console.log(data.statusCode);
             }
         });
+    }*/
+
+
+    function CreateTeam(schoolID) {
+
+        var element = document.getElementById("subjectSelection");
+        var subject = element.options[element.selectedIndex].value;
+        var name = document.getElementById('nameInput').value;
+
+
+        var fileUpload = $("#files").get(0);
+        var files = fileUpload.files;
+        var data = new FormData();
+
+        for (var i = 0; i < files.length; i++) {
+            data.append(files[i].name, files[i]);
+        }
+
+        data.append('TeamName', name)
+        data.append('SubjectCategory', subject);
+        data.append('SchoolID', schoolID)
+
+        $.ajax({
+            type: "POST",
+            url: "api/UploadReport",
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function (message) {
+                alert(message);
+            },
+            error: function () {
+                alert("There was error uploading files!");
+            }
+        });
     }
+
+
+
 });

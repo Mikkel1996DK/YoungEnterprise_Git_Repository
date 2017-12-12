@@ -65,12 +65,8 @@
             </div>
         </form>
 
-        <form asp-action="CreateTeam"
-              asp-controller="http://localhost:53112/api/CreateTeam"
-              method="post"
-              enctype="multipart/form-data">
-            <input type="file" name="files" />
-            <input type="submit" value="Upload Selected File" />
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" id="files" name="files" accept="application/pdf" />
         </form>
 
         <br />
