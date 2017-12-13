@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Service;
+using Service.Models;
 
 namespace Admin.ViewModels
 {
@@ -60,6 +61,11 @@ namespace Admin.ViewModels
             {
                 users.Add(user);
             }
+        }
+
+        public void DeleteUser(User user)
+        {
+           
         }
 
         private void ShowSchools ()
