@@ -62,16 +62,31 @@ namespace Admin.ViewModels
 
             if (!isSchool)
             {
-                //mailSender.SendInviteMail(email, "Young Enterprise | Dommer Invitiation", nameText, email, pw);
-                dbService.CreateJudge(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
-                MessageBox.Show("Dommer Tilføjet!");
+                try
+                {
+                    //mailSender.SendInviteMail(email, "Young Enterprise | Dommer Invitiation", nameText, email, pw);
+                    dbService.CreateJudge(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
+                    MessageBox.Show("Dommer Tilføjet!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Kunne ikke oprette dommmer fordi dommeren allerede eksisterer i systemet!", "Oprettelses Fejl");
+                }
+
                 pw = null;
             }
             else
             {
-                //mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email, pw);
-                dbService.CreateSchool(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
-                MessageBox.Show("Skole Tilføjet!");
+                try
+                {
+                    //mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email, pw);
+                    dbService.CreateSchool(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
+                    MessageBox.Show("Skole Tilføjet!");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Kunne ikke oprette skole fordi skolen allerede eksisterer i systemet!", "Oprettelses Fejl");
+                }
                 pw = null;
             }
         }
