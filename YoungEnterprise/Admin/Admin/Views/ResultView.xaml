@@ -28,25 +28,25 @@
         <Label Content="Se Resultater" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="0" Style="{StaticResource headerLabel}"/>
 
         <!-- ComboBox for the categories -->
-        <ComboBox Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" Margin="12, 4, 12, 20" FontSize="24" FontFamily="Arial" VerticalAlignment="Center" VerticalContentAlignment="Center">
+        <ComboBox Name="categoryCombo" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" Margin="12, 4, 12, 20" FontSize="24" FontFamily="Arial" VerticalAlignment="Center" VerticalContentAlignment="Center" SelectionChanged="categoryCombo_SelectionChanged">
             <ComboBoxItem Content="Vis Alle" IsSelected="True"/>
             <ComboBoxItem Content="Trade and Skills"/>
-            <ComboBoxItem Content="Society and Globalization"/>
-            <ComboBoxItem Content="Science and Technologi"/>
-            <ComboBoxItem Content="Business and Services"/>
+            <ComboBoxItem Content="Globalization and Society"/>
+            <ComboBoxItem Content="Science and Technology"/>
+            <ComboBoxItem Content="Business and Service"/>
         </ComboBox>
 
         <!-- A datagrid to view the results  -->
-        <DataGrid x:Name="viewTeamsDataGrid" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Margin="12, 0, 12, 12" AutoGenerateColumns="False" FontFamily="Arial" FontSize="20">
+        <DataGrid x:Name="viewTeamsDataGrid" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="4" Margin="12, 0, 12, 12" AutoGenerateColumns="False" FontFamily="Arial" FontSize="20" ItemsSource="{Binding TeamResults}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Team Navn" Width="2*" IsReadOnly="True">
+                <DataGridTextColumn Header="Team Navn" Width="2*" Binding="{Binding TeamName}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         </Style>
                     </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Point" Width="2*" IsReadOnly="True">
+                <DataGridTextColumn Header="Point" Width="2*" Binding="{Binding OverallPoints}" IsReadOnly="True">
                     <DataGridTextColumn.HeaderStyle>
                         <Style TargetType="DataGridColumnHeader">
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>

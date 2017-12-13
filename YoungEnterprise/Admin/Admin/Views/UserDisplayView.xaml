@@ -64,7 +64,7 @@
             </Grid.ColumnDefinitions>
             
             <Button x:Name="addBruger" Content="Tilføj Bruger" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="7" Style="{StaticResource searchButton}" Click="AddBruger_Click"/>
-            <Button x:Name="deleteBruger" Content="Fjern Bruger" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="7" Style="{StaticResource searchButton}" Click="AddBruger_Click"/>
+            <Button x:Name="deleteBruger" Content="Fjern Bruger" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="7" Style="{StaticResource searchButton}" Click="deleteBruger_Click"/>
         </Grid>
     </Grid>
 </UserControl>

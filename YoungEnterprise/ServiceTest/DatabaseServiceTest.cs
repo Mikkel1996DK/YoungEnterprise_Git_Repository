@@ -96,7 +96,8 @@ namespace ServiceTest
         {
             var eventID = service.CreateEvent(DateTime.Now);
             var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
-            service.CreateTeam("TestTeam", school.FldSchoolId, "Trade and Skills");
+            byte[] report = Encoding.ASCII.GetBytes("Hello this is a test report");
+            service.CreateTeam("TestTeam", school.FldSchoolId, "Trade and Skills", report);
             Assert.AreEqual(1, service.GetAllTeams().Count());
         }
 
@@ -119,8 +120,8 @@ namespace ServiceTest
             var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
 
             // Teams 
-            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills");
-            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills");
+            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills", new byte[10]);
+            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills", new byte[10]);
 
             // Questions (already setup)
             var questions = service.GetAllQuestions();
@@ -187,8 +188,8 @@ namespace ServiceTest
             var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
 
             // Teams 
-            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills");
-            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills");
+            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills", new byte[10]);
+            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills", new byte[10]);
             // Questions (already setup)
             var questions = service.GetAllQuestions();
             var question1 = questions[0];
@@ -229,8 +230,8 @@ namespace ServiceTest
             var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
 
             // Teams 
-            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills");
-            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills");
+            service.CreateTeam("EasyOn", school.FldSchoolId, "Trade and Skills", new byte[10]);
+            service.CreateTeam("Two", school.FldSchoolId, "Trade and Skills", new byte[10]);
             // Questions (already setup)
             var questions = service.GetAllQuestions();
             var question1 = questions[0];

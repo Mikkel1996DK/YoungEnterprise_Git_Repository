@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Admin.ViewModels;
 
 namespace Admin.Views
 {
@@ -20,10 +21,18 @@ namespace Admin.Views
     /// </summary>
     public partial class ResultView : UserControl
     {
-        // hello
+        private ResultViewModel viewModel = new ResultViewModel();
         public ResultView()
         {
             InitializeComponent();
+            DataContext = viewModel;
+        }
+
+
+
+        private void categoryCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            viewModel.ChangeSelection((categoryCombo.SelectedValue as ComboBoxItem).Content.ToString());
         }
     }
 }

@@ -45,5 +45,10 @@ namespace Admin.Views
             InviteUserView iuv = new InviteUserView();
             mw.ShiftUserControl(iuv);
         }
+
+        private void deleteBruger_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
