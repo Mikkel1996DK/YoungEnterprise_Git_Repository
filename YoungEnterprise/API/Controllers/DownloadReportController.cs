@@ -13,7 +13,7 @@ using System.Net.Http.Headers;
 
 namespace API.Controllers
 {
-    [Produces("application/json")]
+    [Produces("application/pdf")]
     [Route("api/DownloadReport")]
     public class DownloadReportController : Controller
     {
@@ -30,8 +30,6 @@ namespace API.Controllers
         {
             Console.WriteLine("______________________________TEAM NAME: " + name.TeamName);
             TblTeam team = dbService.GetSpecificTeam(name.TeamName);
-
-
 
             return File(team.FldReport, "application/pdf");
         }

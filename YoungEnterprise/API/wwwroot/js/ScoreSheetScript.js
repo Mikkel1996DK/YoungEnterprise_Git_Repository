@@ -9,6 +9,15 @@
     var teamNameText = localStorage.getItem("teamName");
     var userName = localStorage.getItem("userName");
 
+    $(function () {
+        //var btn = document.getElementById('reportButton');
+        if (localStorage.getItem("category") === 'Report') {
+            document.getElementById("reportButton").style.display = "block";
+        } else {
+            document.getElementById("reportButton").style.display = "none";
+        }
+    });
+
     // Changes the header team name to include the teamname for chosen team
     $(function () {
         document.getElementById('teamNameField').innerHTML = "Team Name: " + teamNameText;
@@ -53,24 +62,19 @@
     $('#reportButton').click(function () {
         var name = localStorage.getItem("teamName");
 
-        alert("LUL");
             $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/DownloadReport',
+            xhrFields: {
+                responseType: 'blob'
+            },
             data: { TeamName: name },
-            success: function (data) {
-                alert(data);
+            success: function (blob) {
 
-                /*var hiddenElement = document.createElement('a');*/
-
-                downloadObjectAsPdf(data, "report");
-
-                /*hiddenElement.href = 'data:attachment/text,' + encodeURI(data.toString());
-                hiddenElement.target = '_blank';
-                hiddenElement.download = 'test.txt';
-                hiddenElement.click();*/
-
-
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'rapport.pdf';
+                link.click();
             },
             error: function (data) {
                 console.log(data.statusCode);
@@ -81,14 +85,6 @@
 
     });
 
-    function downloadObjectAsPdf(exportObj, exportName) {
-        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
-        var downloadAnchorNode = document.createElement('a');
-        downloadAnchorNode.setAttribute("href", dataStr);
-        downloadAnchorNode.setAttribute("download", exportName + ".json");
-        downloadAnchorNode.click();
-        downloadAnchorNode.remove();
-    }
 
 
 
