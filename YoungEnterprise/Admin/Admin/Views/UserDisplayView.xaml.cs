@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using YoungEnterprise_API.Models;
+using Service.Models;
 
 namespace Admin.Views
 {
@@ -48,7 +49,15 @@ namespace Admin.Views
 
         private void deleteBruger_Click(object sender, RoutedEventArgs e)
         {
+            string text = "Er du sikker på at du vil fjerne brugeren?";
+            MessageBoxResult result = MessageBox.Show(text, "Advarsel!", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
+            if (result == MessageBoxResult.Yes)
+            {
+                User user = (User)allUsersDataGrid.SelectedItem;
+                viewModel.DeleteUser(user);
+                MessageBox.Show("Bruger fjernet!");
+            }
         }
     }
 }
