@@ -35,12 +35,12 @@ namespace Admin.Views
 
         }
 
-        private void userCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void UserCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             viewModel.ChangeSelection((userCombo.SelectedValue as ComboBoxItem).Content.ToString());
         }
 
-        private void addBruger_Click(object sender, RoutedEventArgs e)
+        private void AddBruger_Click(object sender, RoutedEventArgs e)
         {
             InviteUserView iuv = new InviteUserView();
             mw.ShiftUserControl(iuv);
