@@ -60,7 +60,17 @@
             data: { TeamName: name },
             success: function (data) {
                 alert(data);
-                
+
+                /*var hiddenElement = document.createElement('a');*/
+
+                downloadObjectAsPdf(data, "report");
+
+                /*hiddenElement.href = 'data:attachment/text,' + encodeURI(data.toString());
+                hiddenElement.target = '_blank';
+                hiddenElement.download = 'test.txt';
+                hiddenElement.click();*/
+
+
             },
             error: function (data) {
                 console.log(data.statusCode);
@@ -70,6 +80,15 @@
 
 
     });
+
+    function downloadObjectAsPdf(exportObj, exportName) {
+        var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObj));
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", exportName + ".json");
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+    }
 
 
 

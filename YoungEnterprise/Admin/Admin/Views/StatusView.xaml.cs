@@ -20,6 +20,7 @@ namespace Admin.Views
     /// </summary>
     public partial class StatusView : UserControl
     {
+        // hello
         public StatusView()
         {
             InitializeComponent();
