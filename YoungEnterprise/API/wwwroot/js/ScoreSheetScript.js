@@ -73,7 +73,7 @@
 
                 var link = document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
-                link.download = 'rapport.pdf';
+                link.download = name + '-rapport.pdf';
                 link.click();
             },
             error: function (data) {
