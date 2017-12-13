@@ -17,7 +17,7 @@ namespace Service
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -30,6 +30,14 @@ namespace Service
             {
                 try
                 {
+                    foreach (TblJudge j in GetAllJudges())
+                    {
+                        if (judgeUsername.Equals(j.FldJudgeUsername))
+                        {
+                            throw new Exception();
+                        }
+                    }
+
                     TblJudge judge = new TblJudge()
                     {
                         FldEventId = eventID,
@@ -43,6 +51,7 @@ namespace Service
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.InnerException.Message);
+                    throw ex;
                 }
             }
         }
@@ -130,6 +139,14 @@ namespace Service
             {
                 try
                 {
+
+                    foreach (TblSchool s in GetAllSchools())
+                    {
+                        if (schoolUsername.Equals(s.FldSchoolUsername))
+                        {
+                            throw new Exception();
+                        }
+                    }
 
                     TblSchool school = new TblSchool()
                     {

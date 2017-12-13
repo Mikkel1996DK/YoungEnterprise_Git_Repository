@@ -55,16 +55,31 @@ namespace ServiceTest
         }
 
         [TestMethod]
+        public void CreateSchoolDuplicateTest()
+        {
+            var eventID = service.CreateEvent(DateTime.Now);
+            service.CreateSchool(eventID, "louisebc@gmail.com", userService.HashPassword("louisebc@gmail.com", "12345"), "Louise");
+            try
+            {
+                service.CreateSchool(eventID, "louisebc@gmail.com", userService.HashPassword("louisebc@gmail.com", "12345"), "Louise");
+                Assert.Fail("Expected exception - dublicate judge");
+            }
+            catch (AssertFailedException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                // ok
+            }
+        }
+
+        [TestMethod]
         public void CreateSchoolTest()
         {
             var eventID = service.CreateEvent(DateTime.Now);
             service.CreateSchool(eventID, "louisebc@gmail.com", userService.HashPassword("louisebc@gmail.com", "12345"), "Louise");
             Assert.AreEqual(1, service.GetAllSchools().Count());
-        }
-        [TestMethod]
-        public void CreateSchoolDuplicateTest()
-        {
-            Assert.Fail("TODO");
         }
 
         [TestMethod]
