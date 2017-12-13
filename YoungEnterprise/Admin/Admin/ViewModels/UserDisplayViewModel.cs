@@ -52,13 +52,6 @@ namespace Admin.ViewModels
             else if (selection == "Alle") ShowAll();
         }
 
-        // Returns amount of users currently selected
-        // Apparently not working
-        public int GetAmountOfUsers ()
-        {
-            return users.Count();
-        }
-
         private void ShowAll ()
         {
             users.Clear();
