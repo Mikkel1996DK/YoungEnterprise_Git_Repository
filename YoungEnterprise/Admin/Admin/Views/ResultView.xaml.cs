@@ -20,6 +20,7 @@ namespace Admin.Views
     /// </summary>
     public partial class ResultView : UserControl
     {
+        // hello
         public ResultView()
         {
             InitializeComponent();

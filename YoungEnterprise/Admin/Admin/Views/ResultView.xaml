@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:Admin.Views"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800">
+    <!--hello-->
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.5*"/>
