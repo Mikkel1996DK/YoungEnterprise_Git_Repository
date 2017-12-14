@@ -46,7 +46,7 @@
                     localStorage.setItem("userName", usernameText);
 
                 } else {
-                    alert('Could not login!! :D');
+                    alert('Could not login!');
                 }
             },
             error: function (data) {
