@@ -266,5 +266,35 @@ namespace ServiceTest
             Assert.AreEqual(2, teamResults.Count);
             Assert.AreEqual(2*question1.FldQuestionModifier, teamResults[0].OverallPoints);
         }
+
+        [TestMethod]
+        public void DeleteJudgeTest()
+        {
+            var eventID = service.CreateEvent(DateTime.Now);
+
+            // Judges
+            service.CreateJudge(eventID, "a@gmail.com", userService.HashPassword("a@gmail.com", "12345"), "A");
+            service.CreateJudge(eventID, "b@gmail.com", userService.HashPassword("b@gmail.com", "12345"), "B");
+
+            List<TblJudge> allJudges = service.GetAllJudges();
+            service.DeleteJudge(allJudges[0]);
+
+            // Assertion
+            Assert.AreEqual(1, service.GetAllJudges().Count);
+        }
+
+        [TestMethod]
+        public void DeleteSchoolTest()
+        {
+            var eventID = service.CreateEvent(DateTime.Now);
+
+            // School
+            var school = service.CreateSchool(eventID, "s@gmail.com", userService.HashPassword("s@gmail.com", "12345"), "Business College Syd");
+            List<TblSchool> allSchools = service.GetAllSchools();
+            service.DeleteSchool(allSchools[0]);
+
+            // Assertion
+            Assert.AreEqual(0, service.GetAllSchools().Count);
+        }
     }
 }

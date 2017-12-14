@@ -17,7 +17,7 @@ namespace Service
         {
             //DESKTOP-ACNIRC0 Louise
             //DESKTOP-6D9EMB1 Mikkel
-            var connection = @"Server=DESKTOP-6D9EMB1;Database=DB_YoungEnterprise;Trusted_Connection=True;";
+            var connection = @"Server=DESKTOP-ACNIRC0;Database=DB_YoungEnterprise;Trusted_Connection=True;";
             var optionsBuilder = new DbContextOptionsBuilder<DB_YoungEnterpriseContext>();
             optionsBuilder.UseSqlServer(connection);
             DB_YoungEnterpriseContext context = new DB_YoungEnterpriseContext(optionsBuilder.Options);
@@ -652,12 +652,52 @@ namespace Service
                 }
                 catch (Exception e)
                 {
-                    //Console.WriteLine(e.InnerException.Message);
                     throw e;
                 }
             }
         }
 
+        public TblJudge FindJudgeFromUser(User user)
+        {
+            return GetAllJudges().FirstOrDefault(n => n.FldJudgeUsername.Equals(user.UserName));
+        }
+
+        public void DeleteJudge(TblJudge judge)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    databaseContext.TblJudge.Remove(judge);
+                    databaseContext.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+
+        public TblSchool FindSchoolFromUser(User user)
+        {
+            return GetAllSchools().FirstOrDefault(n => n.FldSchoolUsername.Equals(user.UserName));
+        }
+
+        public void DeleteSchool(TblSchool school)
+        {
+            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
+            {
+                try
+                {
+                    databaseContext.TblSchool.Remove(school);
+                    databaseContext.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
     }
 }
 

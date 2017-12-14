@@ -65,7 +65,14 @@ namespace Admin.ViewModels
 
         public void DeleteUser(User user)
         {
-           
+            if (user.isSchool)
+            {
+                dbService.DeleteSchool(dbService.FindSchoolFromUser(user));
+            }
+            else
+            {
+                dbService.DeleteJudge(dbService.FindJudgeFromUser(user));
+            }
         }
 
         private void ShowSchools ()
