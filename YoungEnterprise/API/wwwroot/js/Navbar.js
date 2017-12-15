@@ -27,10 +27,10 @@
 
 
                     localStorage.setItem("userName", usernameText);
-                    alert('Logged in!! :D');
+                    alert('Logged in!');
 
                 } else {
-                    alert('Could not login!! :D');
+                    alert('Could not login!');
                 }
             },
             error: function (data) {

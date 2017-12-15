@@ -70,7 +70,7 @@
 
                     if (data[i].fldSchoolUsername == localStorage.getItem('userName'))/*'administrator@bcs.dk'*/ {
                         var identifier = data[i].fldSchoolId;
-                        alert(identifier);
+
                         GetTeams(identifier);
 
                     }

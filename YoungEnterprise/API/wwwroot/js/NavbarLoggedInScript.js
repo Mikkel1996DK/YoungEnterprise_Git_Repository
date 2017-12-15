@@ -10,7 +10,6 @@
     });
 
     $('#homeMenu').click(function () {
-        alert(localStorage.getItem("isSchool"));
         if (localStorage.getItem("isSchool") === 'true') {
             window.location.href = "http://localhost:53112/SchoolStartPage.html";
         }

@@ -13,7 +13,7 @@
         $.ajax({
             type: 'GET',
             url: 'http://localhost:53112/api/TblSchools',
-            contentType: 'application/json',
+            contentType: 'application/json', 
             success: function (data) {
                 var identifier;
 
