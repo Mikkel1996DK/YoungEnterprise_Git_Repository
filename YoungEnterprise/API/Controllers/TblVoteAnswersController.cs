@@ -21,7 +21,7 @@ namespace YoungEnterprise_API.Controllers
 
         // GET: api/TblVoteAnswers
         [HttpGet]
-        public IEnumerable<Models.TblVoteAnswer> GetTblVoteAnswer()
+        public IEnumerable<TblVoteAnswer> GetTblVoteAnswer()
         {
             return _context.TblVoteAnswer;
         }
@@ -47,7 +47,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblVoteAnswers/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblVoteAnswer([FromRoute] int id, [FromBody] Models.TblVoteAnswer tblVoteAnswer)
+        public async Task<IActionResult> PutTblVoteAnswer([FromRoute] int id, [FromBody] TblVoteAnswer tblVoteAnswer)
         {
             if (!ModelState.IsValid)
             {
@@ -80,23 +80,6 @@ namespace YoungEnterprise_API.Controllers
             return NoContent();
         }
 
-        /*
-        // POST: api/TblVoteAnswers
-        [HttpPost]
-        public async Task<IActionResult> PostTblVoteAnswer([FromBody] Models.TblVoteAnswer tblVoteAnswer)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.TblVoteAnswer.Add(tblVoteAnswer);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetTblVoteAnswer", new { id = tblVoteAnswer.FldVoteAnswerId }, tblVoteAnswer);
-        }
-        */
-
         // POST: api/TblVoteAnswers
         [HttpPost]
         //[Route("QuestionsAndVotes")]
@@ -107,9 +90,8 @@ namespace YoungEnterprise_API.Controllers
                 return BadRequest(ModelState);
             }
 
-            UserService userService = new UserService();
-            int judgePairID = userService.GetJudgePairID(questionAndVotesModel.JudgeUsername);
             DatabaseService dbService = new DatabaseService();
+            int judgePairID = dbService.GetJudgePairID(questionAndVotesModel.JudgeUsername);
             return CreatedAtAction("GetQuestionsAndVotes", dbService.FindQuestionsAndVotes(questionAndVotesModel.Category, questionAndVotesModel.Subject, judgePairID, questionAndVotesModel.TeamName));
         }
 

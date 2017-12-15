@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Service.Models;
 using Service;
 
@@ -15,10 +14,6 @@ namespace API.Controllers
         public AuthenticationModel ClientLogin(UserPassModel loginModel)
         {
             UserService service = new UserService();
-
-            //Test User:
-            //usr: mikkelljungberg@gmail.com
-            //pw: ls99cTO9
             AuthenticationModel authModel = new AuthenticationModel();
 
             authModel.IsSchool = false;

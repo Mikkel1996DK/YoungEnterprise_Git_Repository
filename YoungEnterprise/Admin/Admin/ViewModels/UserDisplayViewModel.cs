@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Service;
 using Service.Models;
 
@@ -14,29 +11,24 @@ namespace Admin.ViewModels
     {
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        private DatabaseService dbService = null;
+        private DatabaseService dbService = new DatabaseService();
 
-        private ObservableCollection<Service.Models.User> users = new ObservableCollection<Service.Models.User>();
-        public ObservableCollection<Service.Models.User> Users
+        private ObservableCollection<User> users = new ObservableCollection<User>();
+        public ObservableCollection<User> Users
         {
             get { return users; }
             set { users = value; }
         }
 
-
         public UserDisplayViewModel()
         {
-            dbService = new DatabaseService();
-
             ShowAll();
-
-            //users = ConvertToObservableCollection(dbService.GetUsers());
         }
 
-        private ObservableCollection<Service.Models.User> ConvertToObservableCollection (IEnumerable<Service.Models.User> list)
+        private ObservableCollection<User> ConvertToObservableCollection (IEnumerable<User> list)
         {
-            ObservableCollection<Service.Models.User> collection = new ObservableCollection<Service.Models.User>();
-            foreach(Service.Models.User listItem in list)
+            ObservableCollection<User> collection = new ObservableCollection<User>();
+            foreach(User listItem in list)
             {
                 collection.Add(listItem);
             }
@@ -57,7 +49,7 @@ namespace Admin.ViewModels
         {
             users.Clear();
 
-            foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers()))
+            foreach (User user in ConvertToObservableCollection(dbService.GetUsers()))
             {
                 users.Add(user);
             }
@@ -79,7 +71,7 @@ namespace Admin.ViewModels
         {
             users.Clear();
 
-            foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == true)))
+            foreach (User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == true)))
             {
                 users.Add(user);
             }
@@ -89,7 +81,7 @@ namespace Admin.ViewModels
         {
             users.Clear();
 
-            foreach (Service.Models.User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == false)))
+            foreach (User user in ConvertToObservableCollection(dbService.GetUsers().FindAll(n => n.isSchool == false)))
             {
                 users.Add(user);
             }

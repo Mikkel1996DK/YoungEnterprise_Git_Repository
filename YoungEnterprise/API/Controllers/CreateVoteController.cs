@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 using Service.Models;
-using YoungEnterprise_API.Models;
 
 namespace API.Controllers
 {

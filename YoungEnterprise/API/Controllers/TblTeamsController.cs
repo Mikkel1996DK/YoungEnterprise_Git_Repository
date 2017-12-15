@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Cors;
 using Service;
+using Service.Models;
 
 namespace YoungEnterprise_API.Controllers
 {
@@ -22,17 +21,9 @@ namespace YoungEnterprise_API.Controllers
             _context = context; // todo remove when using services
             voteService = new VoteService(_context);
         }
-        /*
-        // GET: api/TblTeams
+      
         [HttpGet]
-        public IEnumerable<TblTeam> GetTblTeam()
-        {
-            return _context.TblTeam;
-        }
-        */
-        // GET: api/TblTeams?NoVotesFromPair=42
-        [HttpGet]
-        public IEnumerable<Models.TblTeam> GetTblTeam(int NoVotesFromPair = -1)
+        public IEnumerable<TblTeam> GetTblTeam(int NoVotesFromPair = -1)
         {
             if (NoVotesFromPair == -1)
             {
@@ -66,7 +57,7 @@ namespace YoungEnterprise_API.Controllers
 
         // PUT: api/TblTeams/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTblTeam([FromRoute] string id, [FromBody] Models.TblTeam tblTeam)
+        public async Task<IActionResult> PutTblTeam([FromRoute] string id, [FromBody] TblTeam tblTeam)
         {
             if (!ModelState.IsValid)
             {
@@ -101,7 +92,7 @@ namespace YoungEnterprise_API.Controllers
 
         // POST: api/TblTeams
         [HttpPost]
-        public async Task<IActionResult> PostTblTeam(Models.TblTeam tblTeam)
+        public async Task<IActionResult> PostTblTeam(TblTeam tblTeam)
         {
             if (!ModelState.IsValid)
             {

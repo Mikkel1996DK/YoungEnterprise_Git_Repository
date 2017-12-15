@@ -4,11 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using YoungEnterprise_API.Models;
 
 namespace Admin.ViewModels
 {
@@ -17,8 +13,7 @@ namespace Admin.ViewModels
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         private DatabaseService dbService = new DatabaseService();
-        private UserService userService = new UserService();
-
+        
         private ObservableCollection<DisplayJudgePair> judgePairs = new ObservableCollection<DisplayJudgePair>();
         public ObservableCollection<DisplayJudgePair> JudgePairs
         {
@@ -34,11 +29,11 @@ namespace Admin.ViewModels
 
         // Used for the "Lav Dommerpar" button.
         // 1: Shift to judge datagrid
-        // 2: Use the method in Userservice.
+        // 2: Use the method in DBservice.
         // 3: Update datagrid
         public void CreateJudgePairs ()
         {
-            userService.CreateJudgePairs();
+            dbService.CreateJudgePairs();
 
         }
 
