@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Mail;
-using System.Security.Cryptography;
 
 namespace Service
 {

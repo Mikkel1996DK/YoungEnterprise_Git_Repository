@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Service.Models
+﻿namespace Service.Models
 {
     public class QuestionAndVotesModel
     {

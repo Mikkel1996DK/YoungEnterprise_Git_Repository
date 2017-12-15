@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace YoungEnterprise_API.Models
+namespace Service.Models
 {
     public partial class TblSchool
     {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Security.Cryptography;
-using YoungEnterprise_API.Models;
+﻿using YoungEnterprise_API.Models;
 using Microsoft.EntityFrameworkCore;
+using Service.Models;
 
 namespace Service
 {

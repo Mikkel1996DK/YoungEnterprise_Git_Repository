@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +17,6 @@ namespace API.Controllers
 
             IFormCollection formCollection = Request.Form;
             
-
             string teamName = null;
             string teamSubjectCategory = null;
             string schoolID = null;
@@ -65,11 +61,5 @@ namespace API.Controllers
                 return Json("Team Creation Failed! Contact Administrator");
             }
         }
-
-
-
-
-
-
     }
 }

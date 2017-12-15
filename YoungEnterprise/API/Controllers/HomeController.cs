@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Service;
 using Microsoft.AspNetCore.Cors;
+using Service.Models;
 
 namespace YoungEnterprise_API.Controllers
 {
@@ -41,7 +41,7 @@ namespace YoungEnterprise_API.Controllers
 
         public IActionResult Error()
         {
-            return View(new Models.ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

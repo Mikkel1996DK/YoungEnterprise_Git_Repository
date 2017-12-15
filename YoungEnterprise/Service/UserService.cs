@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
-using System.Net;
-using System.IO;
 using System.Linq;
-using YoungEnterprise_API.Models;
+using Service.Models;
 
 namespace Service
 {
@@ -80,133 +78,6 @@ namespace Service
             }
 
             return false;
-        }
-
-
-        // Make test for this.
-        public void CreateJudgePairs ()
-        {
-            DatabaseService dbService = new DatabaseService();
-
-            List<TblJudge> judgeList = dbService.GetAllJudges();
-
-            // We've been told that there will always be 24 judges.
-            // Therefore the method should just pair up the judges as long as there's two judges left.
-            // If there's an excess judge, that judge should not be included.
-            // Then trimming the amount of judgepairs down to 12.
-
-            List<TblJudge> judges = new List<TblJudge>();
-
-            // This trims the amount of judges to be an equal number.
-            if (judgeList.Count() % 2 != 0)
-            {
-                for (int i = 0; i < judgeList.Count() - 1; i++)
-                {
-                    judges.Add(judgeList[i]);
-                }
-            } else
-            {
-                judges = judgeList;
-            }
-            
-            // Make judge pairs
-            List<TblJudgePair> judgePairs = new List<TblJudgePair>();
-            for (int i = 0; i < judges.Count() - 1; i++)
-            {
-                TblJudgePair judgePair = new TblJudgePair();
-
-                judgePair.FldJudgeIda = judges[i].FldJudgeId;
-                //judgePair.FldJudgeIdaNavigation = judges[i];
-
-                judgePair.FldJudgeIdb = judges[i + 1].FldJudgeId;
-                //judgePair.FldJudgeIdbNavigation = judges[i + 1];
-
-                i++;
-
-                judgePairs.Add(judgePair);
-            }
-
-            // Add judges to the database.
-            foreach (TblJudgePair pair in judgePairs)
-            {
-                dbService.CreateJudgePair(pair.FldJudgeIda, pair.FldJudgeIdb);
-            }
-
-            dbService = null;
-        }
-
-        public int GetSchoolID(string schoolUsername)
-        {
-            DatabaseService dbService = new DatabaseService();
-            List<TblSchool> schools = dbService.GetAllSchools();
-            dbService = null;
-
-            TblSchool selectedSchool = new TblSchool();
-            foreach (TblSchool school in schools)
-            {
-                if (school.FldSchoolUsername.Equals(schoolUsername))
-                {
-                    selectedSchool = school;
-                    return selectedSchool.FldSchoolId;
-                }
-            }
-
-            return 0;
-        }
-    
-
-        public int GetJudgePairID (string judgeUsername)
-        {
-            DatabaseService dbService = new DatabaseService();
-            List<TblJudge> judges = dbService.GetAllJudges();
-            List<TblJudgePair> judgePairs = dbService.GetAllJudgePairs();
-            dbService = null;
-
-            TblJudge selectedJudge = new TblJudge();
-            foreach (TblJudge judge in judges)
-            {
-                if (judge.FldJudgeUsername.Equals(judgeUsername))
-                {
-                    selectedJudge = judge;
-                    break;
-                }
-            }
-
-            TblJudgePair selectedJudgePair = null;
-            foreach (TblJudgePair judgePair in judgePairs)
-            {
-                if (judgePair.FldJudgeIda == selectedJudge.FldJudgeId || judgePair.FldJudgeIdb == selectedJudge.FldJudgeId)
-                {
-                    selectedJudgePair = judgePair;
-                    break;
-                }
-            }
-
-            if (selectedJudgePair == null)
-            {
-                return 0;
-            } else
-            {
-                return selectedJudgePair.FldJudgePairId;
-            }
-        }
-
-        public int GetQuestionID(string questionText)
-        {
-            DatabaseService dbService = new DatabaseService();
-            List<TblQuestion> questions = dbService.GetAllQuestions();
-            dbService = null;
-
-            TblQuestion selectedQuestion = new TblQuestion();
-            foreach (TblQuestion question in questions)
-            {
-                if (question.FldQuestionText.Equals(questionText))
-                {
-                    selectedQuestion = question;
-                    break;
-                }
-            }
-            return selectedQuestion.FldQuestionId;
         }
     }
 }

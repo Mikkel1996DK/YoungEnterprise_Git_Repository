@@ -9,10 +9,7 @@ namespace Service
 {
     public class DatabaseService
     {
-        public DatabaseService()
-        {
-        }
-
+      
         public DB_YoungEnterpriseContext GetConnection()
         {
             //DESKTOP-ACNIRC0 Louise
@@ -232,34 +229,6 @@ namespace Service
                 {
                     //Console.WriteLine(ex.InnerException.Message);
                     throw ex;
-                }
-            }
-        }
-
-        public List<TblTeam> GetTeamsForSchool(int schoolID)
-        {
-            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
-            {
-                List<TblTeam> teams = new List<TblTeam>();
-
-                foreach (TblTeam team in databaseContext.TblTeam)
-                {
-                    Console.WriteLine("__________________________________________________________" + team.FldTeamName);
-                }
-
-                try
-                {
-                    foreach (TblTeam team in databaseContext.TblTeam.Where(q => q.FldSchoolId == schoolID))
-                    {
-                        teams.Add(team);
-                    }
-                    return teams;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-
-                    return teams;
                 }
             }
         }
@@ -485,8 +454,8 @@ namespace Service
                 try
                 {
                     var service = new UserService();
-                    int questionID = service.GetQuestionID(createVoteModel.FldQuestiontext);
-                    int judgePairID = service.GetJudgePairID(createVoteModel.FldJudgeUsername);
+                    int questionID = GetQuestionID(createVoteModel.FldQuestiontext);
+                    int judgePairID = GetJudgePairID(createVoteModel.FldJudgeUsername);
                     // todo validate above + FldTeamName
 
                     // New Vote and get voteID returned
@@ -696,6 +665,117 @@ namespace Service
                 {
                     throw e;
                 }
+            }
+        }
+
+        public int GetQuestionID(string questionText)
+        {
+            List<TblQuestion> questions = GetAllQuestions();
+            
+            TblQuestion selectedQuestion = new TblQuestion();
+            foreach (TblQuestion question in questions)
+            {
+                if (question.FldQuestionText.Equals(questionText))
+                {
+                    selectedQuestion = question;
+                    break;
+                }
+            }
+            return selectedQuestion.FldQuestionId;
+        }
+
+        public void CreateJudgePairs()
+        {
+            List<TblJudge> judgeList = GetAllJudges();
+
+            // There will always be 24 judges.
+            // Therefore the method should just pair up the judges as long as there's two judges left.
+            // If there's an excess judge, that judge should not be included.
+            // Then trimming the amount of judgepairs down to 12.
+
+            List<TblJudge> judges = new List<TblJudge>();
+
+            // This trims the amount of judges to be an equal number.
+            if (judgeList.Count() % 2 != 0)
+            {
+                for (int i = 0; i < judgeList.Count() - 1; i++)
+                {
+                    judges.Add(judgeList[i]);
+                }
+            }
+            else
+            {
+                judges = judgeList;
+            }
+
+            // Make judge pairs
+            List<TblJudgePair> judgePairs = new List<TblJudgePair>();
+            for (int i = 0; i < judges.Count() - 1; i++)
+            {
+                TblJudgePair judgePair = new TblJudgePair();
+                judgePair.FldJudgeIda = judges[i].FldJudgeId;
+                judgePair.FldJudgeIdb = judges[i + 1].FldJudgeId;
+                i++;
+
+                judgePairs.Add(judgePair);
+            }
+
+            // Add judges to the database.
+            foreach (TblJudgePair pair in judgePairs)
+            {
+                CreateJudgePair(pair.FldJudgeIda, pair.FldJudgeIdb);
+            }
+        }
+
+        public int GetSchoolID(string schoolUsername)
+        {
+            List<TblSchool> schools = GetAllSchools();
+
+            TblSchool selectedSchool = new TblSchool();
+            foreach (TblSchool school in schools)
+            {
+                if (school.FldSchoolUsername.Equals(schoolUsername))
+                {
+                    selectedSchool = school;
+                    return selectedSchool.FldSchoolId;
+                }
+            }
+
+            return 0;
+        }
+
+        public int GetJudgePairID(string judgeUsername)
+        {
+            List<TblJudge> judges = GetAllJudges();
+            List<TblJudgePair> judgePairs = GetAllJudgePairs();
+            
+            TblJudge selectedJudge = new TblJudge();
+            foreach (TblJudge judge in judges)
+            {
+                if (judge.FldJudgeUsername.Equals(judgeUsername))
+                {
+                    selectedJudge = judge;
+                    break;
+                }
+            }
+
+            TblJudgePair selectedJudgePair = null;
+            foreach (TblJudgePair judgePair in judgePairs)
+            {
+                if (judgePair.FldJudgeIda == selectedJudge.FldJudgeId || judgePair.FldJudgeIdb == selectedJudge.FldJudgeId)
+                {
+                    selectedJudgePair = judgePair;
+                    break;
+                }
+            }
+
+            if (selectedJudgePair == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return selectedJudgePair.FldJudgePairId;
             }
         }
     }

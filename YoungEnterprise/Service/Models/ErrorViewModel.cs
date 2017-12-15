@@ -1,6 +1,4 @@
-using System;
-
-namespace YoungEnterprise_API.Models
+namespace Service.Models
 {
     public class ErrorViewModel
     {
