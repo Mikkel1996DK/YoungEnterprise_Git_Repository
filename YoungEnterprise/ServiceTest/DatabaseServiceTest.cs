@@ -92,7 +92,7 @@ namespace ServiceTest
             service.CreateJudge(eventID, "b@gmail.com", userService.HashPassword("b@gmail.com", "12345"), "B");
             service.CreateJudge(eventID, "c@gmail.com", userService.HashPassword("c@gmail.com", "12345"), "C");
 
-            userService.CreateJudgePairs();
+            service.CreateJudgePairs();
 
             var judgePairs = service.GetAllJudgePairs();
             Assert.AreEqual(2, judgePairs.Count());
@@ -125,7 +125,7 @@ namespace ServiceTest
             service.CreateJudge(eventID, "b@gmail.com", userService.HashPassword("b@gmail.com", "12345"), "B");
             service.CreateJudge(eventID, "c@gmail.com", userService.HashPassword("c@gmail.com", "12345"), "C");
             service.CreateJudge(eventID, "d@gmail.com", userService.HashPassword("d@gmail.com", "12345"), "D");
-            userService.CreateJudgePairs();
+            service.CreateJudgePairs();
             var judgePairs = service.GetAllJudgePairs();
             Assert.AreEqual(2, judgePairs.Count());
             var pair1 = judgePairs[0];
@@ -193,7 +193,7 @@ namespace ServiceTest
             service.CreateJudge(eventID, "b@gmail.com", userService.HashPassword("b@gmail.com", "12345"), "B");
             service.CreateJudge(eventID, "c@gmail.com", userService.HashPassword("c@gmail.com", "12345"), "C");
             service.CreateJudge(eventID, "d@gmail.com", userService.HashPassword("d@gmail.com", "12345"), "D");
-            userService.CreateJudgePairs();
+            service.CreateJudgePairs();
             var judgePairs = service.GetAllJudgePairs();
             Assert.AreEqual(2, judgePairs.Count());
             var pair1 = judgePairs[0];
@@ -235,7 +235,7 @@ namespace ServiceTest
             service.CreateJudge(eventID, "b@gmail.com", userService.HashPassword("b@gmail.com", "12345"), "B");
             service.CreateJudge(eventID, "c@gmail.com", userService.HashPassword("c@gmail.com", "12345"), "C");
             service.CreateJudge(eventID, "d@gmail.com", userService.HashPassword("d@gmail.com", "12345"), "D");
-            userService.CreateJudgePairs();
+            service.CreateJudgePairs();
             var judgePairs = service.GetAllJudgePairs();
             Assert.AreEqual(2, judgePairs.Count());
             var pair1 = judgePairs[0];
