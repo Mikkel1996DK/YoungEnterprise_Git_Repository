@@ -571,30 +571,6 @@ namespace Service
             }
         }
 
-        public void DeleteAllRecords()
-        {
-            using (DB_YoungEnterpriseContext databaseContext = GetConnection())
-            {
-                try
-                {
-                    databaseContext.TblVoteAnswer.RemoveRange(databaseContext.TblVoteAnswer);
-                    databaseContext.TblVote.RemoveRange(databaseContext.TblVote);
-                    databaseContext.TblQuestion.RemoveRange(databaseContext.TblQuestion);
-                    databaseContext.TblJudgePair.RemoveRange(databaseContext.TblJudgePair);
-                    databaseContext.TblJudge.RemoveRange(databaseContext.TblJudge);
-                    databaseContext.TblTeam.RemoveRange(databaseContext.TblTeam);
-                    databaseContext.TblSchool.RemoveRange(databaseContext.TblSchool);
-                    databaseContext.TblEvent.RemoveRange(databaseContext.TblEvent);
-                    databaseContext.SaveChanges();
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                }
-            }
-        }
-
         private void DeleteAllExceptQuestions(DB_YoungEnterpriseContext databaseContext)
         {
             databaseContext.TblVoteAnswer.RemoveRange(databaseContext.TblVoteAnswer);

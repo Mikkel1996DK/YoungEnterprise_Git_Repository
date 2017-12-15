@@ -69,7 +69,6 @@ namespace Admin.ViewModels
 
             if (result == MessageBoxResult.Yes)
             {
-                dbService.DeleteAllRecords();
                 dbService.CreateEvent(dateTime);
                 MessageBox.Show("Ryddet database & nyt event oprettet d. " + dateTime.ToLongDateString(), "Succes!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
