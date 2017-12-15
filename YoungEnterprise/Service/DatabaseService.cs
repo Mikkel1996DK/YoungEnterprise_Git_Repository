@@ -35,6 +35,14 @@ namespace Service
                         }
                     }
 
+                    foreach (TblSchool s in GetAllSchools())
+                    {
+                        if (judgeUsername.Equals(s.FldSchoolUsername))
+                        {
+                            throw new Exception();
+                        }
+                    }
+
                     TblJudge judge = new TblJudge()
                     {
                         FldEventId = eventID,
@@ -140,6 +148,14 @@ namespace Service
                     foreach (TblSchool s in GetAllSchools())
                     {
                         if (schoolUsername.Equals(s.FldSchoolUsername))
+                        {
+                            throw new Exception();
+                        }
+                    }
+                    
+                    foreach (TblJudge j in GetAllJudges())
+                    {
+                        if (schoolName.Equals(j.FldJudgeUsername))
                         {
                             throw new Exception();
                         }
@@ -780,5 +796,3 @@ namespace Service
         }
     }
 }
-
-
