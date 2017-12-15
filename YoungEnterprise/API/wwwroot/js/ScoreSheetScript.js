@@ -80,27 +80,7 @@
                 console.log(data.statusCode);
             }
         });
-
-
-
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
 
 function SavePoints(points, questionText, questionModifier) {

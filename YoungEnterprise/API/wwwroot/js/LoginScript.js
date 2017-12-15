@@ -29,22 +29,12 @@
             success: function (data) {
                 if (JSON.stringify(data.authenticated) === 'true') {
                     if (JSON.stringify(data.isSchool) === 'true') {
-                        //  school login
-                        // School Test User (in Mikkels DB):
-                        // user: SchoolTest@gmail.com
-                        // pass: Vvj7kvPz
                         window.location.href = "http://localhost:53112/SchoolStartpage.html"
                     } else {
-                        // judge login
-                        // Judge Test User (in Mikkels DB):
-                        // user: JudgeTest@gmail.com
-                        // pass: WyclgMPj
                         window.location.href = "http://localhost:53112/JudgeStartPage.html"
                     }
 
-
                     localStorage.setItem("userName", usernameText);
-
                 } else {
                     alert('Could not login!');
                 }

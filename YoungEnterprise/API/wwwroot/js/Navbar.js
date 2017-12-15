@@ -18,16 +18,10 @@
                     if (JSON.stringify(data.isSchool) === 'true') {
                         // school login
                         alert("School logged in!");
-                        // School Test User (in Mikkels DB):
-                        // user: SchoolTest@gmail.com
-                        // pass: OM0KLjdn
                         window.location.href = "http://localhost:53112/SchoolStartpage.html"
                     } else {
                         // judge login
                         alert("Judge logged in!");
-                        // Judge Test User (in Mikkels DB):
-                        // user: JudgeTest@gmail.com
-                        // pass: TZuZzlCh
                         window.location.href = "http://localhost:53112/JudgeStartPage.html"
                     }
 
