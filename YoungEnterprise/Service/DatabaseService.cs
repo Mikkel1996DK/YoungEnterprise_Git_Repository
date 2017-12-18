@@ -21,7 +21,6 @@ namespace Service
             return context;
         }
 
-
         #region In this region: Service methods involving judges
         public void CreateJudge(int eventID, string judgeUsername, string judgePassword, string judgeName)
         {
