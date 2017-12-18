@@ -148,7 +148,6 @@ namespace ServiceTest
             {
                 FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
                 FldPoints = 10,
-                FldQuestionModifier = question1.FldQuestionModifier,  // todo remove
                 FldQuestiontext = question1.FldQuestionText,
                 FldTeamName = "EasyOn"
             };
@@ -158,7 +157,6 @@ namespace ServiceTest
             {
                 FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
                 FldPoints = 3,
-                FldQuestionModifier = question2.FldQuestionModifier,  // todo remove
                 FldQuestiontext = question2.FldQuestionText,
                 FldTeamName = "EasyOn"
             };
@@ -214,7 +212,6 @@ namespace ServiceTest
             {
                 FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
                 FldPoints = 2,
-                FldQuestionModifier = question1.FldQuestionModifier,
                 FldQuestiontext = question1.FldQuestionText,
                 FldTeamName = "EasyOn"
             };
@@ -256,7 +253,6 @@ namespace ServiceTest
             {
                 FldJudgeUsername = service.GetJudgeByID(pair1.FldJudgeIda).FldJudgeUsername,
                 FldPoints = 2,
-                FldQuestionModifier = question1.FldQuestionModifier,
                 FldQuestiontext = question1.FldQuestionText,
                 FldTeamName = "EasyOn"
             };

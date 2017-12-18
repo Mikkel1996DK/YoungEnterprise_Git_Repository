@@ -32,6 +32,7 @@
     // Posting the four parameters to know which questions and votes for judgepair to vote for specific team
     function GetQuestionsAndVotes() {
         $.ajax({
+
             type: 'POST',
             url: 'http://localhost:53112/api/TblVoteAnswers',
             data: {
@@ -47,7 +48,7 @@
                 });
             },
             error: function (data) {
-                console.log(data.statusCode);
+                window.location.href = "ErrorPage.html";
             }
         });
     }
@@ -62,7 +63,7 @@
     $('#reportButton').click(function () {
         var name = localStorage.getItem("teamName");
 
-            $.ajax({
+        $.ajax({
             type: 'POST',
             url: 'http://localhost:53112/api/DownloadReport',
             xhrFields: {
@@ -77,31 +78,29 @@
                 link.click();
             },
             error: function (data) {
-                console.log(data.statusCode);
+                window.location.href = "ErrorPage.html";
             }
         });
     });
 });
 
 function SavePoints(points, questionText, questionModifier) {
-        $.ajax({
-            type: 'POST',
-            url: 'http://localhost:53112/api/CreateVote',
-            data: {
+    $.ajax({
+        type: 'POST',
+        url: 'http://localhost:53112/api/CreateVote',
+        data: {
 
-                FldTeamName: localStorage.getItem("teamName"),
-                FldJudgeUsername: localStorage.getItem("userName"),
-                FldPoints: points,
-                FldQuestionText: questionText,
-                FldQuestionModifier: questionModifier
-            },
-            success: function (data) {
-                alert("Point Gemt!");
-                    window.location.reload(true);
-            },
-            error: function (data) {
-                console.log(data.statusCode);
-            }
-        });
-    };
+            FldTeamName: localStorage.getItem("teamName"),
+            FldJudgeUsername: localStorage.getItem("userName"),
+            FldPoints: points,
+            FldQuestionText: questionText,
+        },
+        success: function (data) {
+            window.location.reload(true);
+        },
+        error: function (data) {
+            window.location.href = "ErrorPage.html";
+        }
+    });
+};
 

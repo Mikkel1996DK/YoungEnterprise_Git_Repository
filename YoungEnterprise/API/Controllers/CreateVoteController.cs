@@ -17,7 +17,6 @@ namespace API.Controllers
         [HttpPost]
         public String CreateVote(CreateVoteModel createVoteModel)
         {
-            UserService service = new UserService();
             DatabaseService dbService = new DatabaseService();
 
             dbService.Vote(createVoteModel);

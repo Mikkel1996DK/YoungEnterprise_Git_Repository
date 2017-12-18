@@ -68,8 +68,6 @@ namespace Admin
             userControlGrid.Children.Add(viewUsersControl);
         }
 
-        
-
         // Shifts a usercontrol with another usercontrol
         public void ShiftUserControl(Control userControl)
         {

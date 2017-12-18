@@ -22,7 +22,7 @@ namespace Admin.ViewModels
 
         public UserDisplayViewModel()
         {
-            ShowAll();
+            //ShowAll();
         }
 
         private ObservableCollection<User> ConvertToObservableCollection (IEnumerable<User> list)

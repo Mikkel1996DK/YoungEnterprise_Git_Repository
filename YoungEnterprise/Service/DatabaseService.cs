@@ -27,13 +27,12 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
+                // Should find judge or school by username, instead of searching all though
                     foreach (TblJudge j in GetAllJudges())
                     {
                         if (judgeUsername.Equals(j.FldJudgeUsername))
                         {
-                            throw new Exception();
+                            throw new UserNameAlreadyExistsException(judgeUsername);
                         }
                     }
 
@@ -41,7 +40,7 @@ namespace Service
                     {
                         if (judgeUsername.Equals(s.FldSchoolUsername))
                         {
-                            throw new Exception();
+                            throw new UserNameAlreadyExistsException(judgeUsername);
                         }
                     }
 
@@ -54,12 +53,6 @@ namespace Service
                     };
                     databaseContext.TblJudge.Add(judge);
                     databaseContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                    throw ex;
-                }
             }
         }
 
@@ -67,15 +60,7 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     return databaseContext.TblJudge.Find(fldJudgeId);
-                }
-                catch (Exception e)
-                {
-                    //Console.WriteLine(e.InnerException.Message);
-                    throw e;
-                }
             }
         }
 
@@ -83,9 +68,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
-
                     List<TblJudge> allJudges = new List<TblJudge>();
                     foreach (TblJudge judge in databaseContext.TblJudge)
                     {
@@ -93,13 +75,6 @@ namespace Service
                     }
 
                     return allJudges;
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
-                }
             }
         }
 
@@ -107,9 +82,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
-
                     TblJudgePair judgePair = new TblJudgePair()
                     {
                         FldJudgeIda = judgeIdA,
@@ -120,11 +92,6 @@ namespace Service
 
                     databaseContext.TblJudgePair.Add(judgePair);
                     databaseContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                }
             }
         }
 
@@ -132,9 +99,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
-
                     List<TblJudgePair> allJudges = new List<TblJudgePair>();
                     foreach (TblJudgePair judgePair in databaseContext.TblJudgePair)
                     {
@@ -142,13 +106,6 @@ namespace Service
                     }
 
                     return allJudges;
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
-                }
             }
         }
 
@@ -199,15 +156,8 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     databaseContext.TblJudge.Remove(judge);
                     databaseContext.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
             }
         }
 
@@ -257,22 +207,20 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
+                    // Should find judge or school by username, instead of searching all though
+                    foreach (TblJudge j in GetAllJudges())
+                    {
+                        if (schoolUsername.Equals(j.FldJudgeUsername))
+                        {
+                            throw new UserNameAlreadyExistsException(schoolUsername);
+                        }
+                    }
 
                     foreach (TblSchool s in GetAllSchools())
                     {
                         if (schoolUsername.Equals(s.FldSchoolUsername))
                         {
-                            throw new Exception();
-                        }
-                    }
-
-                    foreach (TblJudge j in GetAllJudges())
-                    {
-                        if (schoolName.Equals(j.FldJudgeUsername))
-                        {
-                            throw new Exception();
+                            throw new UserNameAlreadyExistsException(schoolUsername);
                         }
                     }
 
@@ -286,50 +234,30 @@ namespace Service
                     databaseContext.TblSchool.Add(school);
                     databaseContext.SaveChanges();
                     return school;
-                }
-                catch (Exception ex)
-                {
-                    //Console.WriteLine(ex.InnerException.Message);
-                    throw ex;
-                }
             }
         }
 
         public List<TblSchool> GetAllSchools()
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
-                try
+            {
+
+                List<TblSchool> allSchools = new List<TblSchool>();
+                foreach (TblSchool school in databaseContext.TblSchool)
                 {
-
-                    List<TblSchool> allSchools = new List<TblSchool>();
-                    foreach (TblSchool school in databaseContext.TblSchool)
-                    {
-                        allSchools.Add(school);
-                    }
-
-                    return allSchools;
-
+                    allSchools.Add(school);
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
-                }
+
+                return allSchools;
+            }
         }
 
         public void DeleteSchool(TblSchool school)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     databaseContext.TblSchool.Remove(school);
                     databaseContext.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
             }
         }
 
@@ -360,32 +288,21 @@ namespace Service
         public List<TblTeam> GetAllTeams()
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
-                try
+            {
+                List<TblTeam> allTeams = new List<TblTeam>();
+                foreach (TblTeam team in databaseContext.TblTeam)
                 {
-
-                    List<TblTeam> allTeams = new List<TblTeam>();
-                    foreach (TblTeam team in databaseContext.TblTeam)
-                    {
-                        allTeams.Add(team);
-                    }
-
-                    return allTeams;
-
+                    allTeams.Add(team);
                 }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
-                }
+
+                return allTeams;
+            }
         }
 
         public void CreateTeam(string teamName, int schoolID, string subject, byte[] report)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
-
                     TblTeam team = new TblTeam()
                     {
                         FldTeamName = teamName,
@@ -395,12 +312,6 @@ namespace Service
                     };
                     databaseContext.TblTeam.Add(team);
                     databaseContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    //Console.WriteLine(ex.InnerException.Message);
-                    throw ex;
-                }
             }
         }
 
@@ -408,14 +319,7 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     return databaseContext.TblTeam.Find(teamName);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
             }
         }
         #endregion
@@ -425,8 +329,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     DeleteAllExceptQuestions(databaseContext);
                     TblEvent tblEvent = new TblEvent()
                     {
@@ -436,12 +338,6 @@ namespace Service
                     databaseContext.TblEvent.Add(tblEvent);
                     databaseContext.SaveChanges();
                     return tblEvent.FldEventId;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                    throw ex;
-                }
             }
         }
 
@@ -461,8 +357,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     // There should only be one event at a time, hence why this method also returns just the first event index.
                     List<TblEvent> allEvents = new List<TblEvent>();
 
@@ -472,12 +366,6 @@ namespace Service
                     }
 
                     return allEvents[0];
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
-                }
             }
         }
         #endregion
@@ -488,11 +376,8 @@ namespace Service
             TblVote vote = null;
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     // Get existing vote using context
                     vote = databaseContext.TblVote.Where(v => v.FldVoteId == voteID).FirstOrDefault<TblVote>();
-
 
                     // Change values
                     if (vote != null)
@@ -504,11 +389,6 @@ namespace Service
 
                     // save changes using context. 
                     databaseContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                }
             }
         }
 
@@ -516,8 +396,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     var service = new UserService();
                     int questionID = GetQuestionID(createVoteModel.FldQuestiontext);
                     int judgePairID = GetJudgePairID(createVoteModel.FldJudgeUsername);
@@ -535,12 +413,8 @@ namespace Service
                     {
                         UpdateVote(vote.FldVoteId, judgePairID, createVoteModel.FldTeamName, createVoteModel.FldPoints);
                     }
-                }
-                catch (Exception ex)
-                {
-                    //Console.WriteLine(ex.InnerException.Message);
-                    throw ex;
-                }
+                    // Just for test of exceptionhandling. TODO remove
+                throw new Exception("øv");
             }
         }
 
@@ -548,8 +422,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     TblVote vote = new TblVote()
                     {
                         FldJudgePairId = judgePairID,
@@ -560,13 +432,6 @@ namespace Service
                     databaseContext.TblVote.Add(vote);
                     databaseContext.SaveChanges();
                     return vote.FldVoteId;
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                    return 0;
-                }
             }
         }
 
@@ -574,8 +439,6 @@ namespace Service
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
                     TblVoteAnswer voteAnswer = new TblVoteAnswer()
                     {
                         FldQuestionId = questionID,
@@ -584,11 +447,6 @@ namespace Service
 
                     databaseContext.TblVoteAnswer.Add(voteAnswer);
                     databaseContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.InnerException.Message);
-                }
             }
         }
 
@@ -701,24 +559,13 @@ namespace Service
 
         private TblVote TryFindVote(int questionID, int judgepairID, string teamName)
         {
-            try
-            {
                 return FindJudgePairVotes(questionID, judgepairID, teamName);
-            }
-            catch (Exception e)
-            {
-                //Console.WriteLine(e.InnerException.Message);
-                throw e;
-            }
         }
 
         public List<TblQuestion> GetAllQuestions()
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
-                try
-                {
-
                     List<TblQuestion> allQuestions = new List<TblQuestion>();
                     foreach (TblQuestion question in databaseContext.TblQuestion)
                     {
@@ -726,13 +573,6 @@ namespace Service
                     }
 
                     return allQuestions;
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.InnerException.Message);
-                    return null;
-                }
             }
         }
 

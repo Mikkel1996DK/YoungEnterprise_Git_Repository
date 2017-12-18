@@ -31,7 +31,7 @@
                 }
             },
             error: function (data) {
-                console.log(data.statusCode);
+                window.location.href = "ErrorPage.html";
             }
         });
     });

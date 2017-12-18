@@ -15,7 +15,7 @@ namespace Admin.ViewModels
         private DatabaseService dbService = new DatabaseService();
         private UserService userService = new UserService();
 
-        #region databinded variables inside this region!!
+        #region databound variables inside this region!!
         private string nameText;
         public string NameText
         {
@@ -50,41 +50,29 @@ namespace Admin.ViewModels
         }
         #endregion
 
-        public void InviteUser ()
+        public void InviteUser()
         {
             string pw = userService.GetRandomPassword(8);
 
             Console.WriteLine(pw);
-
-            if (!isSchool)
-            {
-                try
+           if (!isSchool)
                 {
+
                     //mailSender.SendInviteMail(email, "Young Enterprise | Dommer Invitiation", nameText, email, pw);
                     dbService.CreateJudge(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
                     MessageBox.Show("Dommer Tilføjet!");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Kunne ikke oprette dommmer fordi dommeren allerede eksisterer i systemet!", "Oprettelses Fejl");
-                }
 
-                pw = null;
-            }
-            else
-            {
-                try
+                }
+                else
                 {
+
                     //mailSender.SendInviteMail(email, "Young Enterprise | Skole Invitiation", nameText, email, pw);
                     dbService.CreateSchool(dbService.GetCurrentEvent().FldEventId, email, userService.HashPassword(email, pw), nameText);
                     MessageBox.Show("Skole Tilføjet!");
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Kunne ikke oprette skole fordi skolen allerede eksisterer i systemet!", "Oprettelses Fejl");
-                }
-                pw = null;
-            }
+            pw = null;
+
         }
     }
 }
+
