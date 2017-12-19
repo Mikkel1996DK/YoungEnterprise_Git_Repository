@@ -55,7 +55,7 @@ namespace Service
             }
         }
 
-        public TblJudge GetJudgeByID(int fldJudgeId)
+        private TblJudge GetJudgeByID(int fldJudgeId)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
@@ -77,7 +77,7 @@ namespace Service
             }
         }
 
-        public void CreateJudgePair(int judgeIdA, int judgeIdB)
+        private void CreateJudgePair(int judgeIdA, int judgeIdB)
         {
             using (DB_YoungEnterpriseContext databaseContext = GetConnection())
             {
@@ -195,7 +195,7 @@ namespace Service
             }
         }
 
-        public TblJudge FindJudgeFromUser(User user)
+        private TblJudge FindJudgeFromUser(User user)
         {
             return GetAllJudges().FirstOrDefault(n => n.FldJudgeUsername.Equals(user.UserName));
         }
